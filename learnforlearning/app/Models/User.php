@@ -20,7 +20,12 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'spec'
     ];
+
+    public function subjects() {
+        return $this->belongsToMany(Subject::class);
+    }
 
     /**
      * The attributes that should be hidden for arrays.
