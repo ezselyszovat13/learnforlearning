@@ -24,7 +24,32 @@ class User extends Authenticatable
     ];
 
     public function subjects() {
-        return $this->belongsToMany(Subject::class);
+        return $this->belongsToMany(Subject::class)->withPivot('grade')->withTimestamps();
+    }
+
+    public function getGrades() {
+        $subjects = $this->subjects()->select('code')->get();
+        $grades = [];
+        foreach ($subjects as $subject) {
+            $grades[$subject->code] = $subject->pivot->grade;
+        }
+        return $grades;
+    }
+
+    public function getGrade($code) {
+        $subject = $this->subjects()->where('code', $code)->select('code')->first();
+        if (!$subject) return null;
+        return (int) $subject->pivot->grade;
+    }
+
+    public function setGrade($code, $grade) {
+        $subject = Subject::where('code', $code)->get('id')->first();
+        if (!$subject) return null;
+        return $this->subjects()->syncWithoutDetaching([
+            $subject->id => [
+                'grade' => $grade,
+            ]
+        ]);
     }
 
     /**

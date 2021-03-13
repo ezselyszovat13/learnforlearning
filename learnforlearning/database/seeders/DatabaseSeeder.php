@@ -1017,7 +1017,7 @@ class DatabaseSeeder extends Seeder
 
         User::all()->each(function ($user) {
             $subjectid = Subject::all()->random(1)->pluck('id')->toArray();
-            $user->subjects()->attach($subjectid,['mark' => 1, 'created_at' => Carbon::now()]);
+            $user->subjects()->attach($subjectid,['grade' => 1, 'created_at' => Carbon::now()]);
         });
 
     }
