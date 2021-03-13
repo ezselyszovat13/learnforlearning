@@ -9,7 +9,7 @@ class Subject extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name','mark','even_semester','existsOnA','existsOnB','existsOnC','optionalOnA','optionalOnB','optionalOnC','url'];
+    protected $fillable = ['name','even_semester','existsOnA','existsOnB','existsOnC','optionalOnA','optionalOnB','optionalOnC','url'];
 
     public function users() {
         return $this->belongsToMany(User::class);

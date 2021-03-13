@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Subject;
 use App\Models\User;
 
+use Carbon\Carbon;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -17,6 +19,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         DB::table('subjects')->truncate();
+        DB::table('subject_user')->truncate();
 
         Subject::create(['name' => 'Adatbázisok 1 Ea',
         'code' => 'IP-18AB1E',
@@ -1013,8 +1016,8 @@ class DatabaseSeeder extends Seeder
         User::factory()->create(['spec' => 'C']);
 
         User::all()->each(function ($user) {
-            $ids = Subject::all()->random(1)->pluck('id')->toArray();
-            $user->subjects()->attach($ids);
+            $subjectid = Subject::all()->random(1)->pluck('id')->toArray();
+            $user->subjects()->attach($subjectid,['mark' => 1, 'created_at' => Carbon::now()]);
         });
 
     }
