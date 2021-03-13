@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\SubjectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +19,10 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', [MainController::class, 'index'])->name('main');
+Route::get('/personal', [UserController::class, 'show'])->name('personal');
+Route::get('/subjects', [SubjectController::class, 'showAll'])->name('subjects');
+Route::get('/newsubject', [SubjectController::class, 'givenSubjects'])->name('newsubject');
+Route::get('/findsubject', [SubjectController::class, 'showFind'])->name('findsubject');
 
 Auth::routes();
 
