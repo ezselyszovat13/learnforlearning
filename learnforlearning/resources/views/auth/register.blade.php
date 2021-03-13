@@ -65,7 +65,7 @@
                             <label for="specialization" class="col-md-4 col-form-label text-md-right">Specializáció</label>
 
                             <div class="col-md-6">
-                                <select id="specialization" name="specialization" class="form-control @error('name') is-invalid @enderror" value="{{ old('specialization') }}" autofocus>
+                                <select id="specialization" name="specialization" class="form-control @error('specialization') is-invalid @enderror" value="{{ old('specialization') }}" autofocus>
                                     <option value="A">A szakirány</option>
                                     <option value="B">B szakirány</option>
                                     <option value="C">C szakirány</option>
