@@ -16,12 +16,15 @@ class SubjectController extends Controller
     }
 
     public function givenSubjects() {
-        $subjects = Subject::all()->where('user_id',Auth::id());
+        $subjects = Subject::all();
+        
+        $user = Auth::user();
+        $userSubjects = $user->subjects()->get();
 
-        if($subjects === null)
-            return view('givenSubjects');
+        if($userSubjects === null)
+            return view('givenSubjects',compact('subjects'));
         else
-        return view('givenSubjects', compact('subjects'));
+        return view('givenSubjects', compact('subjects','userSubjects'));
     }
 
     public function showFind() {

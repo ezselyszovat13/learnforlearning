@@ -12,6 +12,7 @@
                 <li>Az alkalmazást használó felhasználók száma: {{ $users }}</li>
                 <li>A felhasznált adatok mennyisége: {{ $data }}</li>
             </ul>
+            <a class="btn btn-primary btn-lg" href="{{route('subjects')}}" role="button">Tárgyak listázása</a>
         </div>
     </div>
 @endsection

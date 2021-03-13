@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
     {
         DB::table('subjects')->truncate();
         DB::table('subject_user')->truncate();
+        DB::table('users')->truncate();
 
         Subject::create(['name' => 'Adatbázisok 1 Ea',
         'code' => 'IP-18AB1E',
