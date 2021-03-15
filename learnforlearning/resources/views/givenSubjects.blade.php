@@ -5,6 +5,18 @@
 @section('content')
     <div class="container">
         <div class="jumbotron">
+            @if (session()->has('grade_added'))
+                @if (session()->get('grade_added') == true)
+                    <div class="alert alert-success mb-3" role="alert">
+                        Az új érdemjegy sikeresen felvéve!
+                    </div>
+                @else
+                    <div class="alert alert-danger mb-3" role="alert">
+                        Ehhez a kurzushoz már tartozik érdemjegy!
+                    </div>
+                @endif
+            @endif
+
             <h1 class="display-4">Új érdemjegyek felvétele</h1>
             <p class="lead">Itt tölthetsz fel új érdemjegyeket a hatékonyabb adatmeghatározáshoz!</p>
             <hr class="my-4">
@@ -20,6 +32,7 @@
                                 <th scope="col">Páros féléves tárgy</th>
                                 <th scope="col">Érdemjegy</th>
                                 <th scope="col"></th>
+                                <th scope='col'></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -34,7 +47,8 @@
                                     <td>NEM</td>
                                 @endif
                                 <td>{{$subject->pivot->grade}}</td>
-                                <td><a class="btn btn-primary btn-lg" target="_blank" href="{{$subject->url}}" role="button">Információk</a></td>
+                                <td><a class="btn btn-primary btn-lg" style="font-size:0.8rem" target="_blank" href="{{$subject->url}}" role="button">Információk</a></td>
+                                <td><a class="btn btn-primary btn-lg" style="font-size:0.8rem" target="_blank" href="" role="button">Jegy szerkesztése</a></td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -53,14 +67,14 @@
             <hr class="my-4">
             @if(isset($subjects))
                 @if(count($subjects)!=0)
-                <form action="" class="form-inline" method="POST">
+                <form action="{{route('subject.add')}}" class="form-inline" method="POST">
                     @csrf
                     <div class="form-group">
                         <label for="subject" class="text-md-right mr-4">Kurzus: </label>
                         <select id="subject" name="subject" class="mr-4 form-control {{ $errors->has('subject') ? 'is-invalid' : '' }}" autofocus>
                             <option value="">Válassz opciót!</option>
                             @foreach ($subjects as $subject)
-                                <option value="{{$subject->id}}">{{$subject->name}}</option>
+                                <option value="{{$subject->id}}" {{ (old('subject') == $subject->id ? 'selected':'') }}>{{$subject->name}}</option>
                             @endforeach
                         </select>
                         @if ($errors->has('subject'))

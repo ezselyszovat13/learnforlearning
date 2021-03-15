@@ -23,6 +23,7 @@ Route::get('/personal', [UserController::class, 'show'])->name('personal');
 Route::get('/subjects', [SubjectController::class, 'showAll'])->name('subjects');
 Route::get('/newsubject', [SubjectController::class, 'givenSubjects'])->name('newsubject');
 Route::get('/findsubject', [SubjectController::class, 'showFind'])->name('findsubject');
+Route::post('/subjects/add', [SubjectController::class, 'addNewGrade'])->name('subject.add')->middleware('auth');
 
 Auth::routes();
 
