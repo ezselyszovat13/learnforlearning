@@ -17,6 +17,22 @@
                 @endif
             @endif
 
+            @if (session()->has('subject_not_exists'))
+                @if (session()->get('subject_not_exists') == true)
+                    <div class="alert alert-danger mb-3" role="alert">
+                        A szerkeszteni kívánt kurzus nem létezik!
+                    </div>
+                @endif
+            @endif
+
+            @if (session()->has('grade_updated'))
+                @if (session()->get('grade_updated') == true)
+                    <div class="alert alert-success mb-3" role="alert">
+                        Az érdemjegy módosítása sikeresen megtörtént!
+                    </div>
+                @endif
+            @endif
+
             <h1 class="display-4">Új érdemjegyek felvétele</h1>
             <p class="lead">Itt tölthetsz fel új érdemjegyeket a hatékonyabb adatmeghatározáshoz!</p>
             <hr class="my-4">
@@ -48,7 +64,7 @@
                                 @endif
                                 <td>{{$subject->pivot->grade}}</td>
                                 <td><a class="btn btn-primary btn-lg" style="font-size:0.8rem" target="_blank" href="{{$subject->url}}" role="button">Információk</a></td>
-                                <td><a class="btn btn-primary btn-lg" style="font-size:0.8rem" target="_blank" href="" role="button">Jegy szerkesztése</a></td>
+                                <td><a class="btn btn-primary btn-lg" style="font-size:0.8rem" target="_blank" href="{{ route('newsubject.edit', ['id' => $subject->id]) }}" role="button">Jegy szerkesztése</a></td>
                             </tr>
                         @endforeach
                     </tbody>

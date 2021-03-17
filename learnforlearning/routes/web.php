@@ -24,6 +24,8 @@ Route::get('/subjects', [SubjectController::class, 'showAll'])->name('subjects')
 Route::get('/newsubject', [SubjectController::class, 'givenSubjects'])->name('newsubject');
 Route::get('/findsubject', [SubjectController::class, 'showFind'])->name('findsubject');
 Route::post('/subjects/add', [SubjectController::class, 'addNewGrade'])->name('subject.add')->middleware('auth');
+Route::get('/newsubject/{id}/edit', [SubjectController::class, 'editGivenGrade'])->name('newsubject.edit')->middleware('auth');
+Route::post('/newsubject/{id}/update', [SubjectController::class, 'updateGivenGrade'])->name('newsubject.update')->middleware('auth');
 
 Auth::routes();
 
