@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Adatbázisok 1 Ea',
         'code' => 'IP-18AB1E',
+        'credit_points' => 2,
         'even_semester'=> true,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -35,6 +36,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Adatbázisok 1 Gy',
         'code' => 'IP-18AB1G',
+        'credit_points' => 2,
         'even_semester'=> true,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -46,6 +48,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Algoritmusok és adatszerkezetek 1 Ea',
         'code' => 'IP-18AA1E',
+        'credit_points' => 2,
         'even_semester'=> true,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -57,6 +60,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Algoritmusok és adatszerkezetek 1 Gy',
         'code' => 'IP-18AA1G',
+        'credit_points' => 3,
         'even_semester'=> true,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -68,6 +72,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Algoritmusok és adatszerkezetek 2 Ea',
         'code' => 'IP-18AA2E',
+        'credit_points' => 2,
         'even_semester'=> false,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -79,6 +84,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Algoritmusok és adatszerkezetek 2 Gy',
         'code' => 'IP-18AA2G',
+        'credit_points' => 3,
         'even_semester'=> false,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -90,6 +96,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Analízis 1 Ea',
         'code' => 'IP-18AN1E',
+        'credit_points' => 2,
         'even_semester'=> true,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -101,6 +108,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Analízis 1 Gy',
         'code' => 'IP-18AN1G',
+        'credit_points' => 3,
         'even_semester'=> true,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -112,6 +120,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Diszkrét matematika 1. Ea',
         'code' => 'IP-18DM1E',
+        'credit_points' => 2,
         'even_semester'=> true,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -123,6 +132,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Diszkrét matematika 1. Gy',
         'code' => 'IP-18DM1G',
+        'credit_points' => 3,
         'even_semester'=> true,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -134,6 +144,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Funkcionális programozás Ea+Gy',
         'code' => 'IP-18FUNPEG',
+        'credit_points' => 5,
         'even_semester'=> false,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -145,6 +156,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Imperatív programozás Ea+Gy',
         'code' => 'IP-18IMPROGEG',
+        'credit_points' => 5,
         'even_semester'=> false,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -156,6 +168,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Konkurrens programozás Ea+Gy',
         'code' => 'IP-18KPROGEG ',
+        'credit_points' => 3,
         'even_semester'=> false,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -167,6 +180,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Mesterséges intelligencia Ea',
         'code' => 'IP-18MIAE',
+        'credit_points' => 3,
         'even_semester'=> false,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -178,6 +192,7 @@ class DatabaseSeeder extends Seeder
         
         Subject::create(['name' => 'Objektumelvű programozás Ea+Gy',
         'code' => 'IP-18OEPROGEG',
+        'credit_points' => 6,
         'even_semester'=> true,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -189,6 +204,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Operációs rendszerek Ea+Gy',
         'code' => 'IP-18OPREG',
+        'credit_points' => 3,
         'even_semester'=> true,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -200,6 +216,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Programozás Ea+Gy',
         'code' => 'IP-18PROGEG',
+        'credit_points' => 6,
         'even_semester'=> false,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -211,6 +228,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Programozási nyelvek 1 Ea+Gy',
         'code' => 'IP-18PNY1EG',
+        'credit_points' => 3,
         'even_semester'=> true,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -222,6 +240,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Programozási nyelvek 2 Ea+Gy',
         'code' => 'IP-18PNY2EG',
+        'credit_points' => 3,
         'even_semester'=> true,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -233,6 +252,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Számítógépes rendszerek Ea+Gy',
         'code' => 'IP-18SZGREG',
+        'credit_points' => 5,
         'even_semester'=> true,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -244,6 +264,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Telekommunikációs hálózatok Ea',
         'code' => 'IP-18TKHE',
+        'credit_points' => 2,
         'even_semester'=> false,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -255,6 +276,7 @@ class DatabaseSeeder extends Seeder
     
         Subject::create(['name' => 'Telekommunikációs hálózatok Gy',
         'code' => 'IP-18TKHG',
+        'credit_points' => 3,
         'even_semester'=> false,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -266,6 +288,7 @@ class DatabaseSeeder extends Seeder
     
         Subject::create(['name' => 'Web-fejlesztés Ea+Gy',
         'code' => 'IP-18WF1EG',
+        'credit_points' => 3,
         'even_semester'=> true,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -277,6 +300,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Adatbázisok 2 Ea',
         'code' => 'IP-18*AB2E',
+        'credit_points' => 2,
         'even_semester'=> false,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -288,6 +312,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Adatbázisok 2 Gy',
         'code' => 'IP-18*AB2G',
+        'credit_points' => 3,
         'even_semester'=> false,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -299,6 +324,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Analízis 2 Ea',
         'code' => 'IP-18*AN2E',
+        'credit_points' => 2,
         'even_semester'=> true,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -310,6 +336,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Analízis 2 Gy',
         'code' => 'IP-18*AN2E',
+        'credit_points' => 3,
         'even_semester'=> true,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -321,6 +348,7 @@ class DatabaseSeeder extends Seeder
     
         Subject::create(['name' => 'Diszkrét matematika 2. Ea',
         'code' => 'IP-18*DM2E',
+        'credit_points' => 2,
         'even_semester'=> false,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -332,6 +360,7 @@ class DatabaseSeeder extends Seeder
     
         Subject::create(['name' => 'Diszkrét matematika 2. Gy',
         'code' => 'IP-18*DM2G',
+        'credit_points' => 3,
         'even_semester'=> false,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -343,6 +372,7 @@ class DatabaseSeeder extends Seeder
     
         Subject::create(['name' => 'Eseményvezérelt alkalmazások Ea+Gy',
         'code' => 'IP-18*EVALKEG',
+        'credit_points' => 5,
         'even_semester'=> false,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -354,6 +384,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Formális nyelvek és a fordítóprogramok alapjai Ea',
         'code' => 'IP-18bFNYFPRE',
+        'credit_points' => 2,
         'even_semester'=> true,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -365,6 +396,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Formális nyelvek és a fordítóprogramok alapjai Gy',
         'code' => 'IP-18bFNYFPRG',
+        'credit_points' => 3,
         'even_semester'=> true,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -376,6 +408,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Numerikus módszerek 1. Ea',
         'code' => 'IP-18*NM1E',
+        'credit_points' => 2,
         'even_semester'=> true,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -387,6 +420,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Numerikus módszerek 1. Gy',
         'code' => 'IP-18*NM1G',
+        'credit_points' => 3,
         'even_semester'=> true,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -398,6 +432,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Programozáselmélet Ea',
         'code' => 'IP-18*PREE',
+        'credit_points' => 2,
         'even_semester'=> false,
         'optionalOnA' => true,
         'optionalOnB' => false,
@@ -409,6 +444,7 @@ class DatabaseSeeder extends Seeder
     
         Subject::create(['name' => 'Programozáselmélet Gy',
         'code' => 'IP-18*PREG',
+        'credit_points' => 3,
         'even_semester'=> false,
         'optionalOnA' => true,
         'optionalOnB' => false,
@@ -420,6 +456,7 @@ class DatabaseSeeder extends Seeder
     
         Subject::create(['name' => 'Számításelmélet Ea',
         'code' => 'IP-18bSZEE',
+        'credit_points' => 2,
         'even_semester'=> false,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -431,6 +468,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Számításelmélet Gy',
         'code' => 'IP-18bSZEG',
+        'credit_points' => 3,
         'even_semester'=> false,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -442,6 +480,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Numerikus módszerek 2 Ea',
         'code' => 'IP-18aNM2EE ',
+        'credit_points' => 2,
         'even_semester'=> false,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -453,6 +492,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Numerikus módszerek 2 Gy',
         'code' => 'IP-18*NM2EG ',
+        'credit_points' => 3,
         'even_semester'=> false,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -464,6 +504,7 @@ class DatabaseSeeder extends Seeder
     
         Subject::create(['name' => 'Szoftvertechnológia Ea+Gy',
         'code' => 'IP-18*SZTEG',
+        'credit_points' => 5,
         'even_semester'=> true,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -475,6 +516,7 @@ class DatabaseSeeder extends Seeder
     
         Subject::create(['name' => 'Többváltozós függvénytan Ea+Gy',
         'code' => 'IP-18bTVFTEG',
+        'credit_points' => 4,
         'even_semester'=> true,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -486,6 +528,7 @@ class DatabaseSeeder extends Seeder
     
         Subject::create(['name' => 'Valószínűségszámítás és statisztika Ea+Gy',
         'code' => 'IP-18bVSZEG',
+        'credit_points' => 4,
         'even_semester'=> true,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -497,6 +540,7 @@ class DatabaseSeeder extends Seeder
     
         Subject::create(['name' => 'Valószínűségszámítás és statisztika Ea+Gy (F)',
         'code' => 'IP-18cVSZG',
+        'credit_points' => 3,
         'even_semester'=> false,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -508,6 +552,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Valószínűségszámítás',
         'code' => 'IP-18aVSZEG',
+        'credit_points' => 4,
         'even_semester'=> false,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -519,6 +564,7 @@ class DatabaseSeeder extends Seeder
     
         Subject::create(['name' => 'Matematikai statisztika',
         'code' => 'IP-18aMSAEG',
+        'credit_points' => 4,
         'even_semester'=> false,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -530,6 +576,7 @@ class DatabaseSeeder extends Seeder
     
         Subject::create(['name' => 'Bevezetés a gépi tanulásba Ea',
         'code' => 'IP-18KVSZBGTE',
+        'credit_points' => 2,
         'even_semester'=> false,
         'optionalOnA' => true,
         'optionalOnB' => true,
@@ -541,6 +588,7 @@ class DatabaseSeeder extends Seeder
     
         Subject::create(['name' => 'Big Data architektúrák és elemző módszerek Ea',
         'code' => 'IP-18KVIBDAE',
+        'credit_points' => 2,
         'even_semester'=> false,
         'optionalOnA' => true,
         'optionalOnB' => true,
@@ -552,6 +600,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Big Data architektúrák és elemző módszerek Gy',
         'code' => 'IP-18KVIBDAG',
+        'credit_points' => 3,
         'even_semester'=> false,
         'optionalOnA' => true,
         'optionalOnB' => true,
@@ -563,6 +612,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Full stack webprogramozás Ea+Gy',
         'code' => 'IP-18KVIFSWPROGG',
+        'credit_points' => 3,
         'even_semester'=> true,
         'optionalOnA' => true,
         'optionalOnB' => true,
@@ -574,6 +624,7 @@ class DatabaseSeeder extends Seeder
     
         Subject::create(['name' => 'Funkcionális nyelvek Ea+Gy',
         'code' => 'IP-18KVFPNYEG',
+        'credit_points' => 5,
         'even_semester'=> true,
         'optionalOnA' => true,
         'optionalOnB' => true,
@@ -585,6 +636,7 @@ class DatabaseSeeder extends Seeder
     
         Subject::create(['name' => 'GPU programozás Ea+Gy',
         'code' => 'IP-18KVIGPUEG',
+        'credit_points' => 3,
         'even_semester'=> false,
         'optionalOnA' => true,
         'optionalOnB' => true,
@@ -596,6 +648,7 @@ class DatabaseSeeder extends Seeder
     
         Subject::create(['name' => 'Haladó Java Ea+Gy',
         'code' => 'IP-18KVIHJEG',
+        'credit_points' => 5,
         'even_semester'=> true,
         'optionalOnA' => true,
         'optionalOnB' => true,
@@ -607,6 +660,7 @@ class DatabaseSeeder extends Seeder
     
         Subject::create(['name' => 'Kliensoldali webprogramozás Ea+Gy',
         'code' => 'IP-18KVIKWPROGEG',
+        'credit_points' => 4,
         'even_semester'=> false,
         'optionalOnA' => true,
         'optionalOnB' => true,
@@ -618,6 +672,7 @@ class DatabaseSeeder extends Seeder
         
         Subject::create(['name' => 'Kriptográfia és biztonság Ea',
         'code' => 'IP-18KVSZKRBE',
+        'credit_points' => 2,
         'even_semester'=> false,
         'optionalOnA' => true,
         'optionalOnB' => true,
@@ -629,6 +684,7 @@ class DatabaseSeeder extends Seeder
         
         Subject::create(['name' => 'Kriptográfia és biztonság Gy',
         'code' => 'IP-18KVSZKRBG',
+        'credit_points' => 3,
         'even_semester'=> false,
         'optionalOnA' => true,
         'optionalOnB' => true,
@@ -640,6 +696,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Logika Ea',
         'code' => 'IP-18KVELE',
+        'credit_points' => 2,
         'even_semester'=> true,
         'optionalOnA' => true,
         'optionalOnB' => true,
@@ -651,6 +708,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Logika Gy',
         'code' => 'IP-18KVELG',
+        'credit_points' => 3,
         'even_semester'=> true,
         'optionalOnA' => true,
         'optionalOnB' => true,
@@ -662,6 +720,7 @@ class DatabaseSeeder extends Seeder
         
         Subject::create(['name' => 'Mély neuronhálók algoritmusai és fajtái Ea+Gy',
         'code' => 'IP-18KVIMNFEG',
+        'credit_points' => 3,
         'even_semester'=> false,
         'optionalOnA' => true,
         'optionalOnB' => true,
@@ -673,6 +732,7 @@ class DatabaseSeeder extends Seeder
     
         Subject::create(['name' => 'Numerikus algoritmusok Ea+Gy',
         'code' => 'IP-18KVMNMALEG',
+        'credit_points' => 4,
         'even_semester'=> false,
         'optionalOnA' => true,
         'optionalOnB' => true,
@@ -684,6 +744,7 @@ class DatabaseSeeder extends Seeder
         
         Subject::create(['name' => 'Osztott rendszerek specifikációja és implementációja Ea',
         'code' => 'IP-18KVSZORSIE',
+        'credit_points' => 2,
         'even_semester'=> true,
         'optionalOnA' => true,
         'optionalOnB' => true,
@@ -695,6 +756,7 @@ class DatabaseSeeder extends Seeder
     
         Subject::create(['name' => 'Osztott rendszerek specifikációja és implementációja Gy',
         'code' => 'IP-18KVSZORSIG',
+        'credit_points' => 3,
         'even_semester'=> true,
         'optionalOnA' => true,
         'optionalOnB' => true,
@@ -706,6 +768,7 @@ class DatabaseSeeder extends Seeder
     
         Subject::create(['name' => 'Programozási módszertan Ea',
         'code' => 'IP-18KVSZPME',
+        'credit_points' => 2,
         'even_semester'=> true,
         'optionalOnA' => true,
         'optionalOnB' => true,
@@ -717,6 +780,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Programozási módszertan Gy',
         'code' => 'IP-18KVSZPMG',
+        'credit_points' => 3,
         'even_semester'=> true,
         'optionalOnA' => true,
         'optionalOnB' => true,
@@ -728,6 +792,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Projekteszközök (Tools of software projects)',
         'code' => 'IP-18KVPRJG',
+        'credit_points' => 3,
         'even_semester'=> true,
         'optionalOnA' => true,
         'optionalOnB' => true,
@@ -739,6 +804,7 @@ class DatabaseSeeder extends Seeder
     
         Subject::create(['name' => 'Számítási modellek Ea',
         'code' => 'IP-18KVSZSZME',
+        'credit_points' => 2,
         'even_semester'=> false,
         'optionalOnA' => true,
         'optionalOnB' => true,
@@ -750,6 +816,7 @@ class DatabaseSeeder extends Seeder
     
         Subject::create(['name' => 'Számítási modellek Gy',
         'code' => 'IP-18KVSZSZMG',
+        'credit_points' => 3,
         'even_semester'=> false,
         'optionalOnA' => true,
         'optionalOnB' => true,
@@ -761,6 +828,7 @@ class DatabaseSeeder extends Seeder
     
         Subject::create(['name' => 'Számítógépes grafika Ea',
         'code' => 'IP-18KVISZGE',
+        'credit_points' => 2,
         'even_semester'=> false,
         'optionalOnA' => true,
         'optionalOnB' => true,
@@ -772,6 +840,7 @@ class DatabaseSeeder extends Seeder
     
         Subject::create(['name' => 'Számítógépes grafika Gy',
         'code' => 'IP-18KVISZGG',
+        'credit_points' => 3,
         'even_semester'=> false,
         'optionalOnA' => true,
         'optionalOnB' => true,
@@ -783,6 +852,7 @@ class DatabaseSeeder extends Seeder
     
         Subject::create(['name' => 'Szerveroldali webprogramozás Ea+Gy',
         'code' => 'IP-18KVISZWPROGEG',
+        'credit_points' => 4,
         'even_semester'=> false,
         'optionalOnA' => true,
         'optionalOnB' => true,
@@ -794,6 +864,7 @@ class DatabaseSeeder extends Seeder
     
         Subject::create(['name' => 'Szoftver mély neuronhálók alkalmazásához Gy',
         'code' => 'IP-18KVISZMNAGE',
+        'credit_points' => 4,
         'even_semester'=> true,
         'optionalOnA' => true,
         'optionalOnB' => true,
@@ -805,6 +876,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Típuselmélet Ea',
         'code' => 'IP-18KVSZTME',
+        'credit_points' => 2,
         'even_semester'=> false,
         'optionalOnA' => true,
         'optionalOnB' => true,
@@ -816,6 +888,7 @@ class DatabaseSeeder extends Seeder
     
         Subject::create(['name' => 'Típuselmélet Gy',
         'code' => 'IP-18KVSZTMG',
+        'credit_points' => 3,
         'even_semester'=> false,
         'optionalOnA' => true,
         'optionalOnB' => true,
@@ -827,6 +900,7 @@ class DatabaseSeeder extends Seeder
     
         Subject::create(['name' => 'Vállalati információs rendszerek és architektúrák Ea',
         'code' => 'IP-18KVIVISZE',
+        'credit_points' => 2,
         'even_semester'=> true,
         'optionalOnA' => true,
         'optionalOnB' => true,
@@ -838,6 +912,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Vállalati információs rendszerek és architektúrák Gy',
         'code' => 'IP-18KVIVISZG',
+        'credit_points' => 3,
         'even_semester'=> true,
         'optionalOnA' => true,
         'optionalOnB' => true,
@@ -849,6 +924,7 @@ class DatabaseSeeder extends Seeder
     
         Subject::create(['name' => 'Web-es alkalmazások fejlesztése Ea+Gy',
         'code' => 'IP-18KVIWAFEG',
+        'credit_points' => 3,
         'even_semester'=> true,
         'optionalOnA' => true,
         'optionalOnB' => true,
@@ -860,6 +936,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Webprogramozás Ea+Gy',
         'code' => 'IP-18KWEBPROGEG',
+        'credit_points' => 4,
         'even_semester'=> false,
         'optionalOnA' => true,
         'optionalOnB' => true,
@@ -871,6 +948,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Webprogramozás',
         'code' => 'IP-18cWEBPROGEG',
+        'credit_points' => 4,
         'even_semester'=> false,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -882,6 +960,7 @@ class DatabaseSeeder extends Seeder
     
         Subject::create(['name' => 'Bevezetés a számításelméletbe Ea',
         'code' => 'IP-18aBSZEE',
+        'credit_points' => 2,
         'even_semester'=> false,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -893,6 +972,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Bevezetés a számításelméletbe Gy',
         'code' => 'IP-18aBSZEG',
+        'credit_points' => 3,
         'even_semester'=> false,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -904,6 +984,7 @@ class DatabaseSeeder extends Seeder
     
         Subject::create(['name' => 'Analízis 3 Ea',
         'code' => 'IP-18aAN3E',
+        'credit_points' => 2,
         'even_semester'=> true,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -915,6 +996,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Analízis 3 Gy',
         'code' => 'IP-18aAN3G',
+        'credit_points' => 3,
         'even_semester'=> true,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -926,6 +1008,7 @@ class DatabaseSeeder extends Seeder
    
         Subject::create(['name' => 'Analízis alkalmazásai Ea',
         'code' => 'IP-18aANA1E',
+        'credit_points' => 2,
         'even_semester'=> false,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -937,6 +1020,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'Analízis alkalmazásai Gy',
         'code' => 'IP-18aANA1G',
+        'credit_points' => 3,
         'even_semester'=> false,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -948,6 +1032,7 @@ class DatabaseSeeder extends Seeder
     
         Subject::create(['name' => 'Programozási technológia Ea+Gy',
         'code' => 'IP-18cPROGTEG',
+        'credit_points' => 5,
         'even_semester'=> false,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -959,6 +1044,7 @@ class DatabaseSeeder extends Seeder
     
         Subject::create(['name' => 'Diszkrét modellek alkalmazásai Gy',
         'code' => 'IP-18cDMAG',
+        'credit_points' => 3,
         'even_semester'=> false,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -970,6 +1056,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'A számításelmélet alapjai 1 Ea',
         'code' => 'IP-18cSZÁMEA1E',
+        'credit_points' => 2,
         'even_semester'=> true,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -981,6 +1068,7 @@ class DatabaseSeeder extends Seeder
     
         Subject::create(['name' => 'A számításelmélet alapjai 1 Gy',
         'code' => 'IP-18cSZÁMEA1G',
+        'credit_points' => 3,
         'even_semester'=> true,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -992,6 +1080,7 @@ class DatabaseSeeder extends Seeder
     
         Subject::create(['name' => 'A számításelmélet alapjai 2 Ea',
         'code' => 'IP-18cSZÁMEA2E',
+        'credit_points' => 2,
         'even_semester'=> false,
         'optionalOnA' => false,
         'optionalOnB' => false,
@@ -1003,6 +1092,7 @@ class DatabaseSeeder extends Seeder
 
         Subject::create(['name' => 'A számításelmélet alapjai 2 Gy',
         'code' => 'IP-18cSZÁMEA2G',
+        'credit_points' => 3,
         'even_semester'=> false,
         'optionalOnA' => false,
         'optionalOnB' => false,

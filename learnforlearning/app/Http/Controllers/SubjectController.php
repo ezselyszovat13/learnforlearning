@@ -18,11 +18,27 @@ class SubjectController extends Controller
     }
 
     public function givenSubjects() {
-        $subjects = Subject::all();
-        
         $user = Auth::user();
-        $userSubjects = $user->subjects()->get();
 
+        $subjects = null;
+
+        switch ($user->spec) {
+            case 'A':
+                $subjects = Subject::all()->where('existsOnA',true);
+                break;
+            case 'B':
+                $subjects = Subject::all()->where('existsOnB',true);
+                break;
+            case 'C':
+                $subjects = Subject::all()->where('existsOnC',true);
+                break;
+            case 'NOTHING':
+                $subjects = Subject::all();
+                break;
+            default:
+                break;
+        }
+        $userSubjects = $user->subjects()->get();
         if($userSubjects === null)
             return view('givenSubjects',compact('subjects'));
         else

@@ -36,6 +36,24 @@ class User extends Authenticatable
         return $grades;
     }
 
+    public function getGradesCount(){
+        return count($this->getGrades());
+    }
+
+    public function getGradesAverage() {
+        if($this->getGradesCount()==0)
+            return null;
+        
+        return $this->subjects()->pluck('grade')->avg();
+    }
+
+    public function getAcquiredCredits(){
+        if($this->getGradesCount()==0)
+            return 0;
+        
+        return $this->subjects()->pluck('credit_points')->sum();
+    }
+
     public function getGrade($code) {
         $subject = $this->subjects()->where('code', $code)->select('code')->first();
         if (!$subject) return null;
