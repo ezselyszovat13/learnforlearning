@@ -70,6 +70,10 @@ class User extends Authenticatable
         ]);
     }
 
+    public function hasSpecialization(){
+        return $this['spec'] !== "NOTHING";
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *

@@ -46,7 +46,9 @@ class SubjectController extends Controller
     }
 
     public function showFind() {
-        return view('find');
+        $user = Auth::User();
+        $canCalculate = $user->hasSpecialization();
+        return view('find',compact('canCalculate'));
     }
 
     public function addNewGrade(AddGradeFormRequest $request){
