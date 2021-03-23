@@ -21,7 +21,6 @@ class UserController extends Controller
     }
 
     public function updateSpecialization(ModifySpecFormRequest $request, $id){
-        var_dump("HEY");
         $data = $request->all();
         $user = Auth::User();
         $user->update($data);

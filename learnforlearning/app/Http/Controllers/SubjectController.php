@@ -13,7 +13,6 @@ class SubjectController extends Controller
 {
     public function showAll() {
         $subjects = Subject::all();
-
         return view('subjects', compact('subjects'));
     }
 
@@ -48,7 +47,8 @@ class SubjectController extends Controller
     public function showFind() {
         $user = Auth::User();
         $canCalculate = $user->hasSpecialization();
-        return view('find',compact('canCalculate'));
+        $optionalSubjects = $user->getOptionalSubjects();
+        return view('find',compact('canCalculate','optionalSubjects'));
     }
 
     public function addNewGrade(AddGradeFormRequest $request){
@@ -81,12 +81,9 @@ class SubjectController extends Controller
     }
 
     public function updateGivenGrade(ModifyGradeFormRequest $request, $id){
-        var_dump("HI!");
         $data = $request->all();
-
-        $subject = Subject::find($id);
         $user = Auth::User();
-        $user->setGrade($subject->code, (int)$data['grade']);
+        $user->update($data);
         return redirect()->route('newsubject')->with('grade_updated', true);
     }
 
