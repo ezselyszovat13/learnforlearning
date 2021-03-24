@@ -47,7 +47,7 @@ class SubjectController extends Controller
     public function showFind() {
         $user = Auth::User();
         $canCalculate = $user->hasSpecialization();
-        $optionalSubjects = $user->getOptionalSubjects();
+        $optionalSubjects = $user->getAvailableOptionalSubjects();
         return view('find',compact('canCalculate','optionalSubjects'));
     }
 
@@ -86,6 +86,5 @@ class SubjectController extends Controller
         $user->update($data);
         return redirect()->route('newsubject')->with('grade_updated', true);
     }
-
 
 }

@@ -23,10 +23,14 @@
             <hr class="my-4">
             <div class="container">
                 <div class="row">
-                    <a class="btn btn-primary btn-lg {{ $canCalculate ? '' : 'disabled' }} mx-auto" href="" role="button">Kalkulál</a>
+                    <a class="btn btn-primary btn-lg {{ $canCalculate ? '' : 'disabled' }} mx-auto" href="{{route('calculate')}}" role="button">Kalkulál</a>
                 </div>
             </div>
-            
+            @if (session()->has('calculated_subject_name'))
+                <div class="alert alert-success mt-3" role="alert">
+                    A következő tárgy javasolandó: {{ session()->get('calculated_subject_name') }}
+                </div>
+            @endif
             @if(!$canCalculate)
                 <p style="color:red" class="mt-3">Kérlek válassz szakirányt, hogy kalkulálni tudjunk a számodra!</p>
             @endif
