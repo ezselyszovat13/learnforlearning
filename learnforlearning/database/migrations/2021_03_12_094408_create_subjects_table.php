@@ -17,6 +17,7 @@ class CreateSubjectsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('code');
+            $table->integer('credit_points');
             $table->boolean('even_semester');
             $table->boolean('existsOnA');
             $table->boolean('existsOnB');

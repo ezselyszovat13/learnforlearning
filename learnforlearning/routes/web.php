@@ -19,10 +19,15 @@ use App\Http\Controllers\SubjectController;
 */
 
 Route::get('/', [MainController::class, 'index'])->name('main');
-Route::get('/personal', [UserController::class, 'show'])->name('personal');
+Route::get('/personal', [UserController::class, 'show'])->name('personal')->middleware('auth');
 Route::get('/subjects', [SubjectController::class, 'showAll'])->name('subjects');
-Route::get('/newsubject', [SubjectController::class, 'givenSubjects'])->name('newsubject');
-Route::get('/findsubject', [SubjectController::class, 'showFind'])->name('findsubject');
+Route::get('/newsubject', [SubjectController::class, 'givenSubjects'])->name('newsubject')->middleware('auth');
+Route::get('/findsubject', [SubjectController::class, 'showFind'])->name('findsubject')->middleware('auth');
+Route::post('/subjects/add', [SubjectController::class, 'addNewGrade'])->name('subject.add')->middleware('auth');
+Route::get('/newsubject/{id}/edit', [SubjectController::class, 'editGivenGrade'])->name('newsubject.edit')->middleware('auth');
+Route::post('/newsubject/{id}/update', [SubjectController::class, 'updateGivenGrade'])->name('newsubject.update')->middleware('auth');
+Route::get('/personal/{id}/edit', [UserController::class, 'editSpecialization'])->name('spec.edit')->middleware('auth');
+Route::post('/personal/{id}/update', [UserController::class, 'updateSpecialization'])->name('spec.update')->middleware('auth');
 
 Auth::routes();
 
