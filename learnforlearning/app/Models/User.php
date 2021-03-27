@@ -27,6 +27,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Subject::class)->withPivot('grade')->withTimestamps();
     }
 
+    public function calculations()
+    {
+        return $this->hasMany(Calculation::class);
+    }
+
     public function getGrades() {
         $subjects = $this->subjects()->select('code')->get();
         $grades = [];
@@ -58,6 +63,14 @@ class User extends Authenticatable
         $subject = $this->subjects()->where('code', $code)->select('code')->first();
         if (!$subject) return null;
         return (int) $subject->pivot->grade;
+    }
+
+    public function addCalculation($subject_code){
+       $this->calculations()->create(['subject_code' => $subject_code]);
+    }
+
+    public function deleteOldCalculations(){
+        $this->calculations()->delete();
     }
 
     public function setGrade($code, $grade) {

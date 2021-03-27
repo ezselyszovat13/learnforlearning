@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Subject;
+use App\Http\Requests\DoCalculationFormRequest;
 use Auth;
 
 class CalculateController extends Controller
@@ -106,13 +107,34 @@ class CalculateController extends Controller
         return $maximalError;
     }
 
-    public function calculateOptional(){
+    public function calculateOptional(DoCalculationFormRequest $request){
+        $data = $request->all();
+
+        //we need to get the semester we are in
+        $isEvenSemester = null;
+        if($data['semester'] == "1"){
+            $isEvenSemester = false;
+        }
+        else if($data['semester'] == "2"){
+            $isEvenSemester = true;
+        }
+
         $goodSelector = $this->getGoodSelectorInformations();
 
         //we will count for all the optional whether they were good or not when user was a good selector or not
         $logonUser = Auth::User();
         //we need these, because these are the only subjects the user can choose
         $availableOptionals = $logonUser->getAvailableOptionalSubjects();
+
+        //we need to filter the options depends on the semester
+        $filteredAvailable = [];
+        foreach($availableOptionals as $availableOpt){
+            if($availableOpt->even_semester == $isEvenSemester){
+                array_push($filteredAvailable,$availableOpt);
+            }
+        }
+        $availableOptionals = $filteredAvailable;
+
         $optionalData = [];
         $availableCodes = [];
         
@@ -335,6 +357,7 @@ class CalculateController extends Controller
         if($advisableSubject == null){
             return redirect()->route('findsubject')->with('calculate_failed',true);
         }
-        return redirect()->route('findsubject')->with('calculated_subject_name',$advisableSubject->name);
+        $user->addCalculation($advisableSubject->code);
+        return redirect()->route('findsubject')->with('calculated_subject',$advisableSubject);
     }
 }

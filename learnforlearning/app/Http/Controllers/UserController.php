@@ -26,4 +26,10 @@ class UserController extends Controller
         $user->update($data);
         return redirect()->route('personal')->with('spec_updated', true);
     }
+
+    public function deleteCalculations(){
+        $user = Auth::User();
+        $user->deleteOldCalculations();
+        return redirect()->route('findsubject')->with('calculations_deleted',true);
+    }
 }
