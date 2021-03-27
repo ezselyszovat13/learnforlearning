@@ -149,7 +149,10 @@ class User extends Authenticatable
     }
 
     public function getOptionalGradesCount(){
-        return count($this->getOptionalSubjects());
+        $optionals = $this->getOptionalSubjects();
+        if($optionals === null)
+            return 0;
+        return count($optionals);
     }
 
     public function getOptionalGradesAverage(){
