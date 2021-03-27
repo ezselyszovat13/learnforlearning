@@ -1102,14 +1102,113 @@ class DatabaseSeeder extends Seeder
         'existsOnC' => true,
         'url' => 'https://www.inf.elte.hu/dstore/document/1082/A%20sz%C3%A1m%C3%ADt%C3%A1selm%C3%A9let%20alapjai%20II..pdf']);
     
-        User::factory()->create(['spec' => 'A']);
-        User::factory()->create(['spec' => 'B']);
-        User::factory()->create(['spec' => 'C']);
+        for($x = 1; $x < 11; $x++){
+            User::factory()->create( ['name' => "Felhasználó ".$x,
+                                      'email' => 'user'.$x.'@tanulas.hu',
+                                      'spec' => 'A']);
+        }
 
-        User::all()->each(function ($user) {
-            $subjectid = Subject::all()->random(1)->pluck('id')->toArray();
-            $user->subjects()->attach($subjectid,['grade' => 1, 'created_at' => Carbon::now()]);
-        });
+        //User ID 1
+        $user = User::where('id',1)->first();
+
+        $user->subjects()->attach(3,['grade' => 5, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(4,['grade' => 5, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(11,['grade' => 5, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(57,['grade' => 5, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(58,['grade' => 5, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(72,['grade' => 5, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(73,['grade' => 5, 'created_at' => Carbon::now()]);
+
+        //User ID 2
+        $user = User::where('id',2)->first();
+
+        $user->subjects()->attach(3,['grade' => 4, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(4,['grade' => 4, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(11,['grade' => 4, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(57,['grade' => 4, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(58,['grade' => 4, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(70,['grade' => 4, 'created_at' => Carbon::now()]);
+
+        //User ID 3
+        $user = User::where('id',3)->first();
+
+        $user->subjects()->attach(3,['grade' => 5, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(4,['grade' => 5, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(11,['grade' => 5, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(57,['grade' => 4, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(58,['grade' => 5, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(68,['grade' => 4, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(69,['grade' => 4, 'created_at' => Carbon::now()]);
+
+        //User ID 4
+        $user = User::where('id',4)->first();
+
+        $user->subjects()->attach(3,['grade' => 5, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(4,['grade' => 5, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(11,['grade' => 5, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(70,['grade' => 5, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(72,['grade' => 3, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(73,['grade' => 3, 'created_at' => Carbon::now()]);
+
+        //User ID 5
+        $user = User::where('id',5)->first();
+
+        $user->subjects()->attach(3,['grade' => 4, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(4,['grade' => 4, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(11,['grade' => 4, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(57,['grade' => 5, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(58,['grade' => 5, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(68,['grade' => 5, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(69,['grade' => 5, 'created_at' => Carbon::now()]);
+
+        //User ID 6
+        $user = User::where('id',6)->first();
+
+        $user->subjects()->attach(3,['grade' => 3, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(4,['grade' => 2, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(11,['grade' => 3, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(70,['grade' => 3, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(72,['grade' => 2, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(73,['grade' => 2, 'created_at' => Carbon::now()]);
+
+        //User ID 7
+        $user = User::where('id',7)->first();
+
+        $user->subjects()->attach(3,['grade' => 3, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(4,['grade' => 3, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(11,['grade' => 3, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(57,['grade' => 4, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(58,['grade' => 5, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(72,['grade' => 3, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(73,['grade' => 3, 'created_at' => Carbon::now()]);
+
+        //User ID 8
+        $user = User::where('id',8)->first();
+
+        $user->subjects()->attach(3,['grade' => 4, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(4,['grade' => 3, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(11,['grade' => 4, 'created_at' => Carbon::now()]);
+
+        //User ID 9
+        $user = User::where('id',9)->first();
+
+        $user->subjects()->attach(3,['grade' => 4, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(4,['grade' => 4, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(11,['grade' => 5, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(68,['grade' => 5, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(69,['grade' => 4, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(72,['grade' => 3, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(73,['grade' => 5, 'created_at' => Carbon::now()]);
+
+        //User ID 10
+        $user = User::where('id',10)->first();
+
+        $user->subjects()->attach(3,['grade' => 4, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(4,['grade' => 4, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(11,['grade' => 4, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(57,['grade' => 5, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(58,['grade' => 5, 'created_at' => Carbon::now()]);
+        $user->subjects()->attach(70,['grade' => 5, 'created_at' => Carbon::now()]);
 
     }
 

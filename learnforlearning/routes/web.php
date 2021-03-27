@@ -6,6 +6,7 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\CalculateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,8 @@ Route::get('/newsubject/{id}/edit', [SubjectController::class, 'editGivenGrade']
 Route::post('/newsubject/{id}/update', [SubjectController::class, 'updateGivenGrade'])->name('newsubject.update')->middleware('auth');
 Route::get('/personal/{id}/edit', [UserController::class, 'editSpecialization'])->name('spec.edit')->middleware('auth');
 Route::post('/personal/{id}/update', [UserController::class, 'updateSpecialization'])->name('spec.update')->middleware('auth');
+Route::post('/findsubject/calculate', [CalculateController::class,'calculateOptional'])->name('calculate')->middleware('auth');
+Route::get('/findsubject/delete', [UserController::class, 'deleteCalculations'])->name('findsubject.delete')->middleware('auth');
 
 Auth::routes();
 

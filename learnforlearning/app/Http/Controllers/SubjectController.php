@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Subject;
+use App\Models\Calculation;
 use App\Http\Requests\AddGradeFormRequest;
 use App\Http\Requests\ModifyGradeFormRequest;
 use Auth;
@@ -47,8 +48,16 @@ class SubjectController extends Controller
     public function showFind() {
         $user = Auth::User();
         $canCalculate = $user->hasSpecialization();
-        $optionalSubjects = $user->getOptionalSubjects();
-        return view('find',compact('canCalculate','optionalSubjects'));
+        $optionalSubjects = $user->getAvailableOptionalSubjects();
+        $calculationHistory = $user->calculations()->get();
+        $subjects = Subject::all();
+        $subData = [];
+        foreach($subjects as $subject){
+            $subData[$subject->code] = [
+                'url' => $subject->url,
+                'name' => $subject->name];
+        }
+        return view('find',compact('canCalculate','optionalSubjects', 'calculationHistory', 'subData'));
     }
 
     public function addNewGrade(AddGradeFormRequest $request){
@@ -86,6 +95,5 @@ class SubjectController extends Controller
         $user->update($data);
         return redirect()->route('newsubject')->with('grade_updated', true);
     }
-
 
 }

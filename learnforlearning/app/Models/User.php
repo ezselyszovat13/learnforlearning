@@ -27,6 +27,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Subject::class)->withPivot('grade')->withTimestamps();
     }
 
+    public function calculations()
+    {
+        return $this->hasMany(Calculation::class);
+    }
+
     public function getGrades() {
         $subjects = $this->subjects()->select('code')->get();
         $grades = [];
@@ -60,6 +65,14 @@ class User extends Authenticatable
         return (int) $subject->pivot->grade;
     }
 
+    public function addCalculation($subject_code){
+       $this->calculations()->create(['subject_code' => $subject_code]);
+    }
+
+    public function deleteOldCalculations(){
+        $this->calculations()->delete();
+    }
+
     public function setGrade($code, $grade) {
         $subject = Subject::where('code', $code)->get('id')->first();
         if (!$subject) return null;
@@ -74,7 +87,7 @@ class User extends Authenticatable
         return $this['spec'] !== "NOTHING";
     }
 
-    public function getOptionalSubjects(){
+    public function getAvailableOptionalSubjects(){
         $spec = null;
         if(!$this->hasSpecialization())
             return null;
@@ -104,6 +117,56 @@ class User extends Authenticatable
             }
         }
         return $optSubjects;
+    }
+
+    public function getOptionalSubjects(){
+        $spec = null;
+        if(!$this->hasSpecialization())
+            return null;
+        else
+            $spec = $this['spec'];
+
+        $subjects = $this->subjects()->get();
+        $optSubjects = [];
+        foreach ($subjects as $subject) {
+            if($spec == 'A'){
+                if($subject['existsOnA'] && $subject['optionalOnA']){
+                    array_push($optSubjects,$subject);
+                }
+            }
+            else if($spec == 'B'){
+                if($subject['existsOnB'] && $subject['optionalOnB']){
+                    array_push($optSubjects,$subject);
+                }
+            }
+            else if($spec == 'C'){
+                if($subject['existsOnC'] && $subject['optionalOnC']){
+                    array_push($optSubjects,$subject);
+                }
+            }
+        }
+        return $optSubjects;
+    }
+
+    public function getOptionalGradesCount(){
+        $optionals = $this->getOptionalSubjects();
+        if($optionals === null)
+            return 0;
+        return count($optionals);
+    }
+
+    public function getOptionalGradesAverage(){
+        $optCount = $this->getOptionalGradesCount();
+        if($optCount==0)
+            return null;
+        
+        $subjects = $this->getOptionalSubjects();
+        $sum = 0.0;
+
+        foreach ($subjects as $subject) {
+            $sum = $sum + $subject->pivot->grade;
+        }
+        return $sum/$optCount;
     }
 
     /**
