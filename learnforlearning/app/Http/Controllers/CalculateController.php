@@ -11,6 +11,7 @@ class CalculateController extends Controller
 {
     private function getGoodSelectorInformations(){
         //decides, whether a person has chosen great optionals or not
+        //all user will get a true or a false value
         $users = User::all();
         $goodSelector = [];
 
@@ -20,6 +21,7 @@ class CalculateController extends Controller
             //if there is no optional subjects yet, the user is not included in the calculation
             if($average === null || $optAverage === null)
                 continue;
+            //he/she is a good selector if his/her average is better because of these subjects
             $goodSelector[$user->id] = ($average <= $optAverage);
         }
 
@@ -34,6 +36,8 @@ class CalculateController extends Controller
         $totalGood = $correctOnGood + $incorrectOnGood;
         $totalBad = $correctOnBad + $incorrectOnBad;
         $total = $totalGood + $totalBad;
+
+        //var_dump($correctOnGood . " " . $incorrectOnGood . " " . $correctOnBad . " " . $incorrectOnBad . " -----------------------");
 
         $correctLeft = $correctOnGood>0 ? pow(($correctOnGood / (double)$totalGood),2) : 0;
         $incorrectLeft = $incorrectOnGood>0 ? pow(($incorrectOnGood / (double)$totalGood),2) : 0;
@@ -51,8 +55,6 @@ class CalculateController extends Controller
         $minGini = null;
         $minGiniValue = null;
         $occurrence = 0;
-
-        var_dump("EZVOLTAMÉRET:" . count($giniImpurities));
 
         foreach ($giniImpurities as $key => $data){
             if($minGini === null){
@@ -83,16 +85,33 @@ class CalculateController extends Controller
             }
         }
         if($minGini === null){
-            throw new Exception('IMPOSSIBLE.');
+            return null;
         }
         return $minGini;
     } 
+
+    private function calculateMaximalError(&$optionalData, $bestChoice, $sampleCount){
+        $maximalError = ($optionalData[$bestChoice]['incorrectOnGoodSelection'] + $optionalData[$bestChoice]['incorrectOnBadSelection'])*$optionalData[$bestChoice]['weight'];
+
+        //we need to define cases for extreme values
+        if($maximalError > 1){
+            $maximalError = 1 - 1/(double)($sampleCount*10); 
+            $reachedMaximumErrorLimit = true;
+        }
+        if($maximalError == 0) 
+            $maximalError += 1/(double)($sampleCount*10);
+        else if($maximalError == 1)
+            $maximalError -= 1/(double)($sampleCount*10);
+
+        return $maximalError;
+    }
 
     public function calculateOptional(){
         $goodSelector = $this->getGoodSelectorInformations();
 
         //we will count for all the optional whether they were good or not when user was a good selector or not
         $logonUser = Auth::User();
+        //we need these, because these are the only subjects the user can choose
         $availableOptionals = $logonUser->getAvailableOptionalSubjects();
         $optionalData = [];
         $availableCodes = [];
@@ -100,8 +119,7 @@ class CalculateController extends Controller
         $users = User::all();
         $userCount = User::count();
 
-
-        //create the samples
+        //create the initial samples in (user-subject-weight-correct) form
         $samples = [];
         foreach ($users as $user){
             $subjects = $user->getOptionalSubjects();
@@ -117,166 +135,137 @@ class CalculateController extends Controller
         }
 
         $stumps = [];
-        //repeat it until we get 5 stump
-
         $reachedMaximumErrorLimit = false;
         $sampleCount = count($samples);
 
+        //we continue our tasks until 6 round (because the result are usually same after that) or until we reach the error limit
         while(count($stumps) < 6 && !$reachedMaximumErrorLimit){
-        
-        echo '<pre>';
-            var_dump(count($stumps)+1 . "kör");
-        echo '</pre>';
 
-        //add initial weights
+            //all the sample will get the same weight
+            foreach($samples as &$sample){
+                $sample['weight'] = 1/(double)($sampleCount);
+            }
 
-        var_dump("SZEMPKÁNT:" . $sampleCount);
-        foreach($samples as &$sample){
-            $sample['weight'] = 1/(double)($sampleCount);
-        }
+            $availableCodes = [];
+            //we need to reset the occurrence of the subjects
+            foreach ($availableOptionals as $optional) {
+                $optionalData[$optional->code] = [
+                    'correctOnGoodSelection' => 0,
+                    'incorrectOnGoodSelection' => 0,
+                    'correctOnBadSelection' => 0,
+                    'incorrectOnBadSelection' => 0,
+                    'weight' => 0,
+                ];
+                array_push($availableCodes,$optional->code);
+            }
 
-        //we need to reset the occurrence of the subjects
-        foreach ($availableOptionals as $optional) {
-            $optionalData[$optional->code] = [
-                'correctOnGoodSelection' => 0,
-                'incorrectOnGoodSelection' => 0,
-                'correctOnBadSelection' => 0,
-                'incorrectOnBadSelection' => 0,
-                'weight' => 0,
+            //we will decide whether a sample was a correct choice or not
+            foreach ($samples as &$sample){
+                $user = $sample['user'];
+                $subject = $sample['subject'];
+                $subjects = $user->getOptionalSubjects();
+                $average = $user->getGradesAverage();
+                $optAverage = $user->getOptionalGradesAverage();
+                $isGoodSelector = $goodSelector[$user->id];
+
+                //the subject was not completed by logonUser
+                if(in_array($subject->code,$availableCodes)){
+                    if($isGoodSelector){
+                        if($subject->pivot->grade >= $average){
+                            $optionalData[$subject->code]['correctOnGoodSelection'] += 1;
+                            $sample['correct'] = true;
+                        }
+                        else{
+                            $optionalData[$subject->code]['incorrectOnGoodSelection'] += 1;
+                            $optionalData[$subject->code]['weight'] += $sample['weight'];
+                            $sample['correct'] = false;
+                        }
+                    }
+                    else{
+                        if($subject->pivot->grade < $average){
+                            $optionalData[$subject->code]['correctOnBadSelection'] += 1;
+                            $sample['correct'] = true;
+                        }
+                        else{
+                            $optionalData[$subject->code]['incorrectOnBadSelection'] += 1;
+                            $optionalData[$subject->code]['weight'] += $sample['weight'];
+                            $sample['correct'] = false;
+                        }
+                    }
+                }
+            }
+
+            //filter all the subjects that were not touched
+            $filteredData = [];
+            foreach ($optionalData as $key => $data){
+                if($data['correctOnGoodSelection']>0 || $data['incorrectOnGoodSelection']>0 || $data['correctOnBadSelection']>0 || $data['incorrectOnBadSelection']>0){
+                    $filteredData[$key] = $data;
+                }
+            }
+            $optionalData = $filteredData;
+            
+            //get giniImpurity for all the remaining subjects
+            $giniImpurities = [];
+            foreach ($optionalData as $key => $data){
+                $giniImpurities[$key] = $this->getGiniImpurity($key,$optionalData);
+            }
+
+            //this will be the chosen stump
+            $bestChoice = $this->getMinimalGini($optionalData,$giniImpurities);
+            if($bestChoice === null){
+                $reachedMaximumErrorLimit = true;
+                break;
+            }
+
+            //maximalError will be all the wrong choice our stump made
+            $maximalError = $this->calculateMaximalError($optionalData,$bestChoice, $sampleCount);
+
+            //this will be the power of the chosen stump
+            $stumpPower = 0.5 * log((1-$maximalError)/$maximalError);
+
+            //add the stump to the results
+            $stump = [
+                'subject' => $bestChoice,
+                'power' => $stumpPower,
             ];
-            array_push($availableCodes,$optional->code);
-        }
 
-        $WEIGHTSUM = 0;
+            array_push($stumps,$stump);
 
-        foreach ($samples as &$sample){
-            echo '<pre>';
-                //var_dump($sample['weight']);
-                $WEIGHTSUM += $sample["weight"];
-            echo '</pre>';
-            $user = $sample['user'];
-            $subject = $sample['subject'];
-            $subjects = $user->getOptionalSubjects();
-            $average = $user->getGradesAverage();
-            $optAverage = $user->getOptionalGradesAverage();
-            $isGoodSelector = $goodSelector[$user->id];
-
-            //the subject was not completed by logonUser
-            if(in_array($subject->code,$availableCodes)){
-                if($isGoodSelector){
-                    if($subject->pivot->grade >= $average){
-                        $optionalData[$subject->code]['correctOnGoodSelection'] += 1;
-                        $sample['correct'] = true;
-                    }
-                    else{
-                        $optionalData[$subject->code]['incorrectOnGoodSelection'] += 1;
-                        $optionalData[$subject->code]['weight'] += $sample['weight'];
-                        $sample['correct'] = false;
-                    }
+            //for later normalization we need to sum the weights
+            $sumOfWeights = 0;
+            
+            //we decrease the weight of successful samples and increase the weight of failed samples
+            foreach($samples as &$sample){
+                if($sample['subject']->code == $bestChoice && $sample['correct']){
+                    $sample['weight'] *= pow(exp(1.0),-1*$stumpPower);
                 }
-                else{
-                    if($subject->pivot->grade < $average){
-                        $optionalData[$subject->code]['correctOnBadSelection'] += 1;
-                        $sample['correct'] = true;
-                    }
-                    else{
-                        $optionalData[$subject->code]['incorrectOnBadSelection'] += 1;
-                        $optionalData[$subject->code]['weight'] += $sample['weight'];
-                        $sample['correct'] = false;
+                else if ($sample['subject']->code == $bestChoice && !$sample['correct']) {
+                    $sample['weight'] *= pow(exp(1.0),$stumpPower);
+                }
+                $sumOfWeights += $sample['weight'];
+            }
+
+            //normalization
+            foreach($samples as &$sample){
+                $sample['weight'] /= (double)$sumOfWeights;
+            }
+
+            //we will get a random number
+            //we go through the samples, and when we reach the proper weight we will choose the sample
+            //the count of the samples will be exactly the same as it was before
+            $newSamples = [];
+            for($index = 0; $index < $sampleCount ; $index++){
+                $randomNumber = mt_rand() / mt_getrandmax();
+                $actualWeightBorder = 0;
+                foreach($samples as $sample){
+                    $actualWeightBorder += $sample['weight'];
+                    if($actualWeightBorder > $randomNumber){ 
+                        array_push($newSamples,$sample);
+                        break;
                     }
                 }
             }
-        }
-    
-        var_dump("SZUMM:" . $WEIGHTSUM);
-
-        var_dump("OPTIONALCOUNT: " . count($optionalData));
-
-        //filter all the subjects that were not touched
-        $filteredData = [];
-        foreach ($optionalData as $key => $data){
-            if($data['correctOnGoodSelection']>0 || $data['incorrectOnGoodSelection']>0 || $data['correctOnBadSelection']>0 || $data['incorrectOnBadSelection']>0){
-                $filteredData[$key] = $data;
-            }
-        }
-        $optionalData = $filteredData;
-        
-        var_dump("OPTIONALCOUNT: " . count($optionalData));
-
-        //get giniImpurity for all the remaining subjects
-        $giniImpurities = [];
-
-        foreach ($optionalData as $key => $data){
-            $giniImpurities[$key] = $this->getGiniImpurity($key,$optionalData);
-        }
-        //this will be the chosen stump
-        $bestChoice = $this->getMinimalGini($optionalData,$giniImpurities);
-
-        var_dump($optionalData[$bestChoice]['incorrectOnGoodSelection']);
-        var_dump($optionalData[$bestChoice]['incorrectOnBadSelection']);
-        var_dump($optionalData[$bestChoice]['weight']);
-
-        $maximalError = ($optionalData[$bestChoice]['incorrectOnGoodSelection'] + $optionalData[$bestChoice]['incorrectOnBadSelection'])*$optionalData[$bestChoice]['weight'];
-        if($maximalError > 1){
-            $maximalError = 1 - 1/(double)($sampleCount*10); 
-            $reachedMaximumErrorLimit = true;
-        }
-        if($maximalError == 0) 
-            $maximalError += 1/(double)($sampleCount*10);
-        else if($maximalError == 1)
-            $maximalError -= 1/(double)($sampleCount*10);
-
-        //this will be the power of the chosen stump
-        var_dump("MAXERROR:" . $maximalError);
-        $stumpPower = 0.5 * log((1-$maximalError)/$maximalError);
-        var_dump("STUMPPOW: " . $stumpPower);
-
-        //add the stump to the results
-        $stump = [
-            'subject' => $bestChoice,
-            'power' => $stumpPower,
-        ];
-
-        array_push($stumps,$stump);
-
-        //for later normalization we need to sum the weights
-        $sumOfWeights = 0;
-        
-        //we decrease the weight of successful samples and increase the weight of failed samples
-        foreach($samples as &$sample){
-            if($sample['subject']->code == $bestChoice && $sample['correct']){
-                //var_dump("HELPER".-1*$stumpPower);
-                $sample['weight'] *= pow(exp(1.0),-1*$stumpPower);
-            }
-            else if ($sample['subject']->code == $bestChoice && !$sample['correct']) {
-                $sample['weight'] *= pow(exp(1.0),$stumpPower);
-            }
-            $sumOfWeights += $sample['weight'];
-        }
-
-        //normalization
-        foreach($samples as &$sample){
-            $sample['weight'] /= (double)$sumOfWeights;
-        }
-
-        $newSamples = [];
-        for($index = 0; $index < $sampleCount ; $index++){
-            $randomNumber = mt_rand() / mt_getrandmax();
-            $actualWeightBorder = 0;
-            foreach($samples as $sample){
-                //var_dump("ACT1: ".$actualWeightBorder);
-                $actualWeightBorder += $sample['weight'];
-                //var_dump("ACT2: ".$actualWeightBorder);
-                //var_dump("RAND: ".$randomNumber);
-                //var_dump("SW: ".$sample['weight']);
-                if($actualWeightBorder > $randomNumber){ 
-                    array_push($newSamples,$sample);
-                    break;
-                }
-            }
-        }
-        var_dump(count($newSamples));
-        $samples = $newSamples;
+            $samples = $newSamples;
         }
 
 
@@ -287,15 +276,65 @@ class CalculateController extends Controller
         //-------------------------------------------------------------------------------------------------------
         //-------------------------------------------------------------------------------------------------------
 
-        //csinálunk minden tárgynak egy összegzőt
-        //végigmegyünk a user-ek jegyein a kialakított stump-oknak megfelelően
-        //ha valakinél megtalálunk egyet és neki jó választás volt ez --> hozzáadjuk az értéket az addigihez
-        //ha valakinél ez rossza választás volt --> kivonjuk az értéket az addigiből
-        //a legmagasabb pontot elérő lesz a javaslat
+        //check which subjects had at least one stump
+        $stumpSubjects = [];
+        foreach ($stumps as $stump){
+            if(!in_array($stump['subject'],$stumpSubjects)){
+                array_push($stumpSubjects,$stump['subject']);
+            }
+        }
 
-        //var_dump($stumps);
+        //all remaining subjects counter will be initialzed to 0
+        $stumpCounter = [];
+        foreach ($stumpSubjects as $stump) {
+            $stumpCounter[$stump] = 0;
+        }
 
-        //$subject = Subject::where('id',1)->first();
-        //return redirect()->route('findsubject')->with('calculated_subject_name',$subject->name);
+        //when a user has a grade from one of the remaining subjects
+        //we will look whether it was a good choice or not 
+        //if not --> we will decrease its value
+        //otherwise --> increase its value
+        foreach ($users as $user){
+            $subjects = $user->getOptionalSubjects();
+            $average = $user->getGradesAverage();
+            foreach($subjects as $subject){
+                if(in_array($subject->code,$stumpSubjects)){
+                    foreach($stumps as &$stump){
+                        if($stump['subject'] === $subject->code){
+                            if($subject->pivot->grade >= $average){
+                                $stumpCounter[$subject->code] += (double)$stump['power'];
+                            }
+                            else{
+                                $stumpCounter[$subject->code] -= (double)$stump['power'];
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        //choosing the best option
+        $maxSubCode = null;
+        $maxValue = null;
+
+        foreach ($stumpCounter as $key => $value) {
+            if($maxSubCode === null){
+                $maxSubCode = $key;
+                $maxValue = $value;
+            }
+            else{
+                if($value > $maxValue){
+                    $maxSubCode = $key;
+                    $maxValue = $value;
+                }
+            }
+        }
+
+        //return the subject
+        $advisableSubject = Subject::where('code',$maxSubCode)->first();
+        if($advisableSubject == null){
+            return redirect()->route('findsubject')->with('calculate_failed',true);
+        }
+        return redirect()->route('findsubject')->with('calculated_subject_name',$advisableSubject->name);
     }
 }
