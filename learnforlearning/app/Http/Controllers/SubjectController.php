@@ -56,7 +56,7 @@ class SubjectController extends Controller
         }
         
         if($user === null)
-            return view('subject', compact('subject','teachers'));
+            return view('subject', compact('subject','teachers', 'votes'));
 
         return view('subject', compact('subject','teachers','user','votes'));
     }
@@ -135,8 +135,12 @@ class SubjectController extends Controller
 
     public function updateGivenGrade(ModifyGradeFormRequest $request, $id){
         $data = $request->all();
+        $subjectToUpdate = Subject::find($id);
+        if ($subjectToUpdate === null) {
+            return redirect()->route('newsubject')->with('subject_not_exists',true);
+        }
         $user = Auth::User();
-        $user->update($data);
+        $user->setGrade($subjectToUpdate->code,$data['grade']);
         return redirect()->route('newsubject')->with('grade_updated', true);
     }
 

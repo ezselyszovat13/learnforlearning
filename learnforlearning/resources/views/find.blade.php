@@ -15,7 +15,7 @@
             <div>
                 @foreach ($optionalSubjects as $subject)
                     <span class="badge badge-primary">
-                        <a target="__blank" style="color: white !important;font-size:14px" href="{{ $subject->url }}">{{ $subject->name }}</a>
+                        <a target="__blank" style="color: white !important;font-size:14px" href="{{ route('subjects.info', ['id' => $subject->id]) }}">{{ $subject->name }}</a>
                     </span>
                 @endforeach
             </div>

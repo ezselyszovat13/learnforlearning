@@ -63,7 +63,7 @@
                                     <td>NEM</td>
                                 @endif
                                 <td>{{$subject->pivot->grade}}</td>
-                                <td><a class="btn btn-primary btn-lg" style="font-size:0.8rem" target="_blank" href="{{$subject->url}}" role="button">Információk</a></td>
+                                <td><a class="btn btn-primary btn-lg" style="font-size:0.8rem" target="_blank" href="{{ route('subjects.info', ['id' => $subject->id]) }}" role="button">Információk</a></td>
                                 <td><a class="btn btn-primary btn-lg" style="font-size:0.8rem" target="_blank" href="{{ route('newsubject.edit', ['id' => $subject->id]) }}" role="button">Jegy szerkesztése</a></td>
                             </tr>
                         @endforeach

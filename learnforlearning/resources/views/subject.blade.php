@@ -53,7 +53,7 @@
                                 <td>{{$teacher->name}}</td>
                                 @if($votes[$teacher->id]['points']>0)
                                     <td style="font-weight:bold;color:green">+{{$votes[$teacher->id]['points']}}</td>
-                                @elseif($votes[$teacher->id]==0)
+                                @elseif($votes[$teacher->id]['points']==0)
                                     <td style="font-weight:bold">{{$votes[$teacher->id]['points']}}</td>
                                 @else
                                     <td style="font-weight:bold;color:red">{{$votes[$teacher->id]['points']}}</td>
