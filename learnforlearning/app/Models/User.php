@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Carbon\Carbon;
 
 class User extends Authenticatable
 {
@@ -27,9 +28,34 @@ class User extends Authenticatable
         return $this->belongsToMany(Subject::class)->withPivot('grade')->withTimestamps();
     }
 
+    public function votes(){
+        return $this->belongsToMany(Teacher::class)->withPivot('is_positive_vote')->withTimestamps();
+    }
+
     public function calculations()
     {
         return $this->hasMany(Calculation::class);
+    }
+
+    public function vote($teacherId, $isPositive){
+        $teacher = Teacher::where('id', $teacherId)->get('id')->first();
+        if (!$teacher) return null;
+        $vote = $this->votes()->where('teacher_id', $teacherId)->first();
+        if($vote !== null && $vote->pivot->is_positive_vote === $isPositive){
+            $this->votes()->detach($teacher);
+        }
+        else{
+            return $this->votes()->syncWithoutDetaching([
+                $teacher->id => [
+                    'is_positive_vote' => $isPositive,
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ]
+            ]);
+        }
+        /*$this->votes()->attach($teacherId,['is_positive_vote' => $isPositive,
+                                           'created_at' => Carbon::now(),
+                                           'updated_at' => Carbon::now()]);*/
     }
 
     public function getGrades() {

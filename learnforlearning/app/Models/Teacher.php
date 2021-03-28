@@ -9,9 +9,13 @@ class Teacher extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name','posVote','negVote'];
+    protected $fillable = ['name'];
 
     public function subjects() {
         return $this->belongsToMany(Subject::class);
+    }
+
+    public function voters() {
+        return $this->belongsToMany(User::class)->withPivot('is_positive_vote')->withTimestamps();
     }
 }

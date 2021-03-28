@@ -17,6 +17,50 @@ class SubjectController extends Controller
         return view('subjects', compact('subjects'));
     }
 
+    public function showSubject($id) {
+        $subject = Subject::where('id',$id)->first();
+        if($subject === null)
+            return view('subjects');
+
+        $user = Auth::user();
+        $teachers = $subject->teachers()->get();
+        $votes = [];
+        foreach($teachers as $teacher){
+            $points = 0;
+            $teacherVotes = $teacher->voters()->get();
+            $hasPositiveVote = false;
+            $hasNegativeVote = false;
+            foreach($teacherVotes as $tVote){
+                if($tVote->pivot->is_positive_vote){
+                    $points += 1;
+                    if($user !== null){
+                        if($tVote->pivot->user_id == $user->id){
+                            $hasPositiveVote = true;
+                        }
+                    }
+                }
+                else{
+                    $points -= 1;
+                    if($user !== null){
+                        if($tVote->pivot->user_id == $user->id){
+                            $hasNegativeVote = true;
+                        }
+                    }
+                }
+            }
+            $votes[$teacher->id] = [
+                'points' => $points,
+                'hasPosVote' => $hasPositiveVote,
+                'hasNegVote' => $hasNegativeVote
+            ];
+        }
+        
+        if($user === null)
+            return view('subject', compact('subject','teachers'));
+
+        return view('subject', compact('subject','teachers','user','votes'));
+    }
+
     public function givenSubjects() {
         $user = Auth::user();
 

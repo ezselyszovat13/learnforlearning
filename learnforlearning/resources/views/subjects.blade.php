@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Adatok')
+@section('title', 'Elérhető kurzusok')
 
 @section('content')
     <div class="container">
@@ -31,16 +31,20 @@
                                 @else
                                     <td>NEM</td>
                                 @endif
-                                <td><a class="btn btn-primary btn-lg" target="_blank" href="{{$subject->url}}" role="button">Információk</a></td>
+                                <td><a class="btn btn-primary btn-lg" target="__blank" href="{{ route('subjects.info', ['id' => $subject->id]) }}" role="button">Információk</a></td>
                             </tr>
                         @endforeach
                     </tbody>
                     </table>
                 @else
-                    <p>Nincsenek megjeleníthető kurzusok</p>
+                    <div class="alert alert-danger mt-3" role="alert">
+                        <p>Nincsenek megjeleníthető kurzusok!</p>
+                    </div>
                 @endif
             @else
-                <p>Nincsenek megjeleníthető kurzusok</p>
+                <div class="alert alert-danger mt-3" role="alert">
+                    <p>Nincsenek megjeleníthető kurzusok!</p>
+                </div>
             @endif
         </div>
     </div>

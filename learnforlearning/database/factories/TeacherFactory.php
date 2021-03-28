@@ -22,8 +22,7 @@ class TeacherFactory extends Factory
     public function definition()
     {
         return [
-            'posVote' => 0,
-            'negVote' => 0,
+            
         ];
     }
 }

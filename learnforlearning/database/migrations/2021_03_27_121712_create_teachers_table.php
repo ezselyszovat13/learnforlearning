@@ -16,8 +16,6 @@ class CreateTeachersTable extends Migration
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('posVote');
-            $table->integer('negVote');
             $table->timestamps();
         });
     }

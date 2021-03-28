@@ -32,4 +32,11 @@ class UserController extends Controller
         $user->deleteOldCalculations();
         return redirect()->route('findsubject')->with('calculations_deleted',true);
     }
+
+    public function vote(Request $request){
+        $params = $request->all();
+        $user = Auth::user();
+        $user->vote($params['teacherId'],$params['isPositive']);
+        return redirect()->route('subjects.info', ['id' => $params['subjectId']]);
+    }
 }

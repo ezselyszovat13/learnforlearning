@@ -22,6 +22,7 @@ use App\Http\Controllers\CalculateController;
 Route::get('/', [MainController::class, 'index'])->name('main');
 Route::get('/personal', [UserController::class, 'show'])->name('personal')->middleware('auth');
 Route::get('/subjects', [SubjectController::class, 'showAll'])->name('subjects');
+Route::get('/subjects/{id}', [SubjectController::class,'showSubject'])->name('subjects.info');
 Route::get('/newsubject', [SubjectController::class, 'givenSubjects'])->name('newsubject')->middleware('auth');
 Route::get('/findsubject', [SubjectController::class, 'showFind'])->name('findsubject')->middleware('auth');
 Route::post('/subjects/add', [SubjectController::class, 'addNewGrade'])->name('subject.add')->middleware('auth');
@@ -31,6 +32,7 @@ Route::get('/personal/{id}/edit', [UserController::class, 'editSpecialization'])
 Route::post('/personal/{id}/update', [UserController::class, 'updateSpecialization'])->name('spec.update')->middleware('auth');
 Route::post('/findsubject/calculate', [CalculateController::class,'calculateOptional'])->name('calculate')->middleware('auth');
 Route::get('/findsubject/delete', [UserController::class, 'deleteCalculations'])->name('findsubject.delete')->middleware('auth');
+Route::get('/subject/vote/', [UserController::class, 'vote'])->name('user.vote')->middleware('auth');
 
 Auth::routes();
 
