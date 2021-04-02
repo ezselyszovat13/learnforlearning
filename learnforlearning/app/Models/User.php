@@ -29,7 +29,7 @@ class User extends Authenticatable
     }
 
     public function votes(){
-        return $this->belongsToMany(Teacher::class)->withPivot('is_positive_vote')->withTimestamps();
+        return $this->belongsToMany(Teacher::class)->withPivot('is_positive_vote','comment')->withTimestamps();
     }
 
     public function calculations()
@@ -42,6 +42,15 @@ class User extends Authenticatable
         if (!$teacher) return null;
         $vote = $this->votes()->where('teacher_id', $teacherId)->first();
         if($vote !== null && $vote->pivot->is_positive_vote === $isPositive){
+            if($vote->pivot->comment !== null){
+                return $this->votes()->syncWithoutDetaching([
+                    $teacher->id => [
+                        'is_positive_vote' => null,
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now()
+                    ]
+                ]);
+            }
             $this->votes()->detach($teacher);
         }
         else{
@@ -53,9 +62,6 @@ class User extends Authenticatable
                 ]
             ]);
         }
-        /*$this->votes()->attach($teacherId,['is_positive_vote' => $isPositive,
-                                           'created_at' => Carbon::now(),
-                                           'updated_at' => Carbon::now()]);*/
     }
 
     public function getGrades() {
@@ -193,6 +199,16 @@ class User extends Authenticatable
             $sum = $sum + $subject->pivot->grade;
         }
         return $sum/$optCount;
+    }
+
+    public function addComment($teacherId, $comment){
+        $teacher = Teacher::where('id', $teacherId)->get('id')->first();
+        if (!$teacher) return null;
+        return $this->votes()->syncWithoutDetaching([
+            $teacherId => [
+                'comment' => $comment,
+            ]
+        ]);
     }
 
     /**

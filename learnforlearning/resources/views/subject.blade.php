@@ -5,6 +5,13 @@
 @section('content')
     <div class="container">
         <div class="jumbotron">
+            @if (session()->has('comment_added'))
+                @if (session()->get('comment_added') == true)
+                    <div class="alert alert-success mb-3" role="alert">
+                        A hozzászólás sikeresen elküldve.
+                    </div>
+                @endif
+            @endif
             <h1 class="display-4">{{$subject->name}}<span class="ml-2" style="font-size: 1.8rem">({{$subject->code}})</span>
                 <a class="btn btn-primary btn-lg" target="__blank" href="{{ $subject->url }}" role="button">További információk</a>
             </h1>
@@ -43,6 +50,7 @@
                                 @if(isset($user)) 
                                 <th scope="col"></th>
                                 <th scope="col"></th>
+                                <th scope="col"></th>
                                 @endif
                             </tr>
                         </thead>
@@ -61,6 +69,7 @@
                                 @if(isset($user)) 
                                     <td style="width:20px;{{ $votes[$teacher->id]['hasPosVote'] ? 'opacity:1' : 'opacity:0.5' }}"><a class="btn btn-lg" href="{{ route('user.vote', ['teacherId' => $teacher->id, 'isPositive' => true, 'subjectId' => $subject->id]) }}" role="button">👍</a></td>
                                     <td style="width:20px;{{ $votes[$teacher->id]['hasNegVote'] ? 'opacity:1' : 'opacity:0.5' }}"><a class="btn btn-lg" href="{{ route('user.vote', ['teacherId' => $teacher->id, 'isPositive' => false, 'subjectId' => $subject->id]) }}" role="button">💔</a></td>
+                                    <td style="width:20px;"><a class="btn btn-lg" href="{{ route('user.comment', ['teacherId' => $teacher->id, 'subjectId' => $subject->id]) }}" role="button">💬</a></td>
                                 @endif
                             </tr>
                         @endforeach

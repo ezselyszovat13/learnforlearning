@@ -31,7 +31,10 @@ class SubjectController extends Controller
             $hasPositiveVote = false;
             $hasNegativeVote = false;
             foreach($teacherVotes as $tVote){
-                if($tVote->pivot->is_positive_vote){
+                if($tVote->pivot->is_positive_vote === null){
+                    continue;
+                }
+                else if($tVote->pivot->is_positive_vote){
                     $points += 1;
                     if($user !== null){
                         if($tVote->pivot->user_id == $user->id){

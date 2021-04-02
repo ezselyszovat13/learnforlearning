@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AddGradeFormRequest extends FormRequest
+class AddCommentFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,8 +26,7 @@ class AddGradeFormRequest extends FormRequest
     {
         // Szabályok
         return [
-            'subject' => 'required',
-            'grade' => 'required|min:1'
+            'comment' => 'required',
         ];
     }
 
@@ -36,7 +35,6 @@ class AddGradeFormRequest extends FormRequest
     public function messages() {
         return [
             'required' => 'Meg kell adnod ezt az opciót!',
-            'min' => 'Meg kell adnod ezt az opciót!',
         ];
     }
 }

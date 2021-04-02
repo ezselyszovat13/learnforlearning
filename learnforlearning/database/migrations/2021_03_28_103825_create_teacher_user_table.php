@@ -17,7 +17,8 @@ class CreateTeacherUserTable extends Migration
             $table->id();
             $table->unsignedBigInteger('teacher_id');
             $table->unsignedBigInteger('user_id');
-            $table->boolean('is_positive_vote');
+            $table->boolean('is_positive_vote')->nullable();
+            $table->text('comment')->nullable();
             $table->timestamps();
 
             $table->unique(['teacher_id','user_id']);

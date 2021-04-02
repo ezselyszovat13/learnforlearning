@@ -33,6 +33,8 @@ Route::post('/personal/{id}/update', [UserController::class, 'updateSpecializati
 Route::post('/findsubject/calculate', [CalculateController::class,'calculateOptional'])->name('calculate')->middleware('auth');
 Route::get('/findsubject/delete', [UserController::class, 'deleteCalculations'])->name('findsubject.delete')->middleware('auth');
 Route::get('/subject/vote/', [UserController::class, 'vote'])->name('user.vote')->middleware('auth');
+Route::get('/subject/comment/', [UserController::class, 'comment'])->name('user.comment')->middleware('auth');
+Route::post('/subject/comment/update', [UserController::class, 'commentUpdate'])->name('user.comment.update')->middleware('auth');
 
 Auth::routes();
 
