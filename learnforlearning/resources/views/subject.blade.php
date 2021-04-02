@@ -60,7 +60,7 @@
                                 <th scope="row">{{$loop->iteration}}</th>
                                 <td>
                                     {{$teacher->name}}
-                                    <a class="btn" data-toggle="tooltip" title="A megjegyzésekért kattints ide"
+                                    <a class="btn" data-toggle="tooltip" title="A megjegyzésekért kattints ide!"
                                         target="__blank" href="{{ route('teacher.comments', ['id' => $teacher->id]) }}" role="button">❓
                                     </a>
                                 </td>
