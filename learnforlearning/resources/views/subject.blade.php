@@ -8,7 +8,7 @@
             @if (session()->has('comment_added'))
                 @if (session()->get('comment_added') == true)
                     <div class="alert alert-success mb-3" role="alert">
-                        A hozzászólás sikeresen elküldve.
+                        A megjegyzés sikeresen elküldve.
                     </div>
                 @endif
             @endif
@@ -58,7 +58,12 @@
                         @foreach ($teachers as $teacher)       
                             <tr>
                                 <th scope="row">{{$loop->iteration}}</th>
-                                <td>{{$teacher->name}}</td>
+                                <td>
+                                    {{$teacher->name}}
+                                    <a class="btn" data-toggle="tooltip" title="A megjegyzésekért kattints ide"
+                                        target="__blank" href="{{ route('teacher.comments', ['id' => $teacher->id]) }}" role="button">❓
+                                    </a>
+                                </td>
                                 @if($votes[$teacher->id]['points']>0)
                                     <td style="font-weight:bold;color:green">+{{$votes[$teacher->id]['points']}}</td>
                                 @elseif($votes[$teacher->id]['points']==0)

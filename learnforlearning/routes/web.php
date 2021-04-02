@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\CalculateController;
+use App\Http\Controllers\TeacherController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,7 @@ Route::get('/findsubject/delete', [UserController::class, 'deleteCalculations'])
 Route::get('/subject/vote/', [UserController::class, 'vote'])->name('user.vote')->middleware('auth');
 Route::get('/subject/comment/', [UserController::class, 'comment'])->name('user.comment')->middleware('auth');
 Route::post('/subject/comment/update', [UserController::class, 'commentUpdate'])->name('user.comment.update')->middleware('auth');
+Route::get('/subject/{id}/comments', [TeacherController::class, 'comments'])->name('teacher.comments');
 
 Auth::routes();
 

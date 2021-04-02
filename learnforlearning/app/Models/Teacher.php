@@ -16,6 +16,19 @@ class Teacher extends Model
     }
 
     public function voters() {
-        return $this->belongsToMany(User::class)->withPivot('is_positive_vote')->withTimestamps();
+        return $this->belongsToMany(User::class)->withPivot('is_positive_vote','comment')->withTimestamps();
+    }
+
+    public function comments() {
+        $votes = $this->voters()->get();
+        $comments = [];
+        foreach ($votes as $vote) {
+            $user = User::where('id',$vote->pivot->user_id)->first();
+            $comments[$user->name] = [
+                'comment' => $vote->pivot->comment,
+                'is_positive_vote' => $vote->pivot->is_positive_vote
+            ];
+        }
+        return $comments;
     }
 }
