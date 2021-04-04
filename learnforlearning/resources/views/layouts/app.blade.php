@@ -62,6 +62,10 @@
                                     <a href="{{ route('subjects') }}" class="dropdown-item">Tárgyak listázása</a>
                                     <a href="{{ route('newsubject') }}" class="dropdown-item">Új jegyek felvétele</a>
                                     <a href="{{ route('findsubject') }}" class="dropdown-item">Kötelezően választható tárgy keresése</a>
+                                    <a href="{{ route('fixable') }}" class="dropdown-item">Javítási észrevételek küldése</a>
+                                    @if (Gate::allows('manage'))
+                                        <a href="{{ route('manage') }}" class="dropdown-item">Javaslatok kezelése</a>
+                                    @endif
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

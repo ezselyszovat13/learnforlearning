@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->truncate();
         DB::table('teachers')->truncate();
         DB::table('subject_teacher')->truncate();
+        DB::table('teacher_user')->truncate();
 
         $subject = Subject::create(['name' => 'Adatbázisok 1 Ea',
         'code' => 'IP-18AB1E',
@@ -44,7 +45,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
     
@@ -67,7 +70,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -92,7 +97,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -117,7 +124,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -140,7 +149,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -163,7 +174,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -185,7 +198,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -209,7 +224,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -231,7 +248,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -255,7 +274,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -278,7 +299,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -302,7 +325,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -325,7 +350,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -347,7 +374,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
         
@@ -370,7 +399,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -392,7 +423,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -418,7 +451,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -442,7 +477,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -466,7 +503,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -490,7 +529,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -512,7 +553,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -535,7 +578,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -559,7 +604,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -581,7 +628,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -604,7 +653,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -627,7 +678,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -650,7 +703,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
     
@@ -672,7 +727,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
     
@@ -694,7 +751,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
     
@@ -718,7 +777,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -740,7 +801,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -762,7 +825,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -784,7 +849,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -806,7 +873,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -828,7 +897,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
     
@@ -851,7 +922,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
     
@@ -873,8 +946,10 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
-                                                        'updated_at' => Carbon::now()]);
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
+                                                          'updated_at' => Carbon::now()]);
         }
 
         $subject = Subject::create(['name' => 'Számításelmélet Gy',
@@ -895,7 +970,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -917,7 +994,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -939,7 +1018,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
     
@@ -961,7 +1042,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
     
@@ -983,8 +1066,10 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
-                                                        'updated_at' => Carbon::now()]);
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
+                                                          'updated_at' => Carbon::now()]);
         }
 
         $subject = Subject::create(['name' => 'Valószínűségszámítás és statisztika Ea+Gy',
@@ -1005,8 +1090,10 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
-                                                        'updated_at' => Carbon::now()]);
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
+                                                          'updated_at' => Carbon::now()]);
         }
 
         $subject = Subject::create(['name' => 'Valószínűségszámítás és statisztika Ea+Gy (F)',
@@ -1063,8 +1150,10 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
-                                                        'updated_at' => Carbon::now()]);
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
+                                                          'updated_at' => Carbon::now()]);
         }
 
         $subject = Subject::create(['name' => 'Big Data architektúrák és elemző módszerek Ea',
@@ -1085,7 +1174,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -1107,7 +1198,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -1129,7 +1222,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
     
@@ -1151,7 +1246,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -1173,7 +1270,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
     
@@ -1195,7 +1294,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
     
@@ -1217,7 +1318,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -1239,7 +1342,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -1261,7 +1366,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -1283,7 +1390,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -1308,7 +1417,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
         
@@ -1330,7 +1441,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -1364,7 +1477,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -1386,7 +1501,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -1408,7 +1525,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -1430,7 +1549,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -1452,7 +1573,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
     
@@ -1474,7 +1597,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
     
@@ -1496,7 +1621,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
     
@@ -1518,7 +1645,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -1541,7 +1670,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
     
@@ -1563,8 +1694,10 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
-                                                        'updated_at' => Carbon::now()]);
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
+                                                          'updated_at' => Carbon::now()]);
         }
 
         $subject = Subject::create(['name' => 'Szoftver mély neuronhálók alkalmazásához Gy',
@@ -1585,8 +1718,10 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
-                                                        'updated_at' => Carbon::now()]);
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
+                                                          'updated_at' => Carbon::now()]);
         }
 
         $subject = Subject::create(['name' => 'Típuselmélet Ea',
@@ -1607,7 +1742,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
     
@@ -1629,7 +1766,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
     
@@ -1675,7 +1814,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -1697,7 +1838,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -1965,6 +2108,10 @@ class DatabaseSeeder extends Seeder
         $user->subjects()->attach(58,['grade' => 5, 'created_at' => Carbon::now()]);
         $user->subjects()->attach(70,['grade' => 5, 'created_at' => Carbon::now()]);
 
+        User::factory()->create( ['name' => "Admin",
+                                  'email' => 'admin@tanulas.hu',
+                                  'spec' => 'NOTHING',
+                                  'is_admin' => true]);
     }
 
     //kihagyottak:

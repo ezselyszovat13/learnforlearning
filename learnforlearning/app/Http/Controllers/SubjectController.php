@@ -26,6 +26,9 @@ class SubjectController extends Controller
         $teachers = $subject->teachers()->get();
         $votes = [];
         foreach($teachers as $teacher){
+            if(!$teacher->pivot->is_active)
+                continue;
+
             $points = 0;
             $teacherVotes = $teacher->voters()->get();
             $hasPositiveVote = false;

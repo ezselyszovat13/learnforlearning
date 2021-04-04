@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\Teacher;
 use App\Models\Subject;
 use Auth;
+use App\Http\Requests\ChangeActivityFormRequest;
+use App\Http\Requests\AddTeacherFormRequest;
 
 class MainController extends Controller
 {
@@ -20,7 +22,7 @@ class MainController extends Controller
         User::all()->each(function ($user) use (&$data, &$comments, &$commentCount) {
             $data = $data + $user->subjects()->count();
             $userComment = $user->votes()->get()->first();
-            if($userComment !== null){
+            if($userComment !== null && $userComment->pivot->comment !== null){
                 $teacher = Teacher::where('id',$userComment->pivot->teacher_id)->first();
                 $comment = [
                     'author' => $user->name,
@@ -54,5 +56,36 @@ class MainController extends Controller
         });
 
         return view('main', compact('users','data','comments','bestTeacher'));
+    }
+
+    public function showFixables(){
+        $subjects = Subject::all();
+        $teachers = Teacher::all();
+        return view('fixable', compact('subjects','teachers'));
+    }
+
+    public function changeActivity(ChangeActivityFormRequest $request){
+        $data = $request->all();
+        $teacher = Teacher::where('id',$data['teacher'])->first();
+        $isActive = $request->has('is_active');
+        $result = $teacher->increaseGoingAgainst($data['subject'],$isActive);
+        if($result === null){
+            return redirect()->route('fixable')->with('activity_changed', false);
+        }
+        return redirect()->route('fixable')->with('activity_changed', true);
+    }
+
+    public function recommendTeacher(AddTeacherFormRequest $request){
+        $data = $request->all();
+        $teacher = Teacher::create(['name' => $data['tname'], 'is_accepted' => false]);
+        $result = $teacher->setActivity($data['subject2'],false);
+        if($result === null){
+            return redirect()->route('fixable')->with('activity_changed', false);
+        }
+        return redirect()->route('fixable')->with('teacher_recommend_added', true);
+    }
+
+    public function showRequests(){
+
     }
 }

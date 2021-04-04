@@ -22,7 +22,7 @@ class TeacherFactory extends Factory
     public function definition()
     {
         return [
-            
+            'is_accepted' => true,
         ];
     }
 }

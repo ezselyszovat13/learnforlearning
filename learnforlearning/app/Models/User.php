@@ -21,7 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'spec'
+        'spec',
+        'is_admin'
     ];
 
     public function subjects() {
