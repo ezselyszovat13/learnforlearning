@@ -14,7 +14,7 @@
             @endif
 
             <h1 class="display-4">Adatok</h1>
-            <p class="lead">Itt láthatóak a megadott személyes adataid</p>
+            <p class="lead">Itt láthatóak a megadott személyes adataid, valamint egyéb kalkulált eredményeid!</p>
             <hr class="my-4">
             <div>
                 <p style="font-size: 1.2rem;">Megadott név: <span style="font-size: 1.5rem;font-weight:bold">{{$user->name}}</span></p>
@@ -29,7 +29,7 @@
             </div>
             <div>
                 @if($user->getGradesCount() !== 0)
-                    <p style="font-size: 1.2rem;">Jelenleg <span style="font-size: 1.5rem;font-weight:bold"> {{ $user->getGradesCount()}} </span> darab jegyet 
+                    <p style="font-size: 1.2rem;">Jelenleg <span style="font-size: 1.5rem;font-weight:bold"> {{ $user->getGradesCount()}} </span> darab eredményt 
                     vettél fel az alkalmazásban, 
                     melyek átlaga: <span style="font-size: 1.5rem;font-weight:bold"> {{ round($user->getGradesAverage(),2)}} </span></p>
                     

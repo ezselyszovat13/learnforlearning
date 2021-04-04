@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\CalculateController;
+use App\Http\Controllers\TeacherController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,7 @@ use App\Http\Controllers\CalculateController;
 Route::get('/', [MainController::class, 'index'])->name('main');
 Route::get('/personal', [UserController::class, 'show'])->name('personal')->middleware('auth');
 Route::get('/subjects', [SubjectController::class, 'showAll'])->name('subjects');
+Route::get('/subjects/{id}', [SubjectController::class,'showSubject'])->name('subjects.info');
 Route::get('/newsubject', [SubjectController::class, 'givenSubjects'])->name('newsubject')->middleware('auth');
 Route::get('/findsubject', [SubjectController::class, 'showFind'])->name('findsubject')->middleware('auth');
 Route::post('/subjects/add', [SubjectController::class, 'addNewGrade'])->name('subject.add')->middleware('auth');
@@ -31,6 +33,10 @@ Route::get('/personal/{id}/edit', [UserController::class, 'editSpecialization'])
 Route::post('/personal/{id}/update', [UserController::class, 'updateSpecialization'])->name('spec.update')->middleware('auth');
 Route::post('/findsubject/calculate', [CalculateController::class,'calculateOptional'])->name('calculate')->middleware('auth');
 Route::get('/findsubject/delete', [UserController::class, 'deleteCalculations'])->name('findsubject.delete')->middleware('auth');
+Route::get('/subject/vote/', [UserController::class, 'vote'])->name('user.vote')->middleware('auth');
+Route::get('/subject/comment/', [UserController::class, 'comment'])->name('user.comment')->middleware('auth');
+Route::post('/subject/comment/update', [UserController::class, 'commentUpdate'])->name('user.comment.update')->middleware('auth');
+Route::get('/subject/{id}/comments', [TeacherController::class, 'comments'])->name('teacher.comments');
 
 Auth::routes();
 

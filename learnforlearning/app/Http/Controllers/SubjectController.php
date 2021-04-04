@@ -17,6 +17,53 @@ class SubjectController extends Controller
         return view('subjects', compact('subjects'));
     }
 
+    public function showSubject($id) {
+        $subject = Subject::where('id',$id)->first();
+        if($subject === null)
+            return view('subjects');
+
+        $user = Auth::user();
+        $teachers = $subject->teachers()->get();
+        $votes = [];
+        foreach($teachers as $teacher){
+            $points = 0;
+            $teacherVotes = $teacher->voters()->get();
+            $hasPositiveVote = false;
+            $hasNegativeVote = false;
+            foreach($teacherVotes as $tVote){
+                if($tVote->pivot->is_positive_vote === null){
+                    continue;
+                }
+                else if($tVote->pivot->is_positive_vote){
+                    $points += 1;
+                    if($user !== null){
+                        if($tVote->pivot->user_id == $user->id){
+                            $hasPositiveVote = true;
+                        }
+                    }
+                }
+                else{
+                    $points -= 1;
+                    if($user !== null){
+                        if($tVote->pivot->user_id == $user->id){
+                            $hasNegativeVote = true;
+                        }
+                    }
+                }
+            }
+            $votes[$teacher->id] = [
+                'points' => $points,
+                'hasPosVote' => $hasPositiveVote,
+                'hasNegVote' => $hasNegativeVote
+            ];
+        }
+        
+        if($user === null)
+            return view('subject', compact('subject','teachers', 'votes'));
+
+        return view('subject', compact('subject','teachers','user','votes'));
+    }
+
     public function givenSubjects() {
         $user = Auth::user();
 
@@ -91,8 +138,12 @@ class SubjectController extends Controller
 
     public function updateGivenGrade(ModifyGradeFormRequest $request, $id){
         $data = $request->all();
+        $subjectToUpdate = Subject::find($id);
+        if ($subjectToUpdate === null) {
+            return redirect()->route('newsubject')->with('subject_not_exists',true);
+        }
         $user = Auth::User();
-        $user->update($data);
+        $user->setGrade($subjectToUpdate->code,$data['grade']);
         return redirect()->route('newsubject')->with('grade_updated', true);
     }
 
