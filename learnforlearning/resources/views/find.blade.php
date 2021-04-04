@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Adatok')
+@section('title', 'Kalkuláció')
 
 @section('content')
     <div class="container">
@@ -22,7 +22,7 @@
             <hr class="my-4">
             <div class="container">
                 <div class="row">
-                    <h2 class="mx-auto">A korábban kalkulált kurzusok a számodra</h2>
+                    <h2 class="mx-auto">A számodra korábban kalkulált kurzusok</h2>
                 </div>
             </div>
             <div>
@@ -47,7 +47,7 @@
                     </table>
                     <div class="container">
                         <div class="row">
-                            <a class="btn btn-primary btn-lg ml-auto" href="{{route('findsubject.delete')}}" role="button">Eddigi kalkulációk törlése</a>
+                            <a class="btn btn-primary btn-lg ml-auto" href="{{route('findsubject.delete')}}" role="button">Korábbi kalkulációk törlése</a>
                         </div>
                     </div>
                 @else
@@ -57,7 +57,7 @@
                 @endif
             </div>
             <hr class="my-4">
-            <p class="lead">A "Kalkulál" gombra kattintva megtudhatod, hogy melyik lenne számodra a legkedvezőbb kötelezően választható tárgy a következő félévre.</p>
+            <p class="lead">A "Kalkulál" gombra kattintva megtudhatod, hogy melyik lenne számodra a legkedvezőbb kötelezően választható tárgy a kiválasztott félévre.</p>
             <form action="{{route('calculate')}}" method="POST">
                     @csrf
                 <div class="form-group">

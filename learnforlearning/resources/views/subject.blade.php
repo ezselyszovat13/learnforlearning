@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Információ')
+@section('title', 'Egy adott tárgy listázása')
 
 @section('content')
     <div class="container">

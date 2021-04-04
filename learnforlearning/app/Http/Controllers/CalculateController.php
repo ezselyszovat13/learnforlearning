@@ -357,7 +357,7 @@ class CalculateController extends Controller
         if($advisableSubject == null){
             return redirect()->route('findsubject')->with('calculate_failed',true);
         }
-        $user->addCalculation($advisableSubject->code);
+        $logonUser->addCalculation($advisableSubject->code);
         return redirect()->route('findsubject')->with('calculated_subject',$advisableSubject);
     }
 }
