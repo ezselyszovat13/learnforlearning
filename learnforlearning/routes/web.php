@@ -39,8 +39,10 @@ Route::get('/subject/vote/', [UserController::class, 'vote'])->name('user.vote')
 Route::get('/subject/comment/', [UserController::class, 'comment'])->name('user.comment')->middleware('auth');
 Route::post('/subject/comment/update', [UserController::class, 'commentUpdate'])->name('user.comment.update')->middleware('auth');
 Route::get('/subject/{id}/comments', [TeacherController::class, 'comments'])->name('teacher.comments');
-Route::post('/fixable/activity', [MainController::class, 'changeActivity'])->name('fixable.activity')->middleware('auth');
+Route::post('/fixable/activity', [MainController::class, 'goAgainst'])->name('fixable.activity')->middleware('auth');
 Route::post('/fixable/newTeacher', [MainController::class, 'recommendTeacher'])->name('fixable.newteacher')->middleware('auth');
+Route::post('/fixable/newSubject', [MainController::class, 'recommendSubject'])->name('fixable.newsubject')->middleware('auth');
+Route::get('/manage/changeActivity', [MainController::class, 'changeTeacherActivity'])->name('manage.changeActivity')->middleware('auth')->middleware('can:manage');
 
 Auth::routes();
 

@@ -26,6 +26,7 @@ class CreateSubjectsTable extends Migration
             $table->boolean('optionalOnB');
             $table->boolean('optionalOnC');
             $table->string('url');
+            $table->boolean('is_accepted');
             $table->timestamps();
         });
     }

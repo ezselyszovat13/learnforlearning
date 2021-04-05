@@ -9,6 +9,7 @@ use App\Models\Subject;
 use Auth;
 use App\Http\Requests\ChangeActivityFormRequest;
 use App\Http\Requests\AddTeacherFormRequest;
+use App\Http\Requests\AddSubjectFormRequest;
 
 class MainController extends Controller
 {
@@ -37,7 +38,7 @@ class MainController extends Controller
         $bestTeacher = Teacher::all()->first()->name;
         $maxPoints = 0;
 
-        Teacher::all()->each(function ($teacher) use (&$bestTeacher, &$maxPoints) {
+        Teacher::all()->where('is_accepted',true)->each(function ($teacher) use (&$bestTeacher, &$maxPoints) {
             $voters = $teacher->voters()->get(); 
             $voterPoints = 0;
             foreach($voters as $voter){
@@ -59,12 +60,12 @@ class MainController extends Controller
     }
 
     public function showFixables(){
-        $subjects = Subject::all();
-        $teachers = Teacher::all();
+        $subjects = Subject::where('is_accepted',true)->get();
+        $teachers = Teacher::where('is_accepted',true)->get();
         return view('fixable', compact('subjects','teachers'));
     }
 
-    public function changeActivity(ChangeActivityFormRequest $request){
+    public function goAgainst(ChangeActivityFormRequest $request){
         $data = $request->all();
         $teacher = Teacher::where('id',$data['teacher'])->first();
         $isActive = $request->has('is_active');
@@ -80,12 +81,64 @@ class MainController extends Controller
         $teacher = Teacher::create(['name' => $data['tname'], 'is_accepted' => false]);
         $result = $teacher->setActivity($data['subject2'],false);
         if($result === null){
-            return redirect()->route('fixable')->with('activity_changed', false);
+            return redirect()->route('fixable')->with('teacher_recommend_added', false);
         }
         return redirect()->route('fixable')->with('teacher_recommend_added', true);
     }
 
-    public function showRequests(){
+    public function recommendSubject(AddSubjectFormRequest $request){
+        $data = $request->all();
+        $name = $data['sname'];
+        $code = $data['code'];
+        $existsOnA = $request->has('existsA');
+        $existsOnB = $request->has('existsB');
+        $existsOnC = $request->has('existsC');
+        $optionalOnA = $request->has('optionalA');
+        $optionalOnB = $request->has('optionalB');
+        $optionalOnC = $request->has('optionalC');
+        $evenSemester = $request->has('evenSemester');
+        $credit = $data['credit'];
+        $url = $data['url'];
+        Subject::create(['name' => $name, 'code' => $code, 'existsOnA' => $existsOnA, 'existsOnB' => $existsOnB, 'existsOnC' => $existsOnC,
+                         'optionalOnA' => $optionalOnA, 'optionalOnB' => $optionalOnB, 'optionalOnC' => $optionalOnC, 'even_semester' => $evenSemester, 'credit_points' => $credit,
+                         'url' => $url, 'is_accepted' => false]);
+        return redirect()->route('fixable')->with('subject_recommend_added', true);
+    }
 
+    public function showRequests(){
+        $activitySubjects = [];
+        Teacher::all()->where('is_accepted',true)->each(function ($teacher) use (&$activitySubjects) {
+            $subjects = $teacher->subjects()->get();
+            foreach($subjects as $subject){
+                if($subject->pivot->going_against > 0){
+                    $newSubject = [
+                        'teacher' => $teacher,
+                        'subjectId' => $subject->id,
+                        'subjectName' => $subject->name,
+                        'isActive' => $subject->pivot->is_active,
+                        'goingAgainst' => $subject->pivot->going_against
+                    ];
+                    array_push($activitySubjects,$newSubject);
+                }
+            }
+        });
+        return view('manage',compact('activitySubjects'));
+    }
+
+    public function changeTeacherActivity(Request $request){
+        $data = $request->all();
+        $teacher = Teacher::where('id',$data['teacherId'])->first();
+        if($teacher === null){
+            return redirect()->route('manage')->with('teacher_not_exists', true);
+        }
+        $subject = Subject::where('id',$data['subjectId'])->first();
+        if($subject === null){
+            return redirect()->route('manage')->with('subject_not_exists', true);
+        }
+        $result = $teacher->setActivity($data['subjectId'],$data['activity']);
+        if($result === null){
+            return redirect()->route('manage')->with('activity_changed', false);
+        }
+        return redirect()->route('manage')->with('activity_changed', true);
     }
 }

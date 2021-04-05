@@ -14,6 +14,13 @@
                     </div>
                 @endif
             @endif
+            @if (session()->has('subject_not_found_watch'))
+                @if (session()->get('subject_not_found_watch') == true)
+                    <div class="alert alert-danger mb-3" role="alert">
+                        A megtekinteni kívánt tárgy nem létezik.
+                    </div>
+                @endif
+            @endif
             @if (session()->has('teacher_not_found'))
                 @if (session()->get('teacher_not_found') == true)
                     <div class="alert alert-danger mb-3" role="alert">

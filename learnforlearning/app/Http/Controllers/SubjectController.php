@@ -13,14 +13,14 @@ use Auth;
 class SubjectController extends Controller
 {
     public function showAll() {
-        $subjects = Subject::all();
+        $subjects = Subject::where('is_accepted',true)->get();
         return view('subjects', compact('subjects'));
     }
 
     public function showSubject($id) {
-        $subject = Subject::where('id',$id)->first();
+        $subject = Subject::where('id',$id)->where('is_accepted',true)->first();
         if($subject === null)
-            return view('subjects');
+            return redirect()->route('subjects')->with('subject_not_found_watch', true);
 
         $user = Auth::user();
         $teachers = $subject->teachers()->get();
@@ -100,7 +100,7 @@ class SubjectController extends Controller
         $canCalculate = $user->hasSpecialization();
         $optionalSubjects = $user->getAvailableOptionalSubjects();
         $calculationHistory = $user->calculations()->get();
-        $subjects = Subject::all();
+        $subjects = Subject::where('is_accepted',true)->get();
         $subData = [];
         foreach($subjects as $subject){
             $subData[$subject->code] = [
