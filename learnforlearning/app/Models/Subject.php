@@ -18,4 +18,8 @@ class Subject extends Model
     public function teachers() {
         return $this->belongsToMany(Teacher::class)->withPivot('is_active','going_against')->withTimestamps();
     }
+
+    public function setAccepted($acceptValue){
+        $this->update(['is_accepted' => true]);
+    }
 }

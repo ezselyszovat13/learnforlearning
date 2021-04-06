@@ -43,6 +43,16 @@ class Teacher extends Model
         ]);
     }
 
+    public function resetGoingAgainst($subjectId){
+        $subject = Subject::where('id',$subjectId)->first();
+        if($subject === null) return null;
+        return $this->subjects()->syncWithoutDetaching([
+            $subject->id => [
+                'going_against' => 0
+            ]
+        ]);
+    }
+
     public function increaseGoingAgainst($subjectId,$isActive){
         $subject = Subject::where('id',$subjectId)->first();
         if($subject === null) return null;
@@ -62,10 +72,6 @@ class Teacher extends Model
     }
 
     public function setAccepted($acceptValue) {
-        return $this->syncWithoutDetaching([
-            $this->id => [
-                'is_accepted' => $acceptValue,
-            ]
-        ]);
+        $this->update(['is_accepted' => true]);
     }
 }

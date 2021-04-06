@@ -122,7 +122,17 @@ class MainController extends Controller
                 }
             }
         });
-        return view('manage',compact('activitySubjects'));
+        $pendingTeachers = [];
+        Teacher::all()->each(function ($teacher) use (&$pendingTeachers) {
+            if(!$teacher->is_accepted)
+                array_push($pendingTeachers,$teacher);
+        });
+        $pendingSubjects = [];
+        Subject::all()->each(function ($subject) use (&$pendingSubjects) {
+            if(!$subject->is_accepted)
+                array_push($pendingSubjects,$subject);
+        });
+        return view('manage',compact('activitySubjects','pendingTeachers','pendingSubjects'));
     }
 
     public function changeTeacherActivity(Request $request){
@@ -140,5 +150,63 @@ class MainController extends Controller
             return redirect()->route('manage')->with('activity_changed', false);
         }
         return redirect()->route('manage')->with('activity_changed', true);
+    }
+
+    public function addTeacher(Request $request){
+        $data = $request->all();
+        $teacher = Teacher::where('id',$data['teacherId'])->first();
+        if($teacher === null){
+            return redirect()->route('manage')->with('teacher_not_exists_add', true);
+        }
+        $teacher->setAccepted(true);
+        $subjects = $teacher->subjects()->get();
+        foreach($subjects as $subject){
+            $teacher->setActivity($subject->id,true);
+        }
+        return redirect()->route('manage')->with('teacher_accepted', true);
+    }
+
+    public function addSubject(Request $request){
+        $data = $request->all();
+        $subject = Subject::where('id',$data['subjectId'])->first();
+        if($subject === null){
+            return redirect()->route('manage')->with('subject_not_exists_add', true);
+        }
+        $subject->setAccepted(true);
+        return redirect()->route('manage')->with('subject_accepted', true);
+    }
+
+    public function resetAgainstActivity(Request $request){
+        $data = $request->all();
+        $teacher = Teacher::where('id',$data['teacherId'])->first();
+        if($teacher === null){
+            return redirect()->route('manage')->with('teacher_not_exists', true);
+        }
+        $subject = Subject::where('id',$data['subjectId'])->first();
+        if($subject === null){
+            return redirect()->route('manage')->with('subject_not_exists', true);
+        }
+        $result = $teacher->resetGoingAgainst($data['subjectId']);
+        return redirect()->route('manage')->with('activity_change_declined', true);
+    }
+
+    public function deleteTeacher(Request $request){
+        $data = $request->all();
+        $teacher = Teacher::where('id',$data['teacherId'])->first();
+        if($teacher === null){
+            return redirect()->route('manage')->with('teacher_not_exists_delete', true);
+        }
+        $teacher->delete();
+        return redirect()->route('manage')->with('teacher_deleted', true);
+    }
+
+    public function deleteSubject(Request $request){
+        $data = $request->all();
+        $subject = Subject::where('id',$data['subjectId'])->first();
+        if($subject === null){
+            return redirect()->route('manage')->with('subject_not_exists_delete', true);
+        }
+        $subject->delete();
+        return redirect()->route('manage')->with('subject_deleted', true);
     }
 }

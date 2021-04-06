@@ -43,6 +43,11 @@ Route::post('/fixable/activity', [MainController::class, 'goAgainst'])->name('fi
 Route::post('/fixable/newTeacher', [MainController::class, 'recommendTeacher'])->name('fixable.newteacher')->middleware('auth');
 Route::post('/fixable/newSubject', [MainController::class, 'recommendSubject'])->name('fixable.newsubject')->middleware('auth');
 Route::get('/manage/changeActivity', [MainController::class, 'changeTeacherActivity'])->name('manage.changeActivity')->middleware('auth')->middleware('can:manage');
+Route::get('/manage/addTeacher', [MainController::class, 'addTeacher'])->name('manage.addTeacher')->middleware('auth')->middleware('can:manage');
+Route::get('/manage/addSubject', [MainController::class, 'addSubject'])->name('manage.addSubject')->middleware('auth')->middleware('can:manage');
+Route::get('/manage/resetAgainstActivity', [MainController::class, 'resetAgainstActivity'])->name('manage.resetAgainstActivity')->middleware('auth')->middleware('can:manage');
+Route::get('/manage/deleteTeacher', [MainController::class, 'deleteTeacher'])->name('manage.deleteTeacher')->middleware('auth')->middleware('can:manage');
+Route::get('/manage/deleteSubject', [MainController::class, 'deleteSubject'])->name('manage.deleteSubject')->middleware('auth')->middleware('can:manage');
 
 Auth::routes();
 
