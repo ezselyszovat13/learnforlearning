@@ -43,7 +43,7 @@
             <h2>Egy, már meglévő oktató aktivitásának változása</h2>
             @if(isset($activitySubjects))
                 @if(count($activitySubjects)!==0)
-                    <table class="table table-striped">
+                    <table class="table table-striped table-responsive">
                         <thead>
                             <tr>
                                 <th scope="col"></th>
@@ -139,7 +139,7 @@
                                         href="{{ route('manage.addTeacher', ['teacherId' => $element->id]) }}" 
                                         role="button"> Oktató aktiválása
                                     </a>
-                                    <a class="btn btn-primary btn-lg" style="font-size:0.8rem" target="_blank"
+                                    <a class="btn btn-primary btn-lg mt-2 mt-sm-0" style="font-size:0.8rem" target="_blank"
                                         href="{{ route('manage.deleteTeacher', ['teacherId' => $element->id]) }}" 
                                         role="button"> Ajánlás elvetése
                                     </a>
@@ -190,7 +190,7 @@
             <h2>Új kurzus ajánlása</h2>
             @if(isset($pendingSubjects))
                 @if(count($pendingSubjects)!==0)
-                    <table class="table table-striped">
+                    <table class="table table-striped table-responsive">
                         <thead>
                             <tr>
                                 <th scope="col"></th>
@@ -200,6 +200,7 @@
                                 <th scope="col">Itt opcionális</th>
                                 <th scope="col">Kreditérték</th>
                                 <th scope="col">Páros féléves tárgy</th>
+                                <th scope="col"></th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
@@ -226,6 +227,8 @@
                                         href="{{ route('manage.addSubject', ['subjectId' => $subject->id]) }}" 
                                         role="button"> Kurzus aktiválása
                                     </a>
+                                </td>
+                                <td>
                                     <a class="btn btn-primary btn-lg" style="font-size:0.8rem" target="_blank"
                                         href="{{ route('manage.deleteSubject', ['subjectId' => $subject->id]) }}" 
                                         role="button"> Ajánlás elvetése
