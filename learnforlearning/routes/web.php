@@ -48,6 +48,8 @@ Route::get('/manage/addSubject', [MainController::class, 'addSubject'])->name('m
 Route::get('/manage/resetAgainstActivity', [MainController::class, 'resetAgainstActivity'])->name('manage.resetAgainstActivity')->middleware('auth')->middleware('can:manage');
 Route::get('/manage/deleteTeacher', [MainController::class, 'deleteTeacher'])->name('manage.deleteTeacher')->middleware('auth')->middleware('can:manage');
 Route::get('/manage/deleteSubject', [MainController::class, 'deleteSubject'])->name('manage.deleteSubject')->middleware('auth')->middleware('can:manage');
+Route::get('/offline', function () { return view('offline');});
+
 
 Auth::routes();
 

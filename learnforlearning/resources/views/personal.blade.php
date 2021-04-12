@@ -31,11 +31,11 @@
                 @if($user->getGradesCount() !== 0)
                     <p style="font-size: 1.2rem;">Jelenleg <span style="font-size: 1.5rem;font-weight:bold"> {{ $user->getGradesCount()}} </span> darab eredményt 
                     vettél fel az alkalmazásban, 
-                    melyek átlaga: <span style="font-size: 1.5rem;font-weight:bold"> {{ round($user->getGradesAverage(),2)}} </span></p>
+                    melyek átlaga: <span style="font-size: 1.5rem;font-weight:bold"> {{ $user->getGradesCount() != 0 ? round($user->getGradesAverage(),2) : '-'}} </span></p>
                     
                     <p style="font-size: 1.2rem;">Ebből <span style="font-size: 1.5rem;font-weight:bold"> {{ $user->getOptionalGradesCount()}} </span> darab tárgy 
                     volt kötelezően választható, 
-                    melyek átlaga: <span style="font-size: 1.5rem;font-weight:bold"> {{ round($user->getOptionalGradesAverage(),2)}} </span></p>
+                    melyek átlaga: <span style="font-size: 1.5rem;font-weight:bold"> {{ $user->getOptionalGradesCount() != 0 ? round($user->getOptionalGradesAverage(),2) : '-'}} </span></p>
 
                     <p style="font-size: 1.2rem;">Eddig <span style="font-size: 1.5rem;font-weight:bold"> 
                     {{$user->getAcquiredCredits()}} </span> kreditet szereztél.</p>

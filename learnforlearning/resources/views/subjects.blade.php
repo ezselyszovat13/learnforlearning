@@ -52,7 +52,7 @@
                                 @else
                                     <td>NEM</td>
                                 @endif
-                                <td><a class="btn btn-primary btn-lg" target="__blank" href="{{ route('subjects.info', ['id' => $subject->id]) }}" role="button">Információk</a></td>
+                                <td><a class="btn btn-primary btn-lg" href="{{ route('subjects.info', ['id' => $subject->id]) }}" role="button">Információk</a></td>
                             </tr>
                         @endforeach
                     </tbody>
