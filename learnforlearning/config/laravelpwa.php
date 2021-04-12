@@ -3,8 +3,8 @@
 return [
     'name' => 'LaravelPWA',
     'manifest' => [
-        'name' => env('APP_NAME', 'Laravel'),
-        'short_name' => 'PWA',
+        'name' => env('APP_NAME', "Tanulás a tanulásért"),
+        'short_name' => 'TaT',
         'start_url' => '/',
         'background_color' => '#ffffff',
         'theme_color' => '#000000',
