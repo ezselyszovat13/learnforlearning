@@ -68,7 +68,7 @@
                                     <td><a class="btn btn-primary btn-lg" style="font-size:0.8rem" target="_blank" href="{{ route('newsubject.edit', ['id' => $subject->id]) }}" role="button">Jegy szerkesztése</a></td>
                                 </tr>
                             @endforeach
-                        </tbody>
+                            </tbody>
                         </table>
                     </div>
                 @else

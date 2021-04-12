@@ -17,6 +17,8 @@ class CreateSubjectTeacherTable extends Migration
             $table->id();
             $table->unsignedBigInteger('subject_id');
             $table->unsignedBigInteger('teacher_id');
+            $table->boolean('is_active');
+            $table->integer('going_against');
             $table->timestamps();
 
             $table->unique(['subject_id','teacher_id']);

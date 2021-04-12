@@ -21,6 +21,8 @@ use App\Http\Controllers\TeacherController;
 */
 
 Route::get('/', [MainController::class, 'index'])->name('main');
+Route::get('/fixable', [MainController::class, 'showFixables'])->name('fixable');
+Route::get('/manage', [MainController::class, 'showRequests'])->name('manage')->middleware('can:manage');
 Route::get('/personal', [UserController::class, 'show'])->name('personal')->middleware('auth');
 Route::get('/subjects', [SubjectController::class, 'showAll'])->name('subjects');
 Route::get('/subjects/{id}', [SubjectController::class,'showSubject'])->name('subjects.info');
@@ -37,6 +39,15 @@ Route::get('/subject/vote/', [UserController::class, 'vote'])->name('user.vote')
 Route::get('/subject/comment/', [UserController::class, 'comment'])->name('user.comment')->middleware('auth');
 Route::post('/subject/comment/update', [UserController::class, 'commentUpdate'])->name('user.comment.update')->middleware('auth');
 Route::get('/subject/{id}/comments', [TeacherController::class, 'comments'])->name('teacher.comments');
+Route::post('/fixable/activity', [MainController::class, 'goAgainst'])->name('fixable.activity')->middleware('auth');
+Route::post('/fixable/newTeacher', [MainController::class, 'recommendTeacher'])->name('fixable.newteacher')->middleware('auth');
+Route::post('/fixable/newSubject', [MainController::class, 'recommendSubject'])->name('fixable.newsubject')->middleware('auth');
+Route::get('/manage/changeActivity', [MainController::class, 'changeTeacherActivity'])->name('manage.changeActivity')->middleware('auth')->middleware('can:manage');
+Route::get('/manage/addTeacher', [MainController::class, 'addTeacher'])->name('manage.addTeacher')->middleware('auth')->middleware('can:manage');
+Route::get('/manage/addSubject', [MainController::class, 'addSubject'])->name('manage.addSubject')->middleware('auth')->middleware('can:manage');
+Route::get('/manage/resetAgainstActivity', [MainController::class, 'resetAgainstActivity'])->name('manage.resetAgainstActivity')->middleware('auth')->middleware('can:manage');
+Route::get('/manage/deleteTeacher', [MainController::class, 'deleteTeacher'])->name('manage.deleteTeacher')->middleware('auth')->middleware('can:manage');
+Route::get('/manage/deleteSubject', [MainController::class, 'deleteSubject'])->name('manage.deleteSubject')->middleware('auth')->middleware('can:manage');
 
 Auth::routes();
 

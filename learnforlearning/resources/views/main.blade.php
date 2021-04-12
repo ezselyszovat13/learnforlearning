@@ -13,8 +13,10 @@
                 <li>A felhasznált adatok mennyisége: {{ $data }}</li>
             </ul>
             <a class="btn btn-primary btn-lg" href="{{route('subjects')}}" role="button">Tárgyak listázása</a>
-            <hr class="my-4">
-            @if(count($comments) != 0) <h2>Néhány, a felhasználók által alkotott megjegyzés</h2> @endif
+            @if(count($comments) != 0) 
+                <hr class="my-4">
+                <h2>Néhány, a felhasználók által alkotott megjegyzés</h2> 
+            @endif
             @foreach ($comments as $comment)
                 <div class="mb-2">
                     <div class="card">

@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->truncate();
         DB::table('teachers')->truncate();
         DB::table('subject_teacher')->truncate();
+        DB::table('teacher_user')->truncate();
 
         $subject = Subject::create(['name' => 'Adatbázisok 1 Ea',
         'code' => 'IP-18AB1E',
@@ -35,7 +36,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1051/Adatb%C3%A1zisok%20I..pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1051/Adatb%C3%A1zisok%20I..pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Vincellér Zoltán","Szalai-Gindl János Márk","Brányi László","Dr. Hajas Csilla",
          "Vörös Péter", "Dr. Nikovits Tibor", "Bokros Ferenc", "Lehotay-Kéry Péter");
@@ -44,7 +46,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
     
@@ -58,7 +62,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1051/Adatb%C3%A1zisok%20I..pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1051/Adatb%C3%A1zisok%20I..pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Vincellér Zoltán","Szalai-Gindl János Márk","Brányi László","Dr. Hajas Csilla", 
         "Vörös Péter", "Dr. Nikovits Tibor", "Bokros Ferenc", "Lehotay-Kéry Péter");
@@ -67,7 +72,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -81,7 +88,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1046/Algoritmusok%20%C3%A9s%20adatszerkezetek%20I.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1046/Algoritmusok%20%C3%A9s%20adatszerkezetek%20I.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Nagy Sára", "Dr. Ásványi Tibor", "Kovácsné Pusztai Kinga Emese", "Veszprémi Anna",
          "Bartalis Dávid", "Torvinen Aili Szonja", "Nagy Ádám", "Dorogi Benjamin", "Bene Fruzsina", 
@@ -92,7 +100,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -106,7 +116,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1046/Algoritmusok%20%C3%A9s%20adatszerkezetek%20I.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1046/Algoritmusok%20%C3%A9s%20adatszerkezetek%20I.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Nagy Sára", "Dr. Ásványi Tibor", "Kovácsné Pusztai Kinga Emese", "Veszprémi Anna",
          "Bartalis Dávid", "Torvinen Aili Szonja", "Nagy Ádám", "Dorogi Benjamin", "Bene Fruzsina", 
@@ -117,7 +128,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -131,7 +144,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1049/Algoritmusok%20%C3%A9s%20adatszerkezetek%20II..pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1049/Algoritmusok%20%C3%A9s%20adatszerkezetek%20II..pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Dr. Szabó László Ferenc", "Dr. Ásványi Tibor", "Zsakó László", "Nagy Sára", "Vadász Péter",
             "Bereczky Péter", "Szita Balázs", "Veszprémi Anna", "Megyesi Attila", "Nagy Ádám", "Kovácsné Pusztai Kinga Emese");
@@ -140,7 +154,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -154,7 +170,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1049/Algoritmusok%20%C3%A9s%20adatszerkezetek%20II..pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1049/Algoritmusok%20%C3%A9s%20adatszerkezetek%20II..pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Dr. Szabó László Ferenc", "Dr. Ásványi Tibor", "Zsakó László", "Nagy Sára", "Vadász Péter",
             "Bereczky Péter", "Szita Balázs", "Veszprémi Anna", "Megyesi Attila", "Nagy Ádám", "Kovácsné Pusztai Kinga Emese");
@@ -163,7 +180,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -177,7 +196,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1048/Anal%C3%ADzis%20I.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1048/Anal%C3%ADzis%20I.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Dr. Weisz Ferenc");
         foreach($teachers as $teacher){
@@ -185,7 +205,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -199,7 +221,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1048/Anal%C3%ADzis%20I.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1048/Anal%C3%ADzis%20I.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Filipp Zoltán István", "Dr. Weisz Ferenc", "Huszárszky Szilvia Zsuzsanna", 
             "Dr. Kovács Sándor", "Németh Zsolt", "Szarvas Kristóf", "Lóczi Lajos Mihály","Dr. Chripkó Ágnes", 
@@ -209,7 +232,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -223,7 +248,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1047/Diszkr%C3%A9t%20matematika%20I.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1047/Diszkr%C3%A9t%20matematika%20I.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Ligeti Péter", "Juhász Zsófia", "Burcsi Péter");
         foreach($teachers as $teacher){
@@ -231,7 +257,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -245,7 +273,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1047/Diszkr%C3%A9t%20matematika%20I.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1047/Diszkr%C3%A9t%20matematika%20I.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Gonda János Ferenc","Burcsi Péter","Fülöp Ágnes", "Dr. Nagy Gábor", "Juhász Zsófia",
              "Mecséri Eszter Ágnes", "Dr. Tóth Viktória", "Gyarmati Máté", "Fonyó Dávid", "Bartha Dénes", "Farkas Izabella Ingrid", 
@@ -255,7 +284,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -269,7 +300,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1038/Funkcion%C3%A1lis%20programoz%C3%A1s.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1038/Funkcion%C3%A1lis%20programoz%C3%A1s.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Dr. Horváth Zoltán", "Bozó István", "Poór Artúr", "Nagy Gergely", "Podlovics Péter Dávid", 
             "Kovács András", "Németh Boldizsár", "Diviánszky Péter", "Lukács Dániel", "Tőkés Anna", "Bense Viktor");
@@ -278,7 +310,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -292,7 +326,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1031/Imperativ%20programoz%C3%A1s.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1031/Imperativ%20programoz%C3%A1s.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Dr. Kozsik Tamás", "Leitereg András", "Porkoláb Zoltán", "Gera Zoltán", "Horpácsi Dániel", "Nagy Vendel", 
              "Tejfel Máté", "Bán Róbert", "Kovács Réka", "Kaposi Ambrus", "Szabó Miklós", "Sinkovics Ábel", "Horváth Gábor",
@@ -302,7 +337,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -316,7 +353,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1052/Konkurens%20programoz%C3%A1s.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1052/Konkurens%20programoz%C3%A1s.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Dr. Kozsik Tamás", "Grünwald Péter", "Menczer Andor", "Kovács Norbert Zsolt",
          "Tabi Zsolt István", "Zaicsek Balázs" ,"Kitlei Róbert László", "Parragi Zsolt", "Mátyás Zoltán", "Szabó Attila");
@@ -325,7 +363,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -339,7 +379,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1054/Mesters%C3%A9ges%20intelligencia.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1054/Mesters%C3%A9ges%20intelligencia.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Gregorics Tibor");
         foreach($teachers as $teacher){
@@ -347,7 +388,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
         
@@ -361,7 +404,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1044/Objektum%20elv%C5%B1%20programoz%C3%A1s.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1044/Objektum%20elv%C5%B1%20programoz%C3%A1s.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Dr. Gregorics Tibor", "Borsi Zsolt Richárd", "Várkonyi Teréz Anna",
            "Veszprémi Anna", "Szalontai Balázs", "Kovácsné Pusztai Kinga Emese", "Pintér Balázs", "Nagymáté Péter");
@@ -370,7 +414,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -384,7 +430,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1050/Oper%C3%A1ci%C3%B3s%20rendszerek.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1050/Oper%C3%A1ci%C3%B3s%20rendszerek.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Korom Szilárd", "Dr. Illés Zoltán", "Bakonyi Viktória Judit", "Klettner Péter");
         foreach($teachers as $teacher){
@@ -392,7 +439,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -406,7 +455,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1030/Programoz%C3%A1s.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1030/Programoz%C3%A1s.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Zsakó László", "Dr. Horváth Gyula", "Menyhárt László Gábor", "Leitereg András", 
            "Bakonyi Viktória Judit", "Kovácsné Pusztai Kinga Emese", "Szalayné Tahy Zsuzsanna", "Veszprémi Anna",
@@ -418,7 +468,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -432,7 +484,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1042/Programoz%C3%A1si%20nyelvek%20I..pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1042/Programoz%C3%A1si%20nyelvek%20I..pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Pataki Norbert", "Umann Kristóf", "Nagy Vendel", "Tarsoly Gergely", "Angeli Gergely",
             "Szabó Miklós", "Gyén Attila", "Kovács Réka Nikolett", "Kiglics Mátyás", "Nagy András", "Gyarmati Péter",
@@ -442,7 +495,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -456,7 +511,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1043/Programoz%C3%A1si%20nyelvek%20II..pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1043/Programoz%C3%A1si%20nyelvek%20II..pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Franke Gábor László", "Németh Boldizsár", "Dr. Kozsik Tamás", "Nagy András", "Kruppai Gábor", 
             "Tabi Zsolt István", "Révész Ádám", "Fazekas Bálint", "Varga Bence Levente", "Kocsis Ábel", "Zaicsek Balázs",
@@ -466,7 +522,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -480,7 +538,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1029/Sz%C3%A1m%C3%ADt%C3%B3g%C3%A9pes%20rendszerek.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1029/Sz%C3%A1m%C3%ADt%C3%B3g%C3%A9pes%20rendszerek.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Nagymáté Péter", "Dr. Illés Zoltán", "Kereszti Zalán", "Heizler Tamás Ferenc", "Bakonyi Viktória Judit",
             "Csongrádi Tamás", "Györgyi Csaba", "Klettner Péter", "Korom Szilárd", "Lehotay-Kéry Péter", "Menyhárt László Gábor", 
@@ -490,7 +549,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -504,7 +565,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1053/Telekommunik%C3%A1ci%C3%B3s%20h%C3%A1l%C3%B3zatok.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1053/Telekommunik%C3%A1ci%C3%B3s%20h%C3%A1l%C3%B3zatok.pdf',
+        'is_accepted' => true]);
     
         $teachers = array("Laki Sándor", "Fejes Ferenc", "Gombos Gergő", "Györgyi Csaba", "Szalai-Gindl János Márk");
         foreach($teachers as $teacher){
@@ -512,7 +574,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -526,7 +590,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1053/Telekommunik%C3%A1ci%C3%B3s%20h%C3%A1l%C3%B3zatok.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1053/Telekommunik%C3%A1ci%C3%B3s%20h%C3%A1l%C3%B3zatok.pdf',
+        'is_accepted' => true]);
     
         $teachers = array("Laki Sándor", "Fejes Ferenc", "Gombos Gergő", "Györgyi Csaba", "Szalai-Gindl János Márk",
             "Kecskeméti Károly", "Vincellér Zoltán");
@@ -535,7 +600,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -549,7 +616,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1045/Web%20fejleszt%C3%A9s.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1045/Web%20fejleszt%C3%A9s.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Gyén Attila", "Abonyi-Tóth Andor", "Zsakó László", "Csongrádi Tamás", "Pluhár Zsuzsa",
             "Torma Hajnalka", "Korom Szilárd", "Bernát Péter", "Ciuciu-Kiss Jenifer Tabita",
@@ -559,7 +627,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -573,7 +643,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => false,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1081/Adatb%C3%A1zisok%20II..pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1081/Adatb%C3%A1zisok%20II..pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Dr. Kiss Attila Elemér", "Dr. Nikovits Tibor", "Szalai-Gindl János Márk");
         foreach($teachers as $teacher){
@@ -581,7 +652,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -595,7 +668,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => false,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1081/Adatb%C3%A1zisok%20II..pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1081/Adatb%C3%A1zisok%20II..pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Brányi László", "Dr. Kiss Attila Elemér", "Dr. Nikovits Tibor", "Szalai-Gindl János Márk", 
             "Vincellér Zoltán");
@@ -604,7 +678,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -618,7 +694,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1056/Anal%C3%ADzis%20II.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1056/Anal%C3%ADzis%20II.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Dr. Fridli Sándor", "Dr. Csörgő István", "Filipp Zoltán István", "Dr. Kovács Sándor",
             "Lóczi Lajos Mihály", "Németh Zsolt", "Dr. Toledo Rodolfo Calixto");
@@ -627,7 +704,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -641,7 +720,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1056/Anal%C3%ADzis%20II.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1056/Anal%C3%ADzis%20II.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Dr. Fridli Sándor", "Dr. Csörgő István", "Filipp Zoltán István", "Dr. Kovács Sándor",
             "Dózsa Tamás Gábor", "Németh Zsolt", "Dr. Toledo Rodolfo Calixto");
@@ -650,7 +730,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
     
@@ -664,7 +746,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => false,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1057/Diszkr%C3%A9t%20matematika%20II.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1057/Diszkr%C3%A9t%20matematika%20II.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Juhász Zsófia");
         foreach($teachers as $teacher){
@@ -672,7 +755,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
     
@@ -686,7 +771,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => false,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1057/Diszkr%C3%A9t%20matematika%20II.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1057/Diszkr%C3%A9t%20matematika%20II.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Juhász Zsófia", "Dr. Tóth Viktória", "Uray Marcell János", "Fülöp Ágnes");
         foreach($teachers as $teacher){
@@ -694,7 +780,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
     
@@ -708,7 +796,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => false,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1032/Esem%C3%A9nyvez%C3%A9relt%20alkalmaz%C3%A1sok.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1032/Esem%C3%A9nyvez%C3%A9relt%20alkalmaz%C3%A1sok.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Dr. Gregorics Tibor", "Mózsi Krisztián", "Cserép Máté András", "Nagymáté Péter", 
            "Várkonyi Teréz Anna", "Révész Ádám", "Szalontai Balázs", "Fekete Anett", "Cseresnyés Kristóf Bendegúz",
@@ -718,7 +807,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -732,7 +823,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => false,
         'existsOnB' => true,
         'existsOnC' => false,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1068/Form%C3%A1lis%20nyelvek%20%C3%A9s%20a%20ford%C3%ADt%C3%B3programok%20alapjai.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1068/Form%C3%A1lis%20nyelvek%20%C3%A9s%20a%20ford%C3%ADt%C3%B3programok%20alapjai.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Dévai Gergely", "Nagy Sára");
         foreach($teachers as $teacher){
@@ -740,7 +832,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -754,7 +848,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => false,
         'existsOnB' => true,
         'existsOnC' => false,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1068/Form%C3%A1lis%20nyelvek%20%C3%A9s%20a%20ford%C3%ADt%C3%B3programok%20alapjai.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1068/Form%C3%A1lis%20nyelvek%20%C3%A9s%20a%20ford%C3%ADt%C3%B3programok%20alapjai.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Leskó Dániel", "Dévai Gergely", "Nagy Sára", "Nagy András");
         foreach($teachers as $teacher){
@@ -762,7 +857,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -776,7 +873,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1059/Numerikus%20m%C3%B3dszerek%20I-T.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1059/Numerikus%20m%C3%B3dszerek%20I-T.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Dr. Krebsz Anna");
         foreach($teachers as $teacher){
@@ -784,7 +882,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -798,7 +898,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1059/Numerikus%20m%C3%B3dszerek%20I-T.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1059/Numerikus%20m%C3%B3dszerek%20I-T.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Dr. Bozsik József", "Dr. Lénárd Margit Mária", "Dózsa Tamás Gábor", "Fábián Gábor", "Dr. Krebsz Anna");
         foreach($teachers as $teacher){
@@ -806,7 +907,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -820,7 +923,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1034/Programoz%C3%A1selm%C3%A9let.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1034/Programoz%C3%A1selm%C3%A9let.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Borsi Zsolt Richárd");
         foreach($teachers as $teacher){
@@ -828,7 +932,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
     
@@ -842,7 +948,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1034/Programoz%C3%A1selm%C3%A9let.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1034/Programoz%C3%A1selm%C3%A9let.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Dr. Gregorics Tibor", "Borsi Zsolt Richárd", "Várkonyi Teréz Anna", "Bereczky Péter",
             "Varga László Zsolt");
@@ -851,7 +958,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
     
@@ -865,7 +974,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => false,
         'existsOnB' => true,
         'existsOnC' => false,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1074/Sz%C3%A1m%C3%ADt%C3%A1selm%C3%A9let.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1074/Sz%C3%A1m%C3%ADt%C3%A1selm%C3%A9let.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Kolonits Gábor");
         foreach($teachers as $teacher){
@@ -873,8 +983,10 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
-                                                        'updated_at' => Carbon::now()]);
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
+                                                          'updated_at' => Carbon::now()]);
         }
 
         $subject = Subject::create(['name' => 'Számításelmélet Gy',
@@ -887,7 +999,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => false,
         'existsOnB' => true,
         'existsOnC' => false,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1074/Sz%C3%A1m%C3%ADt%C3%A1selm%C3%A9let.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1074/Sz%C3%A1m%C3%ADt%C3%A1selm%C3%A9let.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Ciuciu-Kiss Jenifer Tabita", "Kolonits Gábor", "Tichler Krisztián", "Vadász Péter");
         foreach($teachers as $teacher){
@@ -895,7 +1008,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -909,7 +1024,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => false,
         'existsOnC' => false,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1060/Numerikus%20m%C3%B3dszerek%20II%20%28T%29.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1060/Numerikus%20m%C3%B3dszerek%20II%20%28T%29.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Dr. Bozsik József");
         foreach($teachers as $teacher){
@@ -917,7 +1033,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -931,7 +1049,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => false,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1060/Numerikus%20m%C3%B3dszerek%20II%20%28T%29.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1060/Numerikus%20m%C3%B3dszerek%20II%20%28T%29.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Dr. Bozsik József", "Dr. Hiba Antal", "Kovács Péter");
         foreach($teachers as $teacher){
@@ -939,7 +1058,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
     
@@ -953,7 +1074,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1060/Numerikus%20m%C3%B3dszerek%20II%20%28T%29.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1060/Numerikus%20m%C3%B3dszerek%20II%20%28T%29.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Provender Roxána", "Varga László Zsolt", "Mózsi Krisztián", "Recse Ákos", "Cserép Máté András");
         foreach($teachers as $teacher){
@@ -961,7 +1083,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
     
@@ -975,7 +1099,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => false,
         'existsOnB' => true,
         'existsOnC' => false,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1071/T%C3%B6bbv%C3%A1ltoz%C3%B3s%20f%C3%BCggv%C3%A9nytan.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1071/T%C3%B6bbv%C3%A1ltoz%C3%B3s%20f%C3%BCggv%C3%A9nytan.pdf',
+        'is_accepted' => true]);
     
         $teachers = array("Dr. Csörgő István", "Szili László", "Filipp Zoltán István");
         foreach($teachers as $teacher){
@@ -983,8 +1108,10 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
-                                                        'updated_at' => Carbon::now()]);
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
+                                                          'updated_at' => Carbon::now()]);
         }
 
         $subject = Subject::create(['name' => 'Valószínűségszámítás és statisztika Ea+Gy',
@@ -997,7 +1124,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => false,
         'existsOnB' => true,
         'existsOnC' => false,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1070/Val%C3%B3sz%C3%ADn%C5%B1s%C3%A9gsz%C3%A1m%C3%ADt%C3%A1s%20%C3%A9s%20statisztika%20%28T%29.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1070/Val%C3%B3sz%C3%ADn%C5%B1s%C3%A9gsz%C3%A1m%C3%ADt%C3%A1s%20%C3%A9s%20statisztika%20%28T%29.pdf',
+        'is_accepted' => true]);
     
         $teachers = array("Dr. Kovács Ágnes", "Dr. Arató Miklós", "Borbély József", "Szabó Péter");
         foreach($teachers as $teacher){
@@ -1005,8 +1133,10 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
-                                                        'updated_at' => Carbon::now()]);
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
+                                                          'updated_at' => Carbon::now()]);
         }
 
         $subject = Subject::create(['name' => 'Valószínűségszámítás és statisztika Ea+Gy (F)',
@@ -1019,7 +1149,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => false,
         'existsOnB' => false,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1083/Val%C3%B3sz%C3%ADn%C5%B1s%C3%A9gsz%C3%A1m%C3%ADt%C3%A1s%20%C3%A9s%20statisztika%20%28F%29.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1083/Val%C3%B3sz%C3%ADn%C5%B1s%C3%A9gsz%C3%A1m%C3%ADt%C3%A1s%20%C3%A9s%20statisztika%20%28F%29.pdf',
+        'is_accepted' => true]);
 
         $subject = Subject::create(['name' => 'Valószínűségszámítás',
         'code' => 'IP-18aVSZEG',
@@ -1031,7 +1162,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => false,
         'existsOnC' => false,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1106/Val%C3%B3sz%C3%ADn%C5%B1s%C3%A9gsz%C3%A1m%C3%ADt%C3%A1s.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1106/Val%C3%B3sz%C3%ADn%C5%B1s%C3%A9gsz%C3%A1m%C3%ADt%C3%A1s.pdf',
+        'is_accepted' => true]);
     
         $subject = Subject::create(['name' => 'Matematikai statisztika',
         'code' => 'IP-18aMSAEG',
@@ -1043,7 +1175,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => false,
         'existsOnC' => false,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1064/Matematikai%20statisztika.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1064/Matematikai%20statisztika.pdf',
+        'is_accepted' => true]);
     
         $subject = Subject::create(['name' => 'Bevezetés a gépi tanulásba Ea',
         'code' => 'IP-18KVSZBGTE',
@@ -1055,7 +1188,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1097/Bevezet%C3%A9s%20a%20g%C3%A9pi%20tanul%C3%A1sba.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1097/Bevezet%C3%A9s%20a%20g%C3%A9pi%20tanul%C3%A1sba.pdf',
+        'is_accepted' => true]);
     
         $teachers = array("Lőrincz András", "Milacski Zoltán Ádám", "Varga Viktor");
         foreach($teachers as $teacher){
@@ -1063,8 +1197,10 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
-                                                        'updated_at' => Carbon::now()]);
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
+                                                          'updated_at' => Carbon::now()]);
         }
 
         $subject = Subject::create(['name' => 'Big Data architektúrák és elemző módszerek Ea',
@@ -1077,7 +1213,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1093/Big%20Data%20architekt%C3%BAr%C3%A1k%20%C3%A9s%20elemz%C5%91%20m%C3%B3dszerek.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1093/Big%20Data%20architekt%C3%BAr%C3%A1k%20%C3%A9s%20elemz%C5%91%20m%C3%B3dszerek.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Gombos Gergő", "Laki Sándor", "Szalai-Gindl János Márk");
         foreach($teachers as $teacher){
@@ -1085,7 +1222,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -1099,7 +1238,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1093/Big%20Data%20architekt%C3%BAr%C3%A1k%20%C3%A9s%20elemz%C5%91%20m%C3%B3dszerek.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1093/Big%20Data%20architekt%C3%BAr%C3%A1k%20%C3%A9s%20elemz%C5%91%20m%C3%B3dszerek.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Laki Sándor", "Gombos Gergő", "Szalai-Gindl János Márk", "Varga Dániel");
         foreach($teachers as $teacher){
@@ -1107,7 +1247,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -1121,7 +1263,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1091/Full-stack%20webprogramoz%C3%A1s.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1091/Full-stack%20webprogramoz%C3%A1s.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Móger Tibor László", "Horváth Győző", "Nagy Barnabás");
         foreach($teachers as $teacher){
@@ -1129,7 +1272,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
     
@@ -1143,7 +1288,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1474/Funkcion%C3%A1lis%20nyelvek.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1474/Funkcion%C3%A1lis%20nyelvek.pdf',
+        'is_accepted' => true]);
     
         $teachers = array("Kovács András", "Kaposi Ambrus", "Bocquet Rafael");
         foreach($teachers as $teacher){
@@ -1151,7 +1297,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -1165,7 +1313,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1087/GPU%20programoz%C3%A1s.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1087/GPU%20programoz%C3%A1s.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Eichhardt Iván", "Dr. Hajder Levente");
         foreach($teachers as $teacher){
@@ -1173,7 +1322,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
     
@@ -1187,7 +1338,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1095/Halad%C3%B3%20Java.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1095/Halad%C3%B3%20Java.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Schuh Marcell Szilveszter", "Kitlei Róbert László", "Neuwirth István", "Nok Ádám");
         foreach($teachers as $teacher){
@@ -1195,7 +1347,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
     
@@ -1209,7 +1363,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1089/Kliensoldali%20webprogramoz%C3%A1s.pdf']);   
+        'url' => 'https://www.inf.elte.hu/dstore/document/1089/Kliensoldali%20webprogramoz%C3%A1s.pdf',
+        'is_accepted' => true]);   
         
         $teachers = array("Bende Imre", "Horváth Győző", "Kiss Robin", "Németh Tamás Zoltán");
         foreach($teachers as $teacher){
@@ -1217,7 +1372,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -1231,7 +1388,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1086/Kriptogr%C3%A1fia%20%C3%A9s%20biztons%C3%A1g.pdf']);  
+        'url' => 'https://www.inf.elte.hu/dstore/document/1086/Kriptogr%C3%A1fia%20%C3%A9s%20biztons%C3%A1g.pdf',
+        'is_accepted' => true]); 
         
         $teachers = array("Ligeti Péter", "Fonyó Dávid", "Hanyecz Ottó", "Nagy Ádám", "Seres István András");
         foreach($teachers as $teacher){
@@ -1239,7 +1397,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -1253,7 +1413,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1086/Kriptogr%C3%A1fia%20%C3%A9s%20biztons%C3%A1g.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1086/Kriptogr%C3%A1fia%20%C3%A9s%20biztons%C3%A1g.pdf',
+        'is_accepted' => true]);
         
         $teachers = array("Ligeti Péter", "Nagy Ádám", "Burcsi Péter", "Fonyó Dávid");
         foreach($teachers as $teacher){
@@ -1261,7 +1422,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -1275,7 +1438,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1105/Logika.pdf']); 
+        'url' => 'https://www.inf.elte.hu/dstore/document/1105/Logika.pdf',
+        'is_accepted' => true]); 
 
         $teachers = array("Tejfel Máté", "Lovász Bence", "Tóth Gabriella");
         foreach($teachers as $teacher){
@@ -1283,7 +1447,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -1297,7 +1463,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1105/Logika.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1105/Logika.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Tóth Gabriella", "Jakab Olivér", "Tejfel Máté", "Krix Ádám György", "Bense Viktor", 
             "Bondár Renáta", "Kölcsényi Lilla", "Kulcsár Gergő", "Kocsis Barnabás Péter", "Zakariás Adrienn", 
@@ -1308,7 +1475,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
         
@@ -1322,7 +1491,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1100/BSc_Mely_neuronhalok_algoritmusai_es_fajtai_tematika.pdf']); 
+        'url' => 'https://www.inf.elte.hu/dstore/document/1100/BSc_Mely_neuronhalok_algoritmusai_es_fajtai_tematika.pdf',
+        'is_accepted' => true]);
     
         $teachers = array("Kopácsi László", "Varga Viktor");
         foreach($teachers as $teacher){
@@ -1330,7 +1500,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -1344,7 +1516,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1908/Numerikus%20algoritmusok%20ea+gy.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1908/Numerikus%20algoritmusok%20ea+gy.pdf',
+        'is_accepted' => true]);
 
         $subject = Subject::create(['name' => 'Osztott rendszerek specifikációja és implementációja Ea',
         'code' => 'IP-18KVSZORSIE',
@@ -1356,7 +1529,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1147/Osztott%20rendszerek%20specifik%C3%A1ci%C3%B3ja%20%C3%A9s%20implement%C3%A1ci%C3%B3ja.pdf']); 
+        'url' => 'https://www.inf.elte.hu/dstore/document/1147/Osztott%20rendszerek%20specifik%C3%A1ci%C3%B3ja%20%C3%A9s%20implement%C3%A1ci%C3%B3ja.pdf',
+        'is_accepted' => true]); 
     
         $teachers = array("Dr. Horváth Zoltán", "Tejfel Máté");
         foreach($teachers as $teacher){
@@ -1364,7 +1538,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -1378,7 +1554,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1147/Osztott%20rendszerek%20specifik%C3%A1ci%C3%B3ja%20%C3%A9s%20implement%C3%A1ci%C3%B3ja.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1147/Osztott%20rendszerek%20specifik%C3%A1ci%C3%B3ja%20%C3%A9s%20implement%C3%A1ci%C3%B3ja.pdf',
+        'is_accepted' => true]);
     
         $teachers = array("Dr. Horváth Zoltán", "Tejfel Máté", "Reale Anna", "Mészáros Mónika");
         foreach($teachers as $teacher){
@@ -1386,7 +1563,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -1400,7 +1579,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1102/Programoz%C3%A1si%20m%C3%B3dszertan1.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1102/Programoz%C3%A1si%20m%C3%B3dszertan1.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Borsi Zsolt Richárd");
         foreach($teachers as $teacher){
@@ -1408,7 +1588,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -1422,7 +1604,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1102/Programoz%C3%A1si%20m%C3%B3dszertan1.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1102/Programoz%C3%A1si%20m%C3%B3dszertan1.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Borsi Zsolt Richárd", "Dr. Gregorics Tibor", "Várkonyi Teréz Anna", "Kocsis Bálint");
         foreach($teachers as $teacher){
@@ -1430,7 +1613,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -1444,7 +1629,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/567/Projekteszkozok_C_hun.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/567/Projekteszkozok_C_hun.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Gera Zoltán", "Szalay Richárd", "Katona János Dávid");
         foreach($teachers as $teacher){
@@ -1452,7 +1638,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
     
@@ -1466,7 +1654,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1103/Sz%C3%A1m%C3%ADt%C3%A1si%20modellek.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1103/Sz%C3%A1m%C3%ADt%C3%A1si%20modellek.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Csuhaj Varjú Erzsébet", "Tichler Krisztián");
         foreach($teachers as $teacher){
@@ -1474,7 +1663,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
     
@@ -1488,7 +1679,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1103/Sz%C3%A1m%C3%ADt%C3%A1si%20modellek.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1103/Sz%C3%A1m%C3%ADt%C3%A1si%20modellek.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Kolonits Gábor", "Tichler Krisztián");
         foreach($teachers as $teacher){
@@ -1496,7 +1688,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
     
@@ -1510,7 +1704,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1084/Sz%C3%A1m%C3%ADt%C3%B3g%C3%A9pes%20grafika.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1084/Sz%C3%A1m%C3%ADt%C3%B3g%C3%A9pes%20grafika.pdf',
+        'is_accepted' => true]);
     
         $teachers = array("Bán Róbert");
         foreach($teachers as $teacher){
@@ -1518,7 +1713,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -1532,7 +1729,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1084/Sz%C3%A1m%C3%ADt%C3%B3g%C3%A9pes%20grafika.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1084/Sz%C3%A1m%C3%ADt%C3%B3g%C3%A9pes%20grafika.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Szabó Zsombor", "Bálint Csaba", "Bán Róbert", "Dr. Hajder Levente", "Tóth Tekla",
             "Szabó Dávid", "Hartner Stefánia", "Zsemberi Dániel Balázs", "Kiglics Mátyás");
@@ -1541,7 +1739,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
     
@@ -1555,7 +1755,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1090/Szerveroldali%20webprogramoz%C3%A1s.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1090/Szerveroldali%20webprogramoz%C3%A1s.pdf',
+        'is_accepted' => true]);
     
         $teachers = array("Horváth Győző", "Kiss Robin", "Tóta Dávid");
         foreach($teachers as $teacher){
@@ -1563,8 +1764,10 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
-                                                        'updated_at' => Carbon::now()]);
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
+                                                          'updated_at' => Carbon::now()]);
         }
 
         $subject = Subject::create(['name' => 'Szoftver mély neuronhálók alkalmazásához Gy',
@@ -1577,7 +1780,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1099/BSc_Szoftver_mely_neuronhalok_alkalmazasahoz_tematika.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1099/BSc_Szoftver_mely_neuronhalok_alkalmazasahoz_tematika.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Varga Viktor", "Kopácsi László", "Kovács Bálint");
         foreach($teachers as $teacher){
@@ -1585,8 +1789,10 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
-                                                        'updated_at' => Carbon::now()]);
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
+                                                          'updated_at' => Carbon::now()]);
         }
 
         $subject = Subject::create(['name' => 'Típuselmélet Ea',
@@ -1599,7 +1805,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1104/T%C3%ADpuselm%C3%A9let.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1104/T%C3%ADpuselm%C3%A9let.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Kaposi Ambrus");
         foreach($teachers as $teacher){
@@ -1607,7 +1814,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
     
@@ -1621,7 +1830,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1104/T%C3%ADpuselm%C3%A9let.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1104/T%C3%ADpuselm%C3%A9let.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Luksa Norbert", "Kaposi Ambrus", "Széles Márk");
         foreach($teachers as $teacher){
@@ -1629,7 +1839,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
     
@@ -1643,7 +1855,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1092/V%C3%A1llalati%20inform%C3%A1ci%C3%B3s%20rendszerek%20%C3%A9s%20architekt%C3%BAr%C3%A1k.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1092/V%C3%A1llalati%20inform%C3%A1ci%C3%B3s%20rendszerek%20%C3%A9s%20architekt%C3%BAr%C3%A1k.pdf',
+        'is_accepted' => true]);
 
         $subject = Subject::create(['name' => 'Vállalati információs rendszerek és architektúrák Gy',
         'code' => 'IP-18KVIVISZG',
@@ -1655,7 +1868,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1092/V%C3%A1llalati%20inform%C3%A1ci%C3%B3s%20rendszerek%20%C3%A9s%20architekt%C3%BAr%C3%A1k.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1092/V%C3%A1llalati%20inform%C3%A1ci%C3%B3s%20rendszerek%20%C3%A9s%20architekt%C3%BAr%C3%A1k.pdf',
+        'is_accepted' => true]);
     
         $subject = Subject::create(['name' => 'Web-es alkalmazások fejlesztése Ea+Gy',
         'code' => 'IP-18KVIWAFEG',
@@ -1667,7 +1881,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => false,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1085/Webes%20alkalmaz%C3%A1sok%20fejleszt%C3%A9se.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1085/Webes%20alkalmaz%C3%A1sok%20fejleszt%C3%A9se.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Cserép Máté András", "Fekete Anett", "Kis Dávid", "Provender Roxána");
         foreach($teachers as $teacher){
@@ -1675,7 +1890,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -1689,7 +1906,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => true,
         'existsOnC' => false,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1088/Webprogramoz%C3%A1s.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1088/Webprogramoz%C3%A1s.pdf',
+        'is_accepted' => true]);
 
         $teachers = array("Horváth Győző", "Visnovitz Márton", "Bende Imre", "Tűri Erik", "Bernát Péter");
         foreach($teachers as $teacher){
@@ -1697,7 +1915,9 @@ class DatabaseSeeder extends Seeder
             if($actTeacher === null){
                 $actTeacher = Teacher::factory()->create(['name' => $teacher]);
             }
-            $subject->teachers()->attach($actTeacher->id,['created_at' => Carbon::now(),
+            $subject->teachers()->attach($actTeacher->id,['is_active' => true,
+                                                          'going_against' => 0,
+                                                          'created_at' => Carbon::now(),
                                                           'updated_at' => Carbon::now()]);
         }
 
@@ -1711,7 +1931,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => false,
         'existsOnB' => false,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1036/Webprogramoz%C3%A1s.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1036/Webprogramoz%C3%A1s.pdf',
+        'is_accepted' => true]);
     
         $subject = Subject::create(['name' => 'Bevezetés a számításelméletbe Ea',
         'code' => 'IP-18aBSZEE',
@@ -1723,7 +1944,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => false,
         'existsOnC' => false,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1058/Bevezet%C3%A9s%20a%20sz%C3%A1m%C3%ADt%C3%A1selm%C3%A9letbe.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1058/Bevezet%C3%A9s%20a%20sz%C3%A1m%C3%ADt%C3%A1selm%C3%A9letbe.pdf',
+        'is_accepted' => true]);
 
         $subject = Subject::create(['name' => 'Bevezetés a számításelméletbe Gy',
         'code' => 'IP-18aBSZEG',
@@ -1735,7 +1957,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => false,
         'existsOnC' => false,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1058/Bevezet%C3%A9s%20a%20sz%C3%A1m%C3%ADt%C3%A1selm%C3%A9letbe.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1058/Bevezet%C3%A9s%20a%20sz%C3%A1m%C3%ADt%C3%A1selm%C3%A9letbe.pdf',
+        'is_accepted' => true]);
     
         $subject = Subject::create(['name' => 'Analízis 3 Ea',
         'code' => 'IP-18aAN3E',
@@ -1747,7 +1970,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => false,
         'existsOnC' => false,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1061/Anal%C3%ADzis%20III.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1061/Anal%C3%ADzis%20III.pdf',
+        'is_accepted' => true]);
 
         $subject = Subject::create(['name' => 'Analízis 3 Gy',
         'code' => 'IP-18aAN3G',
@@ -1759,7 +1983,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => false,
         'existsOnC' => false,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1061/Anal%C3%ADzis%20III.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1061/Anal%C3%ADzis%20III.pdf',
+        'is_accepted' => true]);
    
         $subject = Subject::create(['name' => 'Analízis alkalmazásai Ea',
         'code' => 'IP-18aANA1E',
@@ -1771,7 +1996,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => false,
         'existsOnC' => false,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1065/Anal%C3%ADzis%20alkalmaz%C3%A1sai.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1065/Anal%C3%ADzis%20alkalmaz%C3%A1sai.pdf',
+        'is_accepted' => true]);
 
         $subject = Subject::create(['name' => 'Analízis alkalmazásai Gy',
         'code' => 'IP-18aANA1G',
@@ -1783,7 +2009,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => true,
         'existsOnB' => false,
         'existsOnC' => false,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1065/Anal%C3%ADzis%20alkalmaz%C3%A1sai.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1065/Anal%C3%ADzis%20alkalmaz%C3%A1sai.pdf',
+        'is_accepted' => true]);
     
         $subject = Subject::create(['name' => 'Programozási technológia Ea+Gy',
         'code' => 'IP-18cPROGTEG',
@@ -1795,7 +2022,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => false,
         'existsOnB' => false,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1035/Programoz%C3%A1si%20technol%C3%B3gia.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1035/Programoz%C3%A1si%20technol%C3%B3gia.pdf',
+        'is_accepted' => true]);
     
         $subject = Subject::create(['name' => 'Diszkrét modellek alkalmazásai Gy',
         'code' => 'IP-18cDMAG',
@@ -1807,7 +2035,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => false,
         'existsOnB' => false,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1077/Diszkr%C3%A9t%20modellek%20alkalmaz%C3%A1sai.pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1077/Diszkr%C3%A9t%20modellek%20alkalmaz%C3%A1sai.pdf',
+        'is_accepted' => true]);
 
         $subject = Subject::create(['name' => 'A számításelmélet alapjai 1 Ea',
         'code' => 'IP-18cSZÁMEA1E',
@@ -1819,7 +2048,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => false,
         'existsOnB' => false,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1078/A%20sz%C3%A1m%C3%ADt%C3%A1selm%C3%A9let%20alapjai%20I..pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1078/A%20sz%C3%A1m%C3%ADt%C3%A1selm%C3%A9let%20alapjai%20I..pdf',
+        'is_accepted' => true]);
     
         $subject = Subject::create(['name' => 'A számításelmélet alapjai 1 Gy',
         'code' => 'IP-18cSZÁMEA1G',
@@ -1831,7 +2061,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => false,
         'existsOnB' => false,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1078/A%20sz%C3%A1m%C3%ADt%C3%A1selm%C3%A9let%20alapjai%20I..pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1078/A%20sz%C3%A1m%C3%ADt%C3%A1selm%C3%A9let%20alapjai%20I..pdf',
+        'is_accepted' => true]);
     
         $subject = Subject::create(['name' => 'A számításelmélet alapjai 2 Ea',
         'code' => 'IP-18cSZÁMEA2E',
@@ -1843,7 +2074,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => false,
         'existsOnB' => false,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1082/A%20sz%C3%A1m%C3%ADt%C3%A1selm%C3%A9let%20alapjai%20II..pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1082/A%20sz%C3%A1m%C3%ADt%C3%A1selm%C3%A9let%20alapjai%20II..pdf',
+        'is_accepted' => true]);
 
         $subject = Subject::create(['name' => 'A számításelmélet alapjai 2 Gy',
         'code' => 'IP-18cSZÁMEA2G',
@@ -1855,7 +2087,8 @@ class DatabaseSeeder extends Seeder
         'existsOnA' => false,
         'existsOnB' => false,
         'existsOnC' => true,
-        'url' => 'https://www.inf.elte.hu/dstore/document/1082/A%20sz%C3%A1m%C3%ADt%C3%A1selm%C3%A9let%20alapjai%20II..pdf']);
+        'url' => 'https://www.inf.elte.hu/dstore/document/1082/A%20sz%C3%A1m%C3%ADt%C3%A1selm%C3%A9let%20alapjai%20II..pdf',
+        'is_accepted' => true]);
     
         for($x = 1; $x < 11; $x++){
             User::factory()->create( ['name' => "Felhasználó ".$x,
@@ -1965,6 +2198,10 @@ class DatabaseSeeder extends Seeder
         $user->subjects()->attach(58,['grade' => 5, 'created_at' => Carbon::now()]);
         $user->subjects()->attach(70,['grade' => 5, 'created_at' => Carbon::now()]);
 
+        User::factory()->create( ['name' => "Admin",
+                                  'email' => 'admin@tanulas.hu',
+                                  'spec' => 'NOTHING',
+                                  'is_admin' => true]);
     }
 
     //kihagyottak:

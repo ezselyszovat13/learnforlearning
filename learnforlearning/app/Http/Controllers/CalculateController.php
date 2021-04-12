@@ -145,6 +145,9 @@ class CalculateController extends Controller
         $samples = [];
         foreach ($users as $user){
             $subjects = $user->getOptionalSubjects();
+            if($subjects === null)
+                continue;
+
             foreach($subjects as $subject){
                 $sample = [
                     'user' => $user,
@@ -319,6 +322,9 @@ class CalculateController extends Controller
         foreach ($users as $user){
             $subjects = $user->getOptionalSubjects();
             $average = $user->getGradesAverage();
+            if($subjects === null)
+                continue;
+            
             foreach($subjects as $subject){
                 if(in_array($subject->code,$stumpSubjects)){
                     foreach($stumps as &$stump){

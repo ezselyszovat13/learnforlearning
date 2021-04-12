@@ -55,7 +55,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach ($teachers as $teacher)       
+                        @foreach ($teachers as $teacher) 
+                            @if($teacher->pivot->is_active)      
                             <tr>
                                 <th scope="row">{{$loop->iteration}}</th>
                                 <td>
@@ -77,6 +78,7 @@
                                     <td style="width:20px;"><a class="btn btn-lg" href="{{ route('user.comment', ['teacherId' => $teacher->id, 'subjectId' => $subject->id]) }}" role="button">💬</a></td>
                                 @endif
                             </tr>
+                            @endif
                         @endforeach
                     </tbody>
                     </table>
