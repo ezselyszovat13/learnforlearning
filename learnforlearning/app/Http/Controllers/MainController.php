@@ -22,16 +22,19 @@ class MainController extends Controller
 
         User::all()->each(function ($user) use (&$data, &$comments, &$commentCount) {
             $data = $data + $user->subjects()->count();
-            $userComment = $user->votes()->get()->first();
-            if($userComment !== null && $userComment->pivot->comment !== null){
-                $teacher = Teacher::where('id',$userComment->pivot->teacher_id)->first();
-                $comment = [
-                    'author' => $user->name,
-                    'teacher' => $teacher->name,
-                    'comment' => $userComment->pivot->comment
-                ];
-                if($commentCount < 5) array_push($comments,$comment);
-                $commentCount += 1;
+            $userComments = $user->votes()->get();
+            foreach($userComments as $userComment){
+                if($userComment !== null && $userComment->pivot->comment !== null){
+                    $teacher = Teacher::where('id',$userComment->pivot->teacher_id)->first();
+                    $comment = [
+                        'author' => $user->name,
+                        'teacher' => $teacher->name,
+                        'comment' => $userComment->pivot->comment
+                    ];
+                    if($commentCount < 5) array_push($comments,$comment);
+                    $commentCount += 1;
+                    break;
+                }
             }
         });
 
