@@ -8,7 +8,18 @@
             @if (session()->has('comment_added'))
                 @if (session()->get('comment_added') == true)
                     <div class="alert alert-success mb-3" role="alert">
-                        A megjegyzés sikeresen elküldve.
+                        A megjegyzés sikeresen elküldve!
+                    </div>
+                @endif
+            @endif
+            @if (session()->has('comment_deleted'))
+                @if (session()->get('comment_deleted') == true)
+                    <div class="alert alert-success mb-3" role="alert">
+                        A megjegyzés sikeresen eltávolítva!
+                    </div>
+                @else
+                    <div class="alert alert-danger mb-3" role="alert">
+                        A megjegyzés eltávolítása sikertelen volt!
                     </div>
                 @endif
             @endif
