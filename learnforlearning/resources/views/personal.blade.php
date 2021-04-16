@@ -87,7 +87,7 @@
                     <p>Még nem írtál megjegyzéseket!</p>
                 </div>
             @endforelse
-            @if(!$wasComment && count($comments)>0)
+            @if(!$was_comment && count($comments)>0)
                 <div role='alert' class="alert alert-danger">
                     <p>Még nem írtál megjegyzéseket!</p>
                 </div>
@@ -102,7 +102,7 @@
                 @endif
             @endif
             <h2>Az oktatókra leadott szavazataid</h2>
-            @if($wasLike)
+            @if($was_like)
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -127,9 +127,11 @@
                     <p>Még nem szavaztál oktatóra!</p>
                 </div>
             @endforelse
+            @if($was_like)
                 </tbody>
             </table>
-            @if(!$wasLike && count($comments)>0)
+            @endif
+            @if(!$was_like && count($comments)>0)
                 <div role='alert' class="alert alert-danger">
                     <p>Még nem szavaztál oktatóra!</p>
                 </div>

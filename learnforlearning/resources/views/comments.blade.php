@@ -26,7 +26,7 @@
                     <p>Még nem érkeztek kommentek az oktatóra!</p>
                 </div>
             @endforelse
-            @if(!$wasComment && count($comments)>0)
+            @if(!$was_comment && count($comments)>0)
                 <div role='alert' class="alert alert-danger">
                     <p>Még nem érkeztek kommentek az oktatóra!</p>
                 </div>

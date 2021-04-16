@@ -30,7 +30,6 @@ class AddSubjectFormRequest extends FormRequest
             'code' => 'required',
             'credit' => 'required|numeric|between:1,20',
             'url' => 'required'
-
         ];
     }
 

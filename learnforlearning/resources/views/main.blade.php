@@ -32,7 +32,7 @@
             @endforeach
             <hr class="my-4">
             <p>
-                A felhasználók szerinti jelenlegi legjobb oktató: <span style="font-size: 1.3rem;font-weight:bold"> {{ $bestTeacher }} </span> 
+                A felhasználók szerinti jelenlegi legjobb oktató: <span style="font-size: 1.3rem;font-weight:bold"> {{ $best_teacher }} </span> 
             </p>
         </div>
     </div>

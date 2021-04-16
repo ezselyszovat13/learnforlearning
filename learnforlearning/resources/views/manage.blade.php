@@ -41,8 +41,8 @@
                 @endif
             @endif
             <h2>Egy, már meglévő oktató aktivitásának változása</h2>
-            @if(isset($activitySubjects))
-                @if(count($activitySubjects)!==0)
+            @if(isset($activity_subjects))
+                @if(count($activity_subjects)!==0)
                     <table class="table table-striped table-responsive">
                         <thead>
                             <tr>
@@ -56,7 +56,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach ($activitySubjects as $element)
+                        @foreach ($activity_subjects as $element)
                             <tr>
                                 <th scope="row">{{$loop->iteration}}</th>
                                 <td>{{$element['subjectName']}}</td>
@@ -119,8 +119,8 @@
                 @endif
             @endif
             <h2>Új oktató ajánlása</h2>
-            @if(isset($pendingTeachers))
-                @if(count($pendingTeachers)!==0)
+            @if(isset($pending_teachers))
+                @if(count($pending_teachers)!==0)
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -130,7 +130,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach ($pendingTeachers as $element)
+                        @foreach ($pending_teachers as $element)
                             <tr>
                                 <th scope="row">{{$loop->iteration}}</th>
                                 <td>{{$element->name}}</td>
@@ -188,8 +188,8 @@
                 @endif
             @endif
             <h2>Új kurzus ajánlása</h2>
-            @if(isset($pendingSubjects))
-                @if(count($pendingSubjects)!==0)
+            @if(isset($pending_subjects))
+                @if(count($pending_subjects)!==0)
                     <table class="table table-striped table-responsive">
                         <thead>
                             <tr>
@@ -205,7 +205,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach ($pendingSubjects as $subject)
+                        @foreach ($pending_subjects as $subject)
                             <tr>
                                 <th scope="row">{{$loop->iteration}}</th>
                                 <td>{{$subject->name}}</td>

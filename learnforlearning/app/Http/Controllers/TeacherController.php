@@ -10,13 +10,13 @@ class TeacherController extends Controller
     public function comments($id){
         $teacher = Teacher::where('id',$id)->first();
         $comments = $teacher->comments();
-        $wasComment = false;
+        $was_comment = false;
         foreach ($comments as $author => $data) {
             if($data['comment'] !== null){
-                $wasComment = true;
+                $was_comment = true;
                 break;
             }
         }
-        return view('comments',compact('comments', 'teacher', 'wasComment'));
+        return view('comments',compact('comments', 'teacher', 'was_comment'));
     }
 }

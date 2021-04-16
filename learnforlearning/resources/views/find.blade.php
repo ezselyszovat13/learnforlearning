@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div>
-                @foreach ($optionalSubjects as $subject)
+                @foreach ($optional_subjects as $subject)
                     <span class="badge badge-primary">
                         <a target="__blank" style="color: white !important;font-size:14px" href="{{ route('subjects.info', ['id' => $subject->id]) }}">{{ $subject->name }}</a>
                     </span>
@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div>
-                @if(count($calculationHistory)!==0)
+                @if(count($calculation_history)!==0)
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -36,11 +36,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($calculationHistory as $element)
+                            @foreach ($calculation_history as $element)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{ $subData[$element->subject_code]['name'] }}</td>
-                                    <td><a class="btn btn-primary btn-lg" style="font-size:0.8rem" target="_blank" href="{{ $subData[$element->subject_code]['url'] }}" role="button">Információk</a></td>
+                                    <td>{{ $sub_data[$element->subject_code]['name'] }}</td>
+                                    <td><a class="btn btn-primary btn-lg" style="font-size:0.8rem" target="_blank" href="{{ $sub_data[$element->subject_code]['url'] }}" role="button">Információk</a></td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -68,7 +68,7 @@
                                 <option value="1">Ősszel induló félév</option>
                                 <option value="2">Tavasszal induló félév</option>
                             </select>
-                            <button type="submit" class="btn btn-primary {{ $canCalculate ? '' : 'disabled' }} mr-auto">Kalkulál</button>
+                            <button type="submit" class="btn btn-primary {{ $can_calculate ? '' : 'disabled' }} mr-auto">Kalkulál</button>
                         </div>
                     </div>
             </form>
@@ -84,7 +84,7 @@
                     </div>
                 @endif
             @endif
-            @if(!$canCalculate)
+            @if(!$can_calculate)
                 <p style="color:red" class="mt-3">Kérlek válassz szakirányt, hogy kalkulálni tudjunk a számodra!</p>
             @endif
             @if (session()->has('calculations_deleted'))

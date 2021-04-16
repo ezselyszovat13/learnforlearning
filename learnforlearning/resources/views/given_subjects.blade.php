@@ -37,8 +37,8 @@
             <p class="lead">Itt tölthetsz fel új érdemjegyeket a hatékonyabb adatmeghatározáshoz!</p>
             <hr class="my-4">
             <h2>Eddig felvett eredmények: </h2>
-            @if(isset($userSubjects))
-                @if(count($userSubjects)!=0)
+            @if(isset($user_subjects))
+                @if(count($user_subjects)!=0)
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
@@ -53,7 +53,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            @foreach ($userSubjects as $subject)
+                            @foreach ($user_subjects as $subject)
                                 <tr>
                                     <th scope="row">{{$loop->iteration}}</th>
                                     <td>{{$subject->name}}</td>

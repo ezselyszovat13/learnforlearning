@@ -18,48 +18,48 @@ class MainController extends Controller
 
         $data = 0;
         $comments = [];
-        $commentCount = 0;
+        $comment_count = 0;
 
-        User::all()->each(function ($user) use (&$data, &$comments, &$commentCount) {
+        User::all()->each(function ($user) use (&$data, &$comments, &$comment_count) {
             $data = $data + $user->subjects()->count();
-            $userComments = $user->votes()->get();
-            foreach($userComments as $userComment){
-                if($userComment !== null && $userComment->pivot->comment !== null){
-                    $teacher = Teacher::where('id',$userComment->pivot->teacher_id)->first();
+            $user_comments = $user->votes()->get();
+            foreach($user_comments as $user_comment){
+                if($user_comment !== null && $user_comment->pivot->comment !== null){
+                    $teacher = Teacher::where('id',$user_comment->pivot->teacher_id)->first();
                     $comment = [
                         'author' => $user->name,
                         'teacher' => $teacher->name,
-                        'comment' => $userComment->pivot->comment
+                        'comment' => $user_comment->pivot->comment
                     ];
-                    if($commentCount < 5) array_push($comments,$comment);
-                    $commentCount += 1;
+                    if($comment_count < 5) array_push($comments,$comment);
+                    $comment_count += 1;
                     break;
                 }
             }
         });
 
-        $bestTeacher = Teacher::all()->first()->name;
-        $maxPoints = 0;
+        $best_teacher = Teacher::all()->first()->name;
+        $max_points = 0;
 
-        Teacher::all()->where('is_accepted',true)->each(function ($teacher) use (&$bestTeacher, &$maxPoints) {
+        Teacher::all()->where('is_accepted',true)->each(function ($teacher) use (&$best_teacher, &$max_points) {
             $voters = $teacher->voters()->get(); 
-            $voterPoints = 0;
+            $voter_points = 0;
             foreach($voters as $voter){
                 $vote = $voter->pivot->is_positive_vote;
                 if($vote !== null){
                     if($vote)
-                        $voterPoints += 1;
+                        $voter_points += 1;
                     else
-                        $voterPoints -= 1;
+                        $voter_points -= 1;
                 }
             }  
-            if($voterPoints > $maxPoints){
-                $bestTeacher = $teacher->name;
-                $maxPoints = $voterPoints;
+            if($voter_points > $max_points){
+                $best_teacher = $teacher->name;
+                $max_points = $voter_points;
             }
         });
 
-        return view('main', compact('users','data','comments','bestTeacher'));
+        return view('main', compact('users','data','comments','best_teacher'));
     }
 
     public function showFixables(){
@@ -71,8 +71,8 @@ class MainController extends Controller
     public function goAgainst(ChangeActivityFormRequest $request){
         $data = $request->all();
         $teacher = Teacher::where('id',$data['teacher'])->first();
-        $isActive = $request->has('is_active');
-        $result = $teacher->increaseGoingAgainst($data['subject'],$isActive);
+        $is_active = $request->has('is_active');
+        $result = $teacher->increaseGoingAgainst($data['subject'],$is_active);
         if($result === null){
             return redirect()->route('fixable')->with('activity_changed', false);
         }
@@ -93,49 +93,49 @@ class MainController extends Controller
         $data = $request->all();
         $name = $data['sname'];
         $code = $data['code'];
-        $existsOnA = $request->has('existsA');
-        $existsOnB = $request->has('existsB');
-        $existsOnC = $request->has('existsC');
-        $optionalOnA = $request->has('optionalA');
-        $optionalOnB = $request->has('optionalB');
-        $optionalOnC = $request->has('optionalC');
-        $evenSemester = $request->has('evenSemester');
+        $exists_on_a = $request->has('existsA');
+        $exists_on_b = $request->has('existsB');
+        $exists_on_c = $request->has('existsC');
+        $optional_on_a = $request->has('optionalA');
+        $optional_on_b = $request->has('optionalB');
+        $optional_on_c = $request->has('optionalC');
+        $even_semester = $request->has('evenSemester');
         $credit = $data['credit'];
         $url = $data['url'];
-        Subject::create(['name' => $name, 'code' => $code, 'existsOnA' => $existsOnA, 'existsOnB' => $existsOnB, 'existsOnC' => $existsOnC,
-                         'optionalOnA' => $optionalOnA, 'optionalOnB' => $optionalOnB, 'optionalOnC' => $optionalOnC, 'even_semester' => $evenSemester, 'credit_points' => $credit,
+        Subject::create(['name' => $name, 'code' => $code, 'existsOnA' => $exists_on_a, 'existsOnB' => $exists_on_b, 'existsOnC' => $exists_on_c,
+                         'optionalOnA' => $optional_on_a, 'optionalOnB' => $optional_on_b, 'optionalOnC' => $optional_on_c, 'even_semester' => $even_semester, 'credit_points' => $credit,
                          'url' => $url, 'is_accepted' => false]);
         return redirect()->route('fixable')->with('subject_recommend_added', true);
     }
 
     public function showRequests(){
-        $activitySubjects = [];
-        Teacher::all()->where('is_accepted',true)->each(function ($teacher) use (&$activitySubjects) {
+        $activity_subjects = [];
+        Teacher::all()->where('is_accepted',true)->each(function ($teacher) use (&$activity_subjects) {
             $subjects = $teacher->subjects()->get();
             foreach($subjects as $subject){
                 if($subject->pivot->going_against > 0){
-                    $newSubject = [
+                    $new_subject = [
                         'teacher' => $teacher,
                         'subjectId' => $subject->id,
                         'subjectName' => $subject->name,
                         'isActive' => $subject->pivot->is_active,
                         'goingAgainst' => $subject->pivot->going_against
                     ];
-                    array_push($activitySubjects,$newSubject);
+                    array_push($activity_subjects,$new_subject);
                 }
             }
         });
-        $pendingTeachers = [];
-        Teacher::all()->each(function ($teacher) use (&$pendingTeachers) {
+        $pending_teachers = [];
+        Teacher::all()->each(function ($teacher) use (&$pending_teachers) {
             if(!$teacher->is_accepted)
-                array_push($pendingTeachers,$teacher);
+                array_push($pending_teachers,$teacher);
         });
-        $pendingSubjects = [];
-        Subject::all()->each(function ($subject) use (&$pendingSubjects) {
+        $pending_subjects = [];
+        Subject::all()->each(function ($subject) use (&$pending_subjects) {
             if(!$subject->is_accepted)
-                array_push($pendingSubjects,$subject);
+                array_push($pending_subjects,$subject);
         });
-        return view('manage',compact('activitySubjects','pendingTeachers','pendingSubjects'));
+        return view('manage',compact('activity_subjects','pending_teachers','pending_subjects'));
     }
 
     public function changeTeacherActivity(Request $request){

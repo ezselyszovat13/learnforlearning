@@ -8,8 +8,8 @@
             <h1 class="display-4">Érdemjegy szerkesztése</h1>
             <hr class="my-4">
             <h2>Eddig felvett eredmények: </h2>
-            @if(isset($userSubjects))
-                @if(count($userSubjects)!=0)
+            @if(isset($user_subjects))
+                @if(count($user_subjects)!=0)
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -23,9 +23,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach ($userSubjects as $subject)
+                        @foreach ($user_subjects as $subject)
                             <tr>
-                                @if($subject->id === $subjectToUpdate->id)
+                                @if($subject->id === $subject_to_update->id)
                                 <form action="{{ route('newsubject.update', ['id' => $subject->id]) }}" method="POST">
                                     @csrf
                                     <th scope="row">{{$loop->iteration}}</th>
