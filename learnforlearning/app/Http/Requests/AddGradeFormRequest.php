@@ -27,7 +27,7 @@ class AddGradeFormRequest extends FormRequest
         // Szabályok
         return [
             'subject' => 'required',
-            'grade' => 'required|min:1'
+            'grade' => 'required|numeric|between:1,5'
         ];
     }
 
@@ -36,7 +36,8 @@ class AddGradeFormRequest extends FormRequest
     public function messages() {
         return [
             'required' => 'Meg kell adnod ezt az opciót!',
-            'min' => 'Meg kell adnod ezt az opciót!',
+            'between' => 'A megadott értéknek 1 és 5 között kell lennie!',
+            'numeric' => 'Egy számot kell itt megadnod!'
         ];
     }
 }

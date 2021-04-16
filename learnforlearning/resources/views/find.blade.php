@@ -13,11 +13,21 @@
                 </div>
             </div>
             <div>
-                @foreach ($optional_subjects as $subject)
-                    <span class="badge badge-primary">
-                        <a target="__blank" style="color: white !important;font-size:14px" href="{{ route('subjects.info', ['id' => $subject->id]) }}">{{ $subject->name }}</a>
-                    </span>
-                @endforeach
+                @if(isset($optional_subjects))
+                    @forelse ($optional_subjects as $subject)
+                        <span class="badge badge-primary">
+                            <a target="__blank" style="color: white !important;font-size:14px" href="{{ route('subjects.info', ['id' => $subject->id]) }}">{{ $subject->name }}</a>
+                        </span>
+                    @empty
+                        <div class="alert alert-danger mb-3" role="alert">
+                            Válassz szakirányt, hogy kalkulálhass!
+                        </div>
+                    @endforelse
+                @else
+                    <div class="alert alert-danger mb-3" role="alert">
+                        Válassz szakirányt, hogy kalkulálhass!
+                    </div>
+                @endif
             </div>
             <hr class="my-4">
             <div class="container">
@@ -68,7 +78,7 @@
                                 <option value="1">Ősszel induló félév</option>
                                 <option value="2">Tavasszal induló félév</option>
                             </select>
-                            <button type="submit" class="btn btn-primary {{ $can_calculate ? '' : 'disabled' }} mr-auto">Kalkulál</button>
+                            <button type="submit" class="btn btn-primary {{ $can_calculate ? '' : 'disabled' }} mr-auto" style="{{ $can_calculate ? '' : 'pointer-events: none;' }}">Kalkulál</button>
                         </div>
                     </div>
             </form>

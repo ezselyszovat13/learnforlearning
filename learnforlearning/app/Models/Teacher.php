@@ -58,11 +58,11 @@ class Teacher extends Model
         if($subject === null) return null;
 
         $subject = $this->subjects()->where('subject_id',$subjectId)->first();
+        if($subject === null) return null;
+
         $isOpposite = ($subject->pivot->is_active != $isActive);
         if($isOpposite){
-            var_dump("HI! ");
             $goingAgainstValue = $subject->pivot->going_against;
-            var_dump($goingAgainstValue);
             return $this->subjects()->syncWithoutDetaching([
                 $subject->id => [
                     'going_against' => $goingAgainstValue + 1,
