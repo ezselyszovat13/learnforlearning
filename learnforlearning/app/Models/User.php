@@ -65,6 +65,26 @@ class User extends Authenticatable
         }
     }
 
+    public function deleteComment($teacherId){
+        $teacher = Teacher::where('id', $teacherId)->get('id')->first();
+        if (!$teacher) return null;
+        $vote = $this->votes()->where('teacher_id', $teacherId)->first();
+        if($vote !== null && $vote->pivot->is_positive_vote !== null){
+            return $this->votes()->syncWithoutDetaching([
+                $teacher->id => [
+                    'comment' => null,
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ]
+            ]);
+        }
+        else if ($vote->pivot->is_positive_vote === null){
+            return $this->votes()->detach($teacher);
+        }
+        else return null;
+    }
+    
+
     public function getGrades() {
         $subjects = $this->subjects()->select('code')->get();
         $grades = [];
@@ -210,6 +230,20 @@ class User extends Authenticatable
                 'comment' => $comment,
             ]
         ]);
+    }
+
+    public function comments() {
+        $votes = $this->votes()->get();
+        $comments = [];
+        foreach ($votes as $vote) {
+            $teacher = Teacher::where('id',$vote->pivot->teacher_id)->first();
+            $comments[$teacher->id] = [
+                'teacher_name' => $teacher->name,
+                'comment' => $vote->pivot->comment,
+                'is_positive_vote' => $vote->pivot->is_positive_vote
+            ];
+        }
+        return $comments;
     }
 
     /**
