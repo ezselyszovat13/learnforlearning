@@ -12,7 +12,8 @@
                     @csrf
                     <div class="form-group">
                     <label for="spec" class="text-md-right mr-4">Specializáció </label>
-                    <select id="spec" name="spec" class="mr-4 col-md-4 form-control {{ $errors->has('spec') ? 'is-invalid' : '' }}" autofocus>
+                    <select id="spec" name="spec" class="mr-4 col-md-4 form-control 
+                        {{ $errors->has('spec') ? 'is-invalid' : '' }}" autofocus>
                         <option value="A" {{$old_spec == 'A' ? 'selected':''}}>A szakirány</option>
                         <option value="B" {{$old_spec == 'B' ? 'selected':''}}>B szakirány</option>
                         <option value="C" {{$old_spec == 'C' ? 'selected':''}}>C szakirány</option>
@@ -23,7 +24,7 @@
                 </form>
             @else
                 <div role='alert' class="alert alert-danger">
-                    <p>Nem létező felhasználó</p>
+                    <p>Nem létező felhasználó!</p>
                 </div>
             @endif
         </div>

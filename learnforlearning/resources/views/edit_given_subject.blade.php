@@ -36,8 +36,15 @@
                                     @else
                                         <td>NEM</td>
                                     @endif
-                                    <td><input type="text" class="{{ $errors->has('grade') ? 'is-invalid' : '' }}" id="grade" name="grade" value="{{ old('grade') ? old('grade') : $grade}}"></td>
-                                    <td><a class="btn btn-primary btn-lg disabled" style="font-size:0.8rem" target="_blank" href="{{$subject->url}}" role="button">Információk</a></td>
+                                    <td>
+                                       <input type="text" class="{{ $errors->has('grade') ? 'is-invalid' : '' }}" id="grade" 
+                                        name="grade" value="{{ old('grade') ? old('grade') : $grade}}">
+                                    </td>
+                                    <td>
+                                      <a class="btn btn-primary btn-lg disabled" style="font-size:0.8rem" target="_blank"
+                                         href="{{$subject->url}}" role="button">Információk
+                                      </a>
+                                    </td>
                                     <td><button type="submit" class="btn btn-primary">Jegy módosítása</button></td>
                                 </form>
                                 @else
@@ -50,8 +57,17 @@
                                         <td>NEM</td>
                                     @endif
                                     <td>{{$subject->pivot->grade}}</td>
-                                    <td><a class="btn btn-primary btn-lg disabled" style="font-size:0.8rem" target="_blank" href="{{$subject->url}}" role="button">Információk</a></td>
-                                    <td><a class="btn btn-primary btn-lg disabled" style="font-size:0.8rem" target="_blank" href="{{ route('newsubject.edit', ['id' => $subject->id]) }}" role="button">Jegy szerkesztése</a></td>
+                                    <td>
+                                        <a class="btn btn-primary btn-lg disabled" style="font-size:0.8rem" target="_blank" 
+                                           href="{{$subject->url}}" role="button">Információk
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-primary btn-lg disabled" style="font-size:0.8rem" target="_blank"
+                                           href="{{ route('newsubject.edit', ['id' => $subject->id]) }}" 
+                                           role="button">Jegy szerkesztése
+                                        </a>
+                                    </td>
                                 @endif
                             </tr>
                         @endforeach

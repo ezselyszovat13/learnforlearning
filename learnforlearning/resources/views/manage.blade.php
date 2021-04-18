@@ -65,13 +65,15 @@
                                 <td>{{$element['goingAgainst']}}</td>
                                 <td>
                                     <a class="btn btn-primary btn-lg" style="font-size:0.8rem" target="_blank"
-                                        href="{{ route('manage.changeActivity', ['subjectId' => $element['subjectId'], 'teacherId' => $element['teacher']->id, 'activity' => !$element['isActive']]) }}" 
+                                        href="{{ route('manage.changeActivity', ['subjectId' => $element['subjectId'],
+                                                'teacherId' => $element['teacher']->id, 'activity' => !$element['isActive']]) }}" 
                                         role="button"> Aktivitás megváltoztatása
                                     </a>
                                 </td>
                                 <td>
                                     <a class="btn btn-primary btn-lg" style="font-size:0.8rem" target="_blank"
-                                        href="{{ route('manage.resetAgainstActivity', ['subjectId' => $element['subjectId'], 'teacherId' => $element['teacher']->id]) }}" 
+                                        href="{{ route('manage.resetAgainstActivity', ['subjectId' => $element['subjectId'], 
+                                                 'teacherId' => $element['teacher']->id]) }}" 
                                         role="button"> Ajánlás elvetése
                                     </a>
                                 </td>

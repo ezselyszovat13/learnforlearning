@@ -64,8 +64,17 @@
                                         <td>NEM</td>
                                     @endif
                                     <td>{{$subject->pivot->grade}}</td>
-                                    <td><a class="btn btn-primary btn-lg" style="font-size:0.8rem" target="_blank" href="{{ route('subjects.info', ['id' => $subject->id]) }}" role="button">Információk</a></td>
-                                    <td><a class="btn btn-primary btn-lg" style="font-size:0.8rem" target="_blank" href="{{ route('newsubject.edit', ['id' => $subject->id]) }}" role="button">Jegy szerkesztése</a></td>
+                                    <td>
+                                        <a class="btn btn-primary btn-lg" style="font-size:0.8rem" target="_blank" 
+                                           href="{{ route('subjects.info', ['id' => $subject->id]) }}" role="button">Információk
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-primary btn-lg" style="font-size:0.8rem" target="_blank" 
+                                           href="{{ route('newsubject.edit', ['id' => $subject->id]) }}" 
+                                           role="button">Jegy szerkesztése
+                                        </a>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -89,10 +98,13 @@
                     @csrf
                     <div class="form-group form-inline">
                         <label for="subject" class="text-md-right mr-4">Kurzus: </label>
-                        <select id="subject" name="subject" class="form-control {{ $errors->has('subject') ? 'is-invalid' : '' }}" autofocus>
+                        <select id="subject" name="subject" class="form-control 
+                            {{ $errors->has('subject') ? 'is-invalid' : '' }}" autofocus>
                             <option value="">Válassz opciót!</option>
                             @foreach ($subjects as $subject)
-                                <option value="{{$subject->id}}" {{ (old('subject') == $subject->id ? 'selected':'') }}>{{$subject->name}}</option>
+                                <option value="{{$subject->id}}" {{ (old('subject') == $subject->id ? 'selected':'') }}>
+                                    {{$subject->name}}
+                                </option>
                             @endforeach
                         </select>
                         @if ($errors->has('subject'))
@@ -103,7 +115,8 @@
                     </div>
                     <div class="form-group form-inline">
                         <label for="subject" class="text-md-right mr-4">Érdemjegy: </label>
-                        <input type="text" class="mr-4 form-control {{ $errors->has('grade') ? 'is-invalid' : '' }}" id="grade" name="grade" value="{{ old('grade') ? old('grade') : ''}}">
+                        <input type="text" class="mr-4 form-control {{ $errors->has('grade') ? 'is-invalid' : '' }}" 
+                               id="grade" name="grade" value="{{ old('grade') ? old('grade') : ''}}">
                         @if ($errors->has('grade'))
                             <div class="invalid-feedback">
                                 <strong>{{ $errors->first('grade') }}</strong>

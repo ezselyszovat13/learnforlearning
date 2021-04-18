@@ -26,7 +26,7 @@ class ModifyGradeFormRequest extends FormRequest
     {
         // Szabályok
         return [
-            'grade' => 'required|integer|between:1,5'
+            'grade' => 'required|numeric|between:1,5'
         ];
     }
 
@@ -36,6 +36,7 @@ class ModifyGradeFormRequest extends FormRequest
         return [
             'required' => 'Meg kell adnod ezt az opciót!',
             'between:1,5' => 'A jegynek értelmesnek kell lennie!',
+            'numeric' => 'A megadott értéknek számnak kell lennie!'
         ];
     }
 }

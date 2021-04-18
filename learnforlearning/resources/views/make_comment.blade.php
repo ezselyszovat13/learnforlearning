@@ -14,10 +14,12 @@
                     role="button"> Megjegyzés törlése
                 </a>
             </p>
-            <form action="{{ route('user.comment.update', ['teacherId' => $teacher->id, 'subjectId' => $subject->id]) }}" method="POST">
+            <form action="{{ route('user.comment.update', ['teacherId' => $teacher->id, 'subjectId' => $subject->id]) }}" 
+                  method="POST">
                 @csrf
                 <label for="comment" class="text-md-right mr-4">Ide írhatod a megjegyzést az oktatóról:</label>
-                <textarea type="text" rows="5" cols="80" class="form-control {{ $errors->has('comment') ? 'is-invalid' : '' }}" id="comment" name="comment">{{ isset($comment) ? $comment : old('comment') }}</textarea>
+                <textarea type="text" rows="5" cols="80" class="form-control {{ $errors->has('comment') ? 'is-invalid' : '' }}"
+                          id="comment" name="comment">{{ isset($comment) ? $comment : old('comment') }}</textarea>
                 @if ($errors->has('comment'))
                     <div class="invalid-feedback">
                         <strong>{{ $errors->first('comment') }}</strong>

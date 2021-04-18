@@ -17,7 +17,9 @@
             <p class="lead">Itt láthatóak a megadott személyes adataid, valamint egyéb kalkulált eredményeid!</p>
             <hr class="my-4">
             <div>
-                <p style="font-size: 1.2rem;">Megadott név: <span style="font-size: 1.5rem;font-weight:bold">{{$user->name}}</span></p>
+                <p style="font-size: 1.2rem;">Megadott név: 
+                    <span style="font-size: 1.5rem;font-weight:bold">{{$user->name}}</span>
+                </p>
             </div>
             <div>
                 <p style="font-size: 1.2rem;">
@@ -29,13 +31,21 @@
             </div>
             <div>
                 @if($user->getGradesCount() !== 0)
-                    <p style="font-size: 1.2rem;">Jelenleg <span style="font-size: 1.5rem;font-weight:bold"> {{ $user->getGradesCount()}} </span> darab eredményt 
-                    vettél fel az alkalmazásban, 
-                    melyek átlaga: <span style="font-size: 1.5rem;font-weight:bold"> {{ $user->getGradesCount() != 0 ? round($user->getGradesAverage(),2) : '-'}} </span></p>
+                    <p style="font-size: 1.2rem;">
+                        Jelenleg <span style="font-size: 1.5rem;font-weight:bold"> {{ $user->getGradesCount()}} </span> 
+                        darab eredményt vettél fel az alkalmazásban, melyek átlaga: 
+                        <span style="font-size: 1.5rem;font-weight:bold"> 
+                            {{ $user->getGradesCount() != 0 ? round($user->getGradesAverage(),2) : '-'}} 
+                        </span>
+                    </p>
                     
-                    <p style="font-size: 1.2rem;">Ebből <span style="font-size: 1.5rem;font-weight:bold"> {{ $user->getOptionalGradesCount()}} </span> darab tárgy 
-                    volt kötelezően választható, 
-                    melyek átlaga: <span style="font-size: 1.5rem;font-weight:bold"> {{ $user->getOptionalGradesCount() != 0 ? round($user->getOptionalGradesAverage(),2) : '-'}} </span></p>
+                    <p style="font-size: 1.2rem;">
+                        Ebből <span style="font-size: 1.5rem;font-weight:bold"> {{ $user->getOptionalGradesCount()}} </span> 
+                        darab tárgy volt kötelezően választható, melyek átlaga: 
+                        <span style="font-size: 1.5rem;font-weight:bold"> 
+                            {{ $user->getOptionalGradesCount() != 0 ? round($user->getOptionalGradesAverage(),2) : '-'}} 
+                        </span>
+                    </p>
 
                     <p style="font-size: 1.2rem;">Eddig <span style="font-size: 1.5rem;font-weight:bold"> 
                     {{$user->getAcquiredCredits()}} </span> kreditet szereztél.</p>
@@ -43,7 +53,9 @@
                     <p style="font-size: 1.5rem;font-weight:bold">Jelenleg még nincs rögzített érdemjegyed!</p>
                 @endif
             </div>
-            <a class="btn btn-primary btn-lg" href="{{ route('spec.edit', ['id' => $user->id]) }}" role="button">Szakirány módosítása</a>
+            <a class="btn btn-primary btn-lg" href="{{ route('spec.edit', ['id' => $user->id]) }}" 
+               role="button">Szakirány módosítása
+            </a>
     
             <hr class="my-4">
             @if (session()->has('comment_updated'))
@@ -69,8 +81,10 @@
                 @if($data['comment'] !== null)
                 <div class="mb-2">
                     <div class="card">
-                        <p class="card-header {{$data['is_positive_vote'] ? 'bg-success' : ''}} {{(!$data['is_positive_vote'] && $data['is_positive_vote'] !== null) ? 'bg-danger' : ''}}">
-                            Véleményezett oktató: <span style="font-size: 1.3rem;font-weight:bold"> {{ $data['teacher_name'] }} </span>
+                        <p class="card-header {{$data['is_positive_vote'] ? 'bg-success' : ''}} 
+                                  {{(!$data['is_positive_vote'] && $data['is_positive_vote'] !== null) ? 'bg-danger' : ''}}">
+                            Véleményezett oktató: 
+                            <span style="font-size: 1.3rem;font-weight:bold"> {{ $data['teacher_name'] }} </span>
                             <a class="btn btn-primary ml-3" style="font-size:0.6rem"
                                 href="{{ route('personal.delete.comment', ['teacherId' => $key]) }}" 
                                 role="button"> Megjegyzés törlése
@@ -118,8 +132,16 @@
                 @if($data['is_positive_vote'] !== null)
                     <tr>
                         <td style="width:300px;"> {{$data['teacher_name']}} </td>
-                        <td style="width:20px;{{ $data['is_positive_vote'] ? 'opacity:1' : 'opacity:0.5' }}"><a class="btn btn-lg" href="{{ route('personal.vote', ['teacherId' => $key, 'isPositive' => true]) }}" role="button">👍</a></td>
-                        <td style="width:20px;{{ !$data['is_positive_vote'] ? 'opacity:1' : 'opacity:0.5' }}"><a class="btn btn-lg" href="{{ route('personal.vote', ['teacherId' => $key, 'isPositive' => false]) }}" role="button">💔</a></td>
+                        <td style="width:20px;{{ $data['is_positive_vote'] ? 'opacity:1' : 'opacity:0.5' }}">
+                            <a class="btn btn-lg" 
+                               href="{{ route('personal.vote', ['teacherId' => $key, 'isPositive' => true]) }}" role="button">👍
+                            </a>
+                        </td>
+                        <td style="width:20px;{{ !$data['is_positive_vote'] ? 'opacity:1' : 'opacity:0.5' }}">
+                            <a class="btn btn-lg" 
+                               href="{{ route('personal.vote', ['teacherId' => $key, 'isPositive' => false]) }}" role="button">💔
+                            </a>
+                        </td>
                     </tr>
                 @endif
             @empty

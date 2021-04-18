@@ -161,7 +161,7 @@ class MainController extends Controller
         if($teacher === null){
             return redirect()->route('manage')->with('teacher_not_exists_add', true);
         }
-        $teacher->setAccepted(true);
+        $teacher->setAccepted();
         $subjects = $teacher->subjects()->get();
         foreach($subjects as $subject){
             $teacher->setActivity($subject->id,true);
@@ -175,7 +175,7 @@ class MainController extends Controller
         if($subject === null){
             return redirect()->route('manage')->with('subject_not_exists_add', true);
         }
-        $subject->setAccepted(true);
+        $subject->setAccepted();
         return redirect()->route('manage')->with('subject_accepted', true);
     }
 

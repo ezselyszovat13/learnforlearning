@@ -16,7 +16,9 @@
                 @if(isset($optional_subjects))
                     @forelse ($optional_subjects as $subject)
                         <span class="badge badge-primary">
-                            <a target="__blank" style="color: white !important;font-size:14px" href="{{ route('subjects.info', ['id' => $subject->id]) }}">{{ $subject->name }}</a>
+                            <a target="__blank" style="color: white !important;font-size:14px" 
+                               href="{{ route('subjects.info', ['id' => $subject->id]) }}">{{ $subject->name }}
+                            </a>
                         </span>
                     @empty
                         <div class="alert alert-danger mb-3" role="alert">
@@ -50,14 +52,20 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{ $sub_data[$element->subject_code]['name'] }}</td>
-                                    <td><a class="btn btn-primary btn-lg" style="font-size:0.8rem" target="_blank" href="{{ $sub_data[$element->subject_code]['url'] }}" role="button">Információk</a></td>
+                                    <td>
+                                        <a class="btn btn-primary btn-lg" style="font-size:0.8rem" target="_blank" 
+                                           href="{{ $sub_data[$element->subject_code]['url'] }}" role="button">Információk
+                                        </a>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
                     <div class="container">
                         <div class="row">
-                            <a class="btn btn-primary btn-lg ml-auto" href="{{route('findsubject.delete')}}" role="button">Korábbi kalkulációk törlése</a>
+                            <a class="btn btn-primary btn-lg ml-auto" href="{{route('findsubject.delete')}}" 
+                               role="button">Korábbi kalkulációk törlése
+                            </a>
                         </div>
                     </div>
                 @else
@@ -67,18 +75,23 @@
                 @endif
             </div>
             <hr class="my-4">
-            <p class="lead">A "Kalkulál" gombra kattintva megtudhatod, hogy melyik lenne számodra a legkedvezőbb kötelezően választható tárgy a kiválasztott félévre.</p>
+            <p class="lead">A "Kalkulál" gombra kattintva megtudhatod, hogy melyik lenne számodra a legkedvezőbb kötelezően 
+                választható tárgy a kiválasztott félévre.
+            </p>
             <form action="{{route('calculate')}}" method="POST">
                     @csrf
                 <div class="form-group">
                     <div class="container">
                         <div class="row">
                             <label for="semester" class="mr-4 mt-2">Aktuális félév: </label>
-                            <select id="semester" name="semester" class="mr-4 col-md-4 form-control {{ $errors->has('semester') ? 'is-invalid' : '' }}" autofocus>
+                            <select id="semester" name="semester" class="mr-4 col-md-4 form-control 
+                                {{ $errors->has('semester') ? 'is-invalid' : '' }}" autofocus>
                                 <option value="1">Ősszel induló félév</option>
                                 <option value="2">Tavasszal induló félév</option>
                             </select>
-                            <button type="submit" class="btn btn-primary {{ $can_calculate ? '' : 'disabled' }} mr-auto" style="{{ $can_calculate ? '' : 'pointer-events: none;' }}">Kalkulál</button>
+                            <button type="submit" class="btn btn-primary {{ $can_calculate ? '' : 'disabled' }} mr-auto" 
+                                    style="{{ $can_calculate ? '' : 'pointer-events: none;' }}">Kalkulál
+                            </button>
                         </div>
                     </div>
             </form>

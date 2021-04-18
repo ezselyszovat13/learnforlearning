@@ -6,7 +6,9 @@
     <div class="container">
         <div class="jumbotron">
             <h1 class="display-4">Üdvözöllek!</h1>
-            <p class="lead">Jelen szoftverünk célja a kötelezően választható tárgyak közül meghatározni, hogy egyénenként kinek mely tárgy lenne a legalkalmasabb a felvételre.</p>
+            <p class="lead">Jelen szoftverünk célja a kötelezően választható tárgyak közül meghatározni, 
+                hogy egyénenként kinek mely tárgy lenne a legalkalmasabb a felvételre.
+            </p>
             <hr class="my-4">
             <ul>
                 <li>Az alkalmazást használó felhasználók száma: {{ $users }}</li>
@@ -32,7 +34,8 @@
             @endforeach
             <hr class="my-4">
             <p>
-                A felhasználók szerinti jelenlegi legjobb oktató: <span style="font-size: 1.3rem;font-weight:bold"> {{ $best_teacher }} </span> 
+                A felhasználók szerinti jelenlegi legjobb oktató:
+                <span style="font-size: 1.3rem;font-weight:bold"> {{ $best_teacher }} </span> 
             </p>
         </div>
     </div>

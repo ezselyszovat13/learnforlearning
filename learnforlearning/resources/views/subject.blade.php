@@ -30,13 +30,19 @@
             <hr class="my-4">
             <div>
                 @if($subject->even_semester)
-                    <p style="font-size: 1.2rem;">Ez általában egy <span style="font-size: 1.5rem;font-weight:bold">páros</span> féléves tárgy.</p>
+                    <p style="font-size: 1.2rem;">Ez általában egy 
+                        <span style="font-size: 1.5rem;font-weight:bold">páros</span> féléves tárgy.
+                    </p>
                 @else
-                <p style="font-size: 1.2rem;">Ez általában egy <span style="font-size: 1.5rem;font-weight:bold">páratlan</span> féléves tárgy.</p>
+                <p style="font-size: 1.2rem;">Ez általában egy 
+                    <span style="font-size: 1.5rem;font-weight:bold">páratlan</span> féléves tárgy.
+                </p>
                 @endif
             </div>
             <div>
-                <p style="font-size: 1.2rem;">Kreditérték: <span style="font-size: 1.5rem;font-weight:bold">{{$subject->credit_points}}</span></p>
+                <p style="font-size: 1.2rem;">Kreditérték: 
+                    <span style="font-size: 1.5rem;font-weight:bold">{{$subject->credit_points}}</span>
+                </p>
             </div>
             <div>
                 <p style="font-size: 1.2rem;">Ezeken a szakirányokon érhető el: 
@@ -73,7 +79,8 @@
                                 <td>
                                     {{$teacher->name}}
                                     <a class="btn" data-toggle="tooltip" title="A megjegyzésekért kattints ide!"
-                                        target="__blank" href="{{ route('teacher.comments', ['id' => $teacher->id]) }}" role="button">❓
+                                        target="__blank" 
+                                        href="{{ route('teacher.comments', ['id' => $teacher->id]) }}" role="button">❓
                                     </a>
                                 </td>
                                 @if($votes[$teacher->id]['points']>0)
@@ -84,9 +91,23 @@
                                     <td style="font-weight:bold;color:red">{{$votes[$teacher->id]['points']}}</td>
                                 @endif
                                 @if(isset($user)) 
-                                    <td style="width:20px;{{ $votes[$teacher->id]['hasPosVote'] ? 'opacity:1' : 'opacity:0.5' }}"><a class="btn btn-lg" href="{{ route('user.vote', ['teacherId' => $teacher->id, 'isPositive' => true, 'subjectId' => $subject->id]) }}" role="button">👍</a></td>
-                                    <td style="width:20px;{{ $votes[$teacher->id]['hasNegVote'] ? 'opacity:1' : 'opacity:0.5' }}"><a class="btn btn-lg" href="{{ route('user.vote', ['teacherId' => $teacher->id, 'isPositive' => false, 'subjectId' => $subject->id]) }}" role="button">💔</a></td>
-                                    <td style="width:20px;"><a class="btn btn-lg" href="{{ route('user.comment', ['teacherId' => $teacher->id, 'subjectId' => $subject->id]) }}" role="button">💬</a></td>
+                                    <td style="width:20px;{{ $votes[$teacher->id]['hasPosVote'] ? 'opacity:1' : 'opacity:0.5' }}">
+                                        <a class="btn btn-lg" href="{{ route('user.vote', ['teacherId' => $teacher->id, 
+                                                 'isPositive' => true, 'subjectId' => $subject->id]) }}" 
+                                           role="button">👍
+                                        </a>
+                                    </td>
+                                    <td style="width:20px;{{ $votes[$teacher->id]['hasNegVote'] ? 'opacity:1' : 'opacity:0.5' }}">
+                                        <a class="btn btn-lg" href="{{ route('user.vote', ['teacherId' => $teacher->id, 
+                                                 'isPositive' => false, 'subjectId' => $subject->id]) }}" 
+                                           role="button">💔
+                                        </a>
+                                    </td>
+                                    <td style="width:20px;">
+                                        <a class="btn btn-lg" href="{{ route('user.comment', ['teacherId' => $teacher->id,
+                                                 'subjectId' => $subject->id]) }}" role="button">💬
+                                        </a>
+                                    </td>
                                 @endif
                             </tr>
                             @endif

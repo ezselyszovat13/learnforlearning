@@ -39,6 +39,7 @@ class AddSubjectFormRequest extends FormRequest
         return [
             'required' => 'Meg kell adnod ezt az opciót!',
             'between' => 'A megadott értéknek 1 és 20 között kell lennie!',
+            'numeric' => 'A megadott értéknek számnak kell lennie!'
         ];
     }
 }

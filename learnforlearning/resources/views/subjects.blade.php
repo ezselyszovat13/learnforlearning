@@ -6,7 +6,9 @@
     <div class="container">
         <div class="jumbotron">
             <h1 class="display-4">Kurzusok</h1>
-            <p class="lead">Itt láthatod, hogy milyen tárgyakat végezhetsz egyetemi tanulmányaid során, melyek nem a szabadon választható kategóriába tartoznak!</p>
+            <p class="lead">Itt láthatod, hogy milyen tárgyakat végezhetsz egyetemi tanulmányaid során, 
+                melyek nem a szabadon választható kategóriába tartoznak!
+            </p>
             @if (session()->has('subject_not_found'))
                 @if (session()->get('subject_not_found') == true)
                     <div class="alert alert-danger mb-3" role="alert">
@@ -52,7 +54,8 @@
                                 @else
                                     <td>NEM</td>
                                 @endif
-                                <td><a class="btn btn-primary btn-lg" href="{{ route('subjects.info', ['id' => $subject->id]) }}" role="button">Információk</a></td>
+                                <td><a class="btn btn-primary btn-lg" href="{{ route('subjects.info', ['id' => $subject->id]) }}"
+                                       role="button">Információk</a></td>
                             </tr>
                         @endforeach
                     </tbody>
