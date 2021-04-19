@@ -74,16 +74,16 @@ class SubjectController extends Controller
 
         switch ($user->spec) {
             case 'A':
-                $subjects = Subject::all()->where('existsOnA',true);
+                $subjects = Subject::all()->where('existsOnA',true)->toArray();
                 break;
             case 'B':
-                $subjects = Subject::all()->where('existsOnB',true);
+                $subjects = Subject::all()->where('existsOnB',true)->toArray();
                 break;
             case 'C':
-                $subjects = Subject::all()->where('existsOnC',true);
+                $subjects = Subject::all()->where('existsOnC',true)->toArray();
                 break;
             case 'NOTHING':
-                $subjects = Subject::all();
+                $subjects = Subject::all()->toArray();
                 break;
             default:
                 break;
@@ -91,7 +91,15 @@ class SubjectController extends Controller
         $user_subjects = $user->subjects()->get();
         if($user_subjects === null)
             return view('given_subjects',compact('subjects'));
-        else
+        
+        foreach($user_subjects as $subject){
+            for($i = 0; $i < count($subjects);$i++){
+                if($subject->code === $subjects[$i]["code"]){
+                    array_splice($subjects,$i,1);
+                    break;
+                }
+            }
+        }
         return view('given_subjects', compact('subjects','user_subjects'));
     }
 

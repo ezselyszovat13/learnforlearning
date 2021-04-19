@@ -102,8 +102,8 @@
                             {{ $errors->has('subject') ? 'is-invalid' : '' }}" autofocus>
                             <option value="">Válassz opciót!</option>
                             @foreach ($subjects as $subject)
-                                <option value="{{$subject->id}}" {{ (old('subject') == $subject->id ? 'selected':'') }}>
-                                    {{$subject->name}}
+                                <option value="{{$subject['id']}}" {{ (old('subject') == $subject["id"] ? 'selected':'') }}>
+                                    {{$subject["name"]}}
                                 </option>
                             @endforeach
                         </select>

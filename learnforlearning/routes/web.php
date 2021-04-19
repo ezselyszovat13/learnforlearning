@@ -50,8 +50,9 @@ Route::get('/subject/vote/', [UserController::class, 'vote'])->name('user.vote')
 Route::get('/personal/vote/', [UserController::class, 'personalVote'])->name('personal.vote')->middleware('auth');
 Route::get('/subject/comment/', [UserController::class, 'comment'])->name('user.comment')->middleware('auth');
 Route::post('/personal/{id}/update', [UserController::class, 'updateSpecialization'])->name('spec.update')->middleware('auth');
-Route::post('/findsubject/calculate', [CalculateController::class,'calculateOptional'])->name('calculate')->middleware('auth');
 Route::post('/subject/comment/update', [UserController::class, 'commentUpdate'])->name('user.comment.update')->middleware('auth');
+
+Route::post('/findsubject/calculate', [CalculateController::class,'calculateOptional'])->name('calculate')->middleware('auth');
 
 Route::get('/subject/{id}/comments', [TeacherController::class, 'comments'])->name('teacher.comments');
 
