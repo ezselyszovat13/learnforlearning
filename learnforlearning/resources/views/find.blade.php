@@ -84,8 +84,8 @@
                     <div class="container">
                         <div class="row">
                             <label for="semester" class="mr-4 mt-2">Aktuális félév: </label>
-                            <select id="semester" name="semester" class="mr-4 col-md-4 form-control 
-                                {{ $errors->has('semester') ? 'is-invalid' : '' }}" autofocus>
+                            <select id="semester" name="semester" class="mr-4 col-md-4 form-control {{ $can_calculate ? '' : 'disabled' }}
+                                {{ $errors->has('semester') ? 'is-invalid' : '' }}" style="{{ $can_calculate ? '' : 'pointer-events: none;' }}" {{$can_calculate ? 'autofocus' : ''}}>
                                 <option value="1">Ősszel induló félév</option>
                                 <option value="2">Tavasszal induló félév</option>
                             </select>
