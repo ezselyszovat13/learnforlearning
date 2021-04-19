@@ -42,8 +42,8 @@ class CalculateController extends Controller
 
         $correct_left = $correct_on_good>0 ? pow(($correct_on_good / (double)$total_good),2) : 0;
         $incorrect_left = $incorrect_on_good>0 ? pow(($incorrect_on_good / (double)$total_good),2) : 0;
-        $correct_right = $correct_on_bad ? pow(($correct_on_bad / (double)$total_bad),2) : 0;
-        $incorrect_right = $incorrect_on_bad ? pow(($incorrect_on_bad / (double)$total_bad),2) : 0;
+        $correct_right = $correct_on_bad>0 ? pow(($correct_on_bad / (double)$total_bad),2) : 0;
+        $incorrect_right = $incorrect_on_bad>0 ? pow(($incorrect_on_bad / (double)$total_bad),2) : 0;
 
         $left_gini = 1 - $correct_left - $incorrect_left;
         $right_gini = 1 - $correct_right - $incorrect_right;
