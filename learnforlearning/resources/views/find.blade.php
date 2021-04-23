@@ -32,6 +32,13 @@
                 @endif
             </div>
             <hr class="my-4">
+            @if (session()->has('calculations_deleted'))
+                @if (session()->get('calculations_deleted') == true)
+                    <div class="alert alert-danger mt-3" role="alert">
+                        A korábbi kalkulációk törlésre kerültek!
+                    </div>
+                @endif
+            @endif
             <div class="container">
                 <div class="row">
                     <h2 class="mx-auto">A számodra korábban kalkulált kurzusok</h2>
@@ -109,13 +116,6 @@
             @endif
             @if(!$can_calculate)
                 <p style="color:red" class="mt-3">Kérlek válassz szakirányt, hogy kalkulálni tudjunk a számodra!</p>
-            @endif
-            @if (session()->has('calculations_deleted'))
-                @if (session()->get('calculations_deleted') == true)
-                    <div class="alert alert-danger mt-3" role="alert">
-                        A korábbi kalkulációk törlésre kerültek!
-                    </div>
-                @endif
             @endif
         </div>
     </div>
