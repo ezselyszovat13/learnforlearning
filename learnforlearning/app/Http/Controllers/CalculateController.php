@@ -10,15 +10,19 @@ use Auth;
 
 class CalculateController extends Controller
 {
-    private function getGoodSelectorInformations(){
+    private function getGoodSelectorInformations(&$users, &$averages){
         //decides, whether a person has chosen great optionals or not
         //all user will get a true or a false value
-        $users = User::all();
         $good_selector = [];
-
         foreach ($users as $user) {
             $average = $user->getGradesAverage();
             $opt_average = $user->getOptionalGradesAverage();
+
+            $averages[$user->id] = [
+                'average' => (double)$average,
+                'opt_average' => (double)$opt_average
+            ];
+
             //if there is no optional subjects yet, the user is not included in the calculation
             if($average === null || $opt_average === null)
                 continue;
@@ -37,8 +41,6 @@ class CalculateController extends Controller
         $total_good = $correct_on_good + $incorrect_on_good;
         $total_bad = $correct_on_bad + $incorrect_on_bad;
         $total = $total_good + $total_bad;
-
-        //var_dump($correct_on_good . " " . $incorrect_on_good . " " . $correct_on_bad . " " . $incorrect_on_bad . " -----------------------");
 
         $correct_left = $correct_on_good>0 ? pow(($correct_on_good / (double)$total_good),2) : 0;
         $incorrect_left = $incorrect_on_good>0 ? pow(($incorrect_on_good / (double)$total_good),2) : 0;
@@ -92,7 +94,8 @@ class CalculateController extends Controller
     } 
 
     private function calculateMaximalError(&$optional_data, $best_choice, $sample_count, &$reached_maximum_error_limit){
-        $maximal_error = ($optional_data[$best_choice]['incorrectOnGoodSelection'] + $optional_data[$best_choice]['incorrectOnBadSelection'])*$optional_data[$best_choice]['weight'];
+        $maximal_error = ($optional_data[$best_choice]['incorrectOnGoodSelection'] + 
+                        $optional_data[$best_choice]['incorrectOnBadSelection'])*$optional_data[$best_choice]['weight'];
 
         //we need to define cases for extreme values
         if($maximal_error > 1){
@@ -110,6 +113,10 @@ class CalculateController extends Controller
     public function calculateOptional(DoCalculationFormRequest $request){
         $data = $request->all();
 
+        //we will calculate everything once, we will store the most important data in these collections:
+        $averages = [];
+        $optional_subjects_for_users = [];
+
         //we need to get the semester we are in
         $is_even_semester = null;
         if($data['semester'] == "1"){
@@ -119,14 +126,16 @@ class CalculateController extends Controller
             $is_even_semester = true;
         }
 
-        $good_selector = $this->getGoodSelectorInformations();
+        $users = User::where('spec','!=','NOTHING')->get();
+        
+        $good_selector = $this->getGoodSelectorInformations($users, $averages);
 
         //we will count for all the optional whether they were good or not when user was a good selector or not
         $logon_user = Auth::User();
-        //we need these, because these are the only subjects the user can choose
+        //we need these, because these are the only subjects the user can choose (only going through on subjects - not much)
         $available_optionals = $logon_user->getAvailableOptionalSubjects();
 
-        //we need to filter the options depends on the semester
+        //we need to filter the options depends on the semester (maximum 30 subject)
         $filtered_available = [];
         foreach($available_optionals as $available_opt){
             if($available_opt->even_semester == $is_even_semester){
@@ -138,15 +147,18 @@ class CalculateController extends Controller
         $optional_data = [];
         $available_codes = [];
         
-        $users = User::all();
-        $user_count = User::count();
+        $user_count = count($users->toArray());
 
         //create the initial samples in (user-subject-weight-correct) form
         $samples = [];
         foreach ($users as $user){
             $subjects = $user->getOptionalSubjects();
-            if($subjects === null)
+            if($subjects === null){
+                $optional_subjects_for_users[$user->id] = null;
                 continue;
+            } else{
+                $optional_subjects_for_users[$user->id] = $subjects;
+            }
 
             foreach($subjects as $subject){
                 $sample = [
@@ -188,9 +200,9 @@ class CalculateController extends Controller
             foreach ($samples as &$sample){
                 $user = $sample['user'];
                 $subject = $sample['subject'];
-                $subjects = $user->getOptionalSubjects();
-                $average = $user->getGradesAverage();
-                $opt_average = $user->getOptionalGradesAverage();
+                $subjects = $optional_subjects_for_users[$user->id];
+                $average = $averages[$user->id]['average'];
+                $opt_average = $averages[$user->id]['opt_average'];
                 $is_good_selector = $good_selector[$user->id];
 
                 //the subject was not completed by logonUser
@@ -270,7 +282,7 @@ class CalculateController extends Controller
                 $sum_of_weights += $sample['weight'];
             }
 
-            //normalization
+            //normalization (we need to do it after the other iteration, because we don't know the sum before it)
             foreach($samples as &$sample){
                 $sample['weight'] /= (double)$sum_of_weights;
             }
@@ -320,8 +332,8 @@ class CalculateController extends Controller
         //if not --> we will decrease its value
         //otherwise --> increase its value
         foreach ($users as $user){
-            $subjects = $user->getOptionalSubjects();
-            $average = $user->getGradesAverage();
+            $subjects = $optional_subjects_for_users[$user->id];
+            $average = $averages[$user->id]['average'];
             if($subjects === null)
                 continue;
             
