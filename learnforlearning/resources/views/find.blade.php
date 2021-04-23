@@ -16,7 +16,7 @@
                 @if(isset($optional_subjects))
                     @forelse ($optional_subjects as $subject)
                         <span class="badge badge-primary">
-                            <a target="__blank" style="color: white !important;font-size:14px" 
+                            <a style="color: white !important;font-size:14px" 
                                href="{{ route('subjects.info', ['id' => $subject->id]) }}">{{ $subject->name }}
                             </a>
                         </span>

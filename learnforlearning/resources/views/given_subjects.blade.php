@@ -39,46 +39,35 @@
             <h2>Eddig felvett eredmények: </h2>
             @if(isset($user_subjects))
                 @if(count($user_subjects)!=0)
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th scope="col"></th>
-                                    <th scope="col">Kurzus neve</th>
-                                    <th scope="col">Kurzus kódja</th>
-                                    <th scope="col">Páros féléves tárgy</th>
-                                    <th scope="col">Érdemjegy</th>
-                                    <th scope="col"></th>
-                                    <th scope='col'></th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                    <div class="container">
+                        <div class="row">
                             @foreach ($user_subjects as $subject)
-                                <tr>
-                                    <th scope="row">{{$loop->iteration}}</th>
-                                    <td>{{$subject->name}}</td>
-                                    <td>{{$subject->code}}</td>
-                                    @if($subject->even_semester)
-                                        <td>IGEN</td>
-                                    @else
-                                        <td>NEM</td>
-                                    @endif
-                                    <td>{{$subject->pivot->grade}}</td>
-                                    <td>
-                                        <a class="btn btn-primary btn-lg" style="font-size:0.8rem" target="_blank" 
-                                           href="{{ route('subjects.info', ['id' => $subject->id]) }}" role="button">Információk
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-primary btn-lg" style="font-size:0.8rem" target="_blank" 
-                                           href="{{ route('newsubject.edit', ['id' => $subject->id]) }}" 
-                                           role="button">Jegy szerkesztése
-                                        </a>
-                                    </td>
-                                </tr>
+                                <div class="mb-2 col-md-6">
+                                    <div class="card h-100">
+                                        <p class="card-header">
+                                            <span style="font-size: 1.3rem;font-weight:bold"> {{ $subject->name }} </span> {{ $subject->code}}
+                                        </p>
+                                        <div class="card-body">
+                                            @if($subject->even_semester)
+                                                <p class="card-subtitle mb-2 text-muted">A tárgy féléve: PÁROS</p>
+                                            @else
+                                                <p class="card-subtitle mb-2 text-muted">A tárgy féléve: PÁRATLAN</p>
+                                            @endif
+                                            <p class="card-subtitle mb-2 text-muted"> Elért érdemejgy: 
+                                                <span style="font-size: 1.3rem;font-weight:bold">{{$subject->pivot->grade}}</span>
+                                            </p>
+                                            <a class="btn btn-primary btn-lg mb-2 mb-sm-0" style="font-size:0.8rem" target="_blank" 
+                                                    href="{{ route('subjects.info', ['id' => $subject->id]) }}" role="button">Információk
+                                            </a>
+                                            <a class="btn btn-primary btn-lg" style="font-size:0.8rem" target="_blank" 
+                                                    href="{{ route('newsubject.edit', ['id' => $subject->id]) }}" 
+                                                    role="button">Jegy szerkesztése
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
                             @endforeach
-                            </tbody>
-                        </table>
+                        </div>
                     </div>
                 @else
                     <div role='alert' class="alert alert-danger">

@@ -226,7 +226,7 @@ class User extends Authenticatable
         $teacher = Teacher::where('id', $teacher_id)->get('id')->first();
         if (!$teacher) return null;
         return $this->votes()->syncWithoutDetaching([
-            $teacherId => [
+            $teacher_id => [
                 'comment' => $comment,
             ]
         ]);

@@ -2202,6 +2202,32 @@ class DatabaseSeeder extends Seeder
                                   'email' => 'admin@tanulas.hu',
                                   'spec' => 'NOTHING',
                                   'is_admin' => true]);
+
+        $full_load_test = true;
+
+        if($full_load_test){
+            $subject_count = Subject::count();
+
+            for($i=0;$i<500;$i++){
+                $user = User::factory()->create( ['name' => "Teszt ".$i,
+                                      'email' => 'test'.$i.'@tanulas.hu',
+                                      'spec' => 'A']);
+                $user_subjects = [];
+                for($j=0;$j<30;$j++){
+                    $randomId = mt_rand(1,$subject_count);
+                    $randomGrade = mt_rand(1,5);
+                    $subject = Subject::where('id',$randomId)->first();
+                    if($subject->existsOnA && !in_array($subject->code,$user_subjects)){
+                        $user->subjects()->attach($randomId,['grade' => $randomGrade, 'created_at' => Carbon::now()]);
+                        array_push($user_subjects,$subject->code);
+                    }
+                    else{
+                        $j--;
+                    }
+                }
+                
+            }
+        }
     }
 
     //kihagyottak:

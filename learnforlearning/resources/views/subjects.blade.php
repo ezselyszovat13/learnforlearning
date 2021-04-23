@@ -32,34 +32,28 @@
             @endif
             @if(isset($subjects))
                 @if(count($subjects)!=0)
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col"></th>
-                                <th scope="col">Kurzus neve</th>
-                                <th scope="col">Kurzus kódja</th>
-                                <th scope="col">Páros féléves tárgy</th>
-                                <th scope="col"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        @foreach ($subjects as $subject)
-                                    
-                            <tr>
-                                <th scope="row">{{$loop->iteration}}</th>
-                                <td>{{$subject->name}}</td>
-                                <td>{{$subject->code}}</td>
-                                @if($subject->even_semester)
-                                    <td>IGEN</td>
-                                @else
-                                    <td>NEM</td>
-                                @endif
-                                <td><a class="btn btn-primary btn-lg" href="{{ route('subjects.info', ['id' => $subject->id]) }}"
-                                       role="button">Információk</a></td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                    </table>
+                    <div class="container">
+                        <div class="row">
+                            @foreach ($subjects as $subject)
+                                <div class="mb-2 col-md-4">
+                                    <div class="card h-100">
+                                        <p class="card-header">
+                                            <span style="font-size: 1.3rem;font-weight:bold"> {{ $subject->name }} </span> {{ $subject->code}}
+                                        </p>
+                                        <div class="card-body">
+                                            @if($subject->even_semester)
+                                                <p class="card-subtitle mb-2 text-muted">A tárgy féléve: PÁROS</p>
+                                            @else
+                                                <p class="card-subtitle mb-2 text-muted">A tárgy féléve: PÁRATLAN</p>
+                                            @endif
+                                            <a class="btn btn-primary btn-lg" href="{{ route('subjects.info', ['id' => $subject->id]) }}"
+                                                role="button">Információk</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
                 @else
                     <div class="alert alert-danger mt-3" role="alert">
                         <p>Nincsenek megjeleníthető kurzusok!</p>

@@ -5,7 +5,7 @@
 @section('content')
     <div class="container">
         <div class="jumbotron">
-            <h1 class="display-4">Üdvözöllek!</h1>
+            <p class="display-4 col-xs-12">Üdvözöllek!</p>
             <p class="lead">Jelen szoftverünk célja a kötelezően választható tárgyak közül meghatározni, 
                 hogy egyénenként kinek mely tárgy lenne a legalkalmasabb a felvételre.
             </p>
