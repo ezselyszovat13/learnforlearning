@@ -372,10 +372,19 @@ class CalculateController extends Controller
 
         //return the subject
         $advisable_subject = Subject::where('code',$max_sub_code)->first();
+        $result = [];
         if($advisable_subject == null){
-            return redirect()->route('findsubject')->with('calculate_failed',true);
+            $result = [
+                'isSuccessful' => false,
+                'subject' => null,
+            ];
+            return $result;
         }
         $logon_user->addCalculation($advisable_subject->code);
-        return redirect()->route('findsubject')->with('calculated_subject',$advisable_subject);
+        $result = [
+            'isSuccessful' => true,
+            'subject' => $advisable_subject,
+        ];
+        return $result;
     }
 }
