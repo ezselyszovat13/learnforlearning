@@ -21,6 +21,7 @@ use App\Http\Controllers\TeacherController;
 */
 
 Route::get('/', [MainController::class, 'index'])->name('main');
+Route::post('/subjects/filter', [MainController::class, 'filteredSubjects'])->name('filter');
 Route::get('/fixable', [MainController::class, 'showFixables'])->name('fixable');
 Route::post('/fixable/activity', [MainController::class, 'goAgainst'])->name('fixable.activity')->middleware('auth');
 Route::post('/fixable/newTeacher', [MainController::class, 'recommendTeacher'])->name('fixable.newteacher')->middleware('auth');

@@ -30,10 +30,18 @@
                     </div>
                 @endif
             @endif
+            <div class="container">
+                <div class="row">
+                    <div class="form-group form-inline">
+                        <label for="search">Keress tárgyra: </label>
+                        <input type="text" class="form-control ml-2" id="searchInput" placeholder="Tárgynév">
+                    </div>
+                </div>
+            </div>
             @if(isset($subjects))
                 @if(count($subjects)!=0)
                     <div class="container">
-                        <div class="row">
+                        <div class="row" id="subject_container">
                             @foreach ($subjects as $subject)
                                 <div class="mb-2 col-md-4">
                                     <div class="card h-100">
@@ -66,4 +74,48 @@
             @endif
         </div>
     </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#searchInput').keyup(function () { 
+                $.ajaxSetup({
+                    beforeSend: function(xhr, type) {
+                        if (!type.crossDomain) {
+                            xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+                        }
+                    },
+               });
+               $.ajax({
+                  url: "{{ url('/subjects/filter') }}",
+                  type: 'POST',
+                  data: {
+                     text: jQuery('#searchInput').val()
+                  },
+                  success: function(result){
+                      subjectsHTML = "";
+                      result.forEach(subject => {
+                        subjectsHTML += `<div class="mb-2 col-md-4">
+                                        <div class="card h-100">
+                                            <p class="card-header">
+                                                <span style="font-size: 1.3rem;font-weight:bold" class="mr-1"> `+ subject.name + `</span>` + subject.code +
+                                            `</p>
+                                            <div class="card-body">`;
+                        
+                        if(subject.even_semester)
+                            subjectsHTML += `<p class="card-subtitle mb-2 text-muted">A tárgy féléve: PÁROS</p>`;
+                        else
+                            subjectsHTML += `<p class="card-subtitle mb-2 text-muted">A tárgy féléve: PÁRATLAN</p>`;
+                                                
+                        subjectsHTML += `<a class="btn btn-primary btn-lg" href="/subjects/`+subject.id+`"
+                                                    role="button">Információk</a></div></div></div>`;
+                      });
+                      $('#subject_container').html(subjectsHTML);
+                  },
+                  error: function (data, textStatus, errorThrown) {
+                    console.log(data);
+                  }
+                });
+            });
+        });
+    </script>
 @endsection

@@ -212,4 +212,21 @@ class MainController extends Controller
         $subject->delete();
         return redirect()->route('manage')->with('subject_deleted', true);
     }
+
+    public function filteredSubjects(Request $request){
+        $data = $request->all();
+        $filter = strtolower($data['text']);
+        $subjects = Subject::all();
+        if($filter=='')
+            return $subjects;
+        
+        $result = [];
+        foreach ($subjects as $subject) {
+            $lowered_subject_name = strtolower($subject->name);
+            if (str_contains($lowered_subject_name, $filter)) { 
+                array_push($result, $subject);
+            }
+        }
+        return $result;
+    }
 }
