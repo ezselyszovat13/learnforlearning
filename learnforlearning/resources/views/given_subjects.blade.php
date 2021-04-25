@@ -56,10 +56,10 @@
                                             <p class="card-subtitle mb-2 text-muted"> Elért érdemejgy: 
                                                 <span style="font-size: 1.3rem;font-weight:bold">{{$subject->pivot->grade}}</span>
                                             </p>
-                                            <a class="btn btn-primary btn-lg mb-2 mb-sm-0" style="font-size:0.8rem" target="_blank" 
+                                            <a class="btn btn-primary btn-lg mb-2 mb-sm-0" style="font-size:0.8rem"
                                                     href="{{ route('subjects.info', ['id' => $subject->id]) }}" role="button">Információk
                                             </a>
-                                            <a class="btn btn-primary btn-lg" style="font-size:0.8rem" target="_blank" 
+                                            <a class="btn btn-primary btn-lg" style="font-size:0.8rem"
                                                     href="{{ route('newsubject.edit', ['id' => $subject->id]) }}" 
                                                     role="button">Jegy szerkesztése
                                             </a>

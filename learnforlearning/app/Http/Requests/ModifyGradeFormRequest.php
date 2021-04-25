@@ -35,7 +35,7 @@ class ModifyGradeFormRequest extends FormRequest
     public function messages() {
         return [
             'required' => 'Meg kell adnod ezt az opciót!',
-            'between:1,5' => 'A jegynek értelmesnek kell lennie!',
+            'between' => 'A jegynek értelmesnek kell lennie! (1-5)',
             'numeric' => 'A megadott értéknek számnak kell lennie!'
         ];
     }
