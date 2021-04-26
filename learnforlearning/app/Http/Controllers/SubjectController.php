@@ -176,4 +176,13 @@ class SubjectController extends Controller
         }
         return redirect()->route('newsubject')->with('grade_deleted',true);
     }
+
+    public function getTeachers(Request $request){
+        $data = $request->all();
+        $subject_id = $data['subject_id'];
+        $subject = Subject::where('id', $subject_id)->first();
+        if($subject === null)
+            return null;
+        return $subject->teachers()->get();
+    }
 }

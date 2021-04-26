@@ -54,12 +54,7 @@
                         <label for="teacher" class="text-md-right mr-4">Oktató: </label>
                         <select id="teacher" name="teacher" class="form-control 
                             {{ $errors->has('teacher') ? 'is-invalid' : '' }} mr-4" autofocus>
-                            <option value="">Válassz opciót!</option>
-                            @foreach ($teachers as $teacher)
-                                <option value="{{$teacher->id}}" {{ (old('teacher') == $teacher->id ? 'selected':'') }}>
-                                    {{$teacher->name}}
-                                </option>
-                            @endforeach
+                            <option value="">Válassz kurzust!</option>
                         </select>
                         @if ($errors->has('teacher'))
                             <div class="invalid-feedback">
@@ -217,4 +212,37 @@
             
         </div>
     </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#subject').change(function () { 
+                $.ajaxSetup({
+                    beforeSend: function(xhr, type) {
+                        if (!type.crossDomain) {
+                            xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+                        }
+                    },
+               });
+               $.ajax({
+                  url: "{{ url('/fixable/teachers') }}",
+                  type: 'GET',
+                  data: {
+                     subject_id: jQuery('#subject option:selected').val()
+                  },
+                  success: function(result){
+                      options = "";
+                      result.forEach(teacher => {
+                        options += `<option value="`+teacher.id+`">`+teacher.name+`</option>`
+                      });
+                      if(options == "")
+                        options += '<option value="">Ehhez a tárgyhoz nem ismertek oktatók!</option>';
+                      $('#teacher').html(options);
+                  },
+                  error: function (data, textStatus, errorThrown) {
+                    console.log(data);
+                  }
+                });
+            });
+        });
+    </script>
 @endsection

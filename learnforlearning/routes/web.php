@@ -34,6 +34,7 @@ Route::get('/manage/resetAgainstActivity', [MainController::class, 'resetAgainst
 Route::get('/manage/deleteTeacher', [MainController::class, 'deleteTeacher'])->name('manage.deleteTeacher')->middleware('auth')->middleware('can:manage');
 Route::get('/manage/deleteSubject', [MainController::class, 'deleteSubject'])->name('manage.deleteSubject')->middleware('auth')->middleware('can:manage');
 
+Route::get('/fixable/teachers', [SubjectController::class, 'getTeachers'])->name('teachers');
 Route::get('/subjects', [SubjectController::class, 'showAll'])->name('subjects');
 Route::get('/subjects/{id}', [SubjectController::class,'showSubject'])->name('subjects.info');
 Route::get('/newsubject', [SubjectController::class, 'givenSubjects'])->name('newsubject')->middleware('auth');

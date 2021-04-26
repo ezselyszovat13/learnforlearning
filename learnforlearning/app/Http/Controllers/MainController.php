@@ -64,8 +64,7 @@ class MainController extends Controller
 
     public function showFixables(){
         $subjects = Subject::where('is_accepted',true)->get();
-        $teachers = Teacher::where('is_accepted',true)->get();
-        return view('fixable', compact('subjects','teachers'));
+        return view('fixable', compact('subjects'));
     }
 
     public function goAgainst(ChangeActivityFormRequest $request){
