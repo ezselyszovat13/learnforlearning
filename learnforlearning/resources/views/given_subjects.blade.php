@@ -123,9 +123,7 @@
                                 <strong>{{ $errors->first('subject') }}</strong>
                             </div>
                         @endif
-                    </div>
-                    <div class="form-group form-inline">
-                        <label for="subject" class="text-md-right mr-4">Érdemjegy: </label>
+                        <label for="subject" class="text-md-right mr-4 ml-md-4 ml-0 mt-md-0 mt-2">Érdemjegy: </label>
                         <input type="text" class="mr-4 form-control {{ $errors->has('grade') ? 'is-invalid' : '' }}" 
                                id="grade" name="grade" value="{{ old('grade') ? old('grade') : ''}}">
                         @if ($errors->has('grade'))
