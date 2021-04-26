@@ -74,7 +74,7 @@
                                 </label>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Elküld</button>
+                        <button type="submit" class="btn btn-secondary">Elküld</button>
                     </div>
                 </form>
             </div>
@@ -116,7 +116,7 @@
                         <label for="tname" class="text-md-right mr-4">Oktató neve: </label>
                         <input type="text" class="mr-4 form-control {{ $errors->has('tname') ? 'is-invalid' : '' }}" 
                                id="tname" name="tname" value="{{ old('tname') ? old('tname') : ''}}">
-                        <button type="submit" class="btn btn-primary">Elküld</button>
+                        <button type="submit" class="btn btn-secondary">Elküld</button>
                     </div>
                 </form>
             </div>
@@ -211,7 +211,7 @@
                             </div>
                         @endif
                     </div>
-                    <button type="submit" class="btn btn-primary">Elküld</button>
+                    <button type="submit" class="btn btn-secondary">Elküld</button>
                 </form>
             </div>
             

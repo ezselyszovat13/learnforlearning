@@ -5,7 +5,12 @@
 @section('content')
     <div class="container">
         <div class="jumbotron">
-            <h1 class="display-4">Beérkezett megjegyzések</h1>
+            <h1 class="display-4">Beérkezett megjegyzések
+                @if(isset($sub_page))
+                    <a class="btn btn-secondary btn-lg" href="{{ route('subjects.info', 
+                              ['id' => $subject_id, 'page' => isset($page) ? $page : null]) }}" role="button">Vissza a kurzushoz</a>
+                @endif
+            </h1>
             <hr class="my-4">
             <p style="font-size: 1.2rem;">
                 A következő oktatóról: <span style="font-size: 1.5rem;font-weight:bold">{{$teacher->name}}</span>

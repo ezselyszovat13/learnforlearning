@@ -31,10 +31,10 @@
                                                     <input type="text" class="{{ $errors->has('grade') ? 'is-invalid' : '' }}" id="grade" 
                                                     name="grade" value="{{ old('grade') ? old('grade') : $grade}}">
                                                     
-                                                    <a class="btn btn-primary btn-lg mb-2 mb-sm-0 disabled" style="font-size:0.8rem"
-                                                       href="{{ route('subjects.info', ['id' => $subject->id]) }}" role="button">Információk
+                                                    <a class="btn btn-secondary btn-lg mb-2 mb-sm-0 disabled" style="font-size:0.8rem"
+                                                       href="{{ route('subjects.info', ['id' => $subject->id, 'page' => 'grades']) }}" role="button">Információk
                                                     </a>
-                                                    <button type="submit" class="btn btn-primary">Jegy módosítása</button>
+                                                    <button type="submit" class="btn btn-secondary">Jegy módosítása</button>
                                                     @if ($errors->has('grade'))
                                                         <div class="invalid-feedback">
                                                             <strong>{{ $errors->first('grade') }}</strong>
@@ -45,10 +45,10 @@
                                                 <p class="card-subtitle mb-2 text-muted"> Elért érdemejgy: 
                                                     <span style="font-size: 1.3rem;font-weight:bold">{{$subject->pivot->grade}}</span>
                                                 </p>
-                                                <a class="btn btn-primary btn-lg mb-2 mb-sm-0 disabled" style="font-size:0.8rem"
-                                                   href="{{ route('subjects.info', ['id' => $subject->id]) }}" role="button">Információk
+                                                <a class="btn btn-secondary btn-lg mb-2 mb-sm-0 disabled" style="font-size:0.8rem"
+                                                   href="{{ route('subjects.info', ['id' => $subject->id, 'page' => 'grades']) }}" role="button">Információk
                                                 </a>
-                                                <a class="btn btn-primary btn-lg disabled" style="font-size:0.8rem" target="_blank"
+                                                <a class="btn btn-secondary btn-lg disabled" style="font-size:0.8rem" target="_blank"
                                                     href="{{ route('newsubject.edit', ['id' => $subject->id]) }}" 
                                                     role="button">Jegy szerkesztése
                                                 </a>

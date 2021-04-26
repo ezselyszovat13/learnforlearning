@@ -14,7 +14,7 @@
                 <li>Az alkalmazást használó felhasználók száma: {{ $users }}</li>
                 <li>A felhasznált adatok mennyisége: {{ $data }}</li>
             </ul>
-            <a class="btn btn-primary btn-lg" href="{{route('subjects')}}" role="button">Tárgyak listázása</a>
+            <a class="btn btn-secondary btn-lg" href="{{route('subjects')}}" role="button">Tárgyak listázása</a>
             @if(count($comments) != 0) 
                 <hr class="my-4">
                 <h2>Néhány, a felhasználók által alkotott megjegyzés</h2> 

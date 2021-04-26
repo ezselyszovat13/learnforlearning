@@ -52,9 +52,14 @@ class UserController extends Controller
 
     public function vote(Request $request){
         $params = $request->all();
+        
+        $page = null;
+        if($request->has('page'))
+            $page = $params['page'];
+
         $user = Auth::user();
         $user->vote($params['teacherId'],$params['isPositive']);
-        return redirect()->route('subjects.info', ['id' => $params['subjectId']]);
+        return redirect()->route('subjects.info', ['id' => $params['subjectId'], 'page' => $page]);
     }
 
     public function personalVote(Request $request){
@@ -68,6 +73,11 @@ class UserController extends Controller
         $params = $request->all();
         $teacher = Teacher::where('id', $params['teacherId'])->first();
         $subject = Subject::where('id', $params['subjectId'])->first();
+        
+        $page = null;
+        if($request->has('page'))
+            $page = $params['page'];
+
         if($subject === null){
             return redirect()->route('subjects')->with('subject_not_found', true);
         }
@@ -77,16 +87,21 @@ class UserController extends Controller
         $user = Auth::user();
         $connection = $user->votes()->where('teacher_id',$teacher->id)->first();
         if($connection === null){
-            return view('make_comment', compact('teacher', 'subject'));
+            return view('make_comment', compact('teacher', 'subject', 'page'));
         }
         $comment = $connection->pivot->comment;
-        return view('make_comment', compact('teacher', 'subject', 'comment'));
+        return view('make_comment', compact('teacher', 'subject', 'comment', 'page'));
     }
 
     public function commentUpdate(AddCommentFormRequest $form_request){
         $data = $form_request->all();
         $teacher = Teacher::where('id', $data['teacherId'])->first();
         $subject = Subject::where('id', $data['subjectId'])->first();
+
+        $page = null;
+        if($form_request->has('page'))
+            $page = $data['page'];
+
         if($subject === null){
             return redirect()->route('subjects')->with('subject_not_found', true);
         }
@@ -95,16 +110,19 @@ class UserController extends Controller
         }
         $user = Auth::user();
         $user->addComment($teacher->id,$data['comment']);
-        return redirect()->route('subjects.info', ['id' => $data['subjectId']])->with('comment_added',true);
+        return redirect()->route('subjects.info', ['id' => $data['subjectId'], 'page' => $page])->with('comment_added',true);
     }
 
     public function deleteComment(Request $request){
         $params = $request->all();
+        $page = null;
+        if($request->has('page'))
+            $page = $params['page'];
         $user = Auth::user();
         $result = $user->deleteComment($params['teacherId']);
         if($result === null)
-            return redirect()->route('subjects.info', ['id' => $params['subjectId']])->with('comment_deleted',false);
-        return redirect()->route('subjects.info', ['id' => $params['subjectId']])->with('comment_deleted',true);
+            return redirect()->route('subjects.info', ['id' => $params['subjectId'], 'page' => $page])->with('comment_deleted',false);
+        return redirect()->route('subjects.info', ['id' => $params['subjectId'], 'page' => $page])->with('comment_deleted',true);
     }
 
     public function personalDeleteComment(Request $request){

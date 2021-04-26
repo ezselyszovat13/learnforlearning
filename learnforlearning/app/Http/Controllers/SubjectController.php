@@ -17,10 +17,16 @@ class SubjectController extends Controller
         return view('subjects', compact('subjects'));
     }
 
-    public function showSubject($id) {
+    public function showSubject($id, Request $request) {
         $subject = Subject::where('id',$id)->where('is_accepted',true)->first();
         if($subject === null)
             return redirect()->route('subjects')->with('subject_not_found_watch', true);
+
+        $data = $request->all();
+
+        $page = null;
+        if($request->has('page'))
+            $page = $data['page'];
 
         $user = Auth::user();
         $teachers = $subject->teachers()->get();
@@ -62,9 +68,9 @@ class SubjectController extends Controller
         }
         
         if($user === null)
-            return view('subject', compact('subject','teachers', 'votes'));
+            return view('subject', compact('subject','teachers', 'votes', 'page'));
 
-        return view('subject', compact('subject','teachers','user','votes'));
+        return view('subject', compact('subject','teachers','user','votes', 'page'));
     }
 
     public function givenSubjects() {
@@ -158,4 +164,16 @@ class SubjectController extends Controller
         return redirect()->route('newsubject')->with('grade_updated', true);
     }
 
+    public function deleteGrade($id){
+        $subject_to_delete = Subject::find($id);
+        if ($subject_to_delete === null) {
+            return redirect()->route('newsubject')->with('subject_not_exists',true);
+        }
+        $user = Auth::User();
+        $result = $user->deleteGrade($subject_to_delete);
+        if ($result === null) {
+            return redirect()->route('newsubject')->with('grade_deleted',false);
+        }
+        return redirect()->route('newsubject')->with('grade_deleted',true);
+    }
 }

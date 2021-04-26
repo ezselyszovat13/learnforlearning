@@ -41,6 +41,7 @@ Route::get('/findsubject', [SubjectController::class, 'showFind'])->name('findsu
 Route::get('/newsubject/{id}/edit', [SubjectController::class, 'editGivenGrade'])->name('newsubject.edit')->middleware('auth');
 Route::post('/subjects/add', [SubjectController::class, 'addNewGrade'])->name('subject.add')->middleware('auth');
 Route::post('/newsubject/{id}/update', [SubjectController::class, 'updateGivenGrade'])->name('newsubject.update')->middleware('auth');
+Route::get('/newsubject/{id}/delete', [SubjectController::class, 'deleteGrade'])->name('newsubject.delete')->middleware('auth');
 
 Route::get('/personal', [UserController::class, 'show'])->name('personal')->middleware('auth');
 Route::get('/personal/{id}/edit', [UserController::class, 'editSpecialization'])->name('spec.edit')->middleware('auth');

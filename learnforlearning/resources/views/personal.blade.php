@@ -53,7 +53,7 @@
                     <p style="font-size: 1.5rem;font-weight:bold">Jelenleg még nincs rögzített érdemjegyed!</p>
                 @endif
             </div>
-            <a class="btn btn-primary btn-lg" href="{{ route('spec.edit', ['id' => $user->id]) }}" 
+            <a class="btn btn-secondary btn-lg" href="{{ route('spec.edit', ['id' => $user->id]) }}" 
                role="button">Szakirány módosítása
             </a>
     
@@ -85,7 +85,7 @@
                                   {{(!$data['is_positive_vote'] && $data['is_positive_vote'] !== null) ? 'bg-danger' : ''}}">
                             Véleményezett oktató: 
                             <span style="font-size: 1.3rem;font-weight:bold"> {{ $data['teacher_name'] }} </span>
-                            <a class="btn btn-primary ml-3" style="font-size:0.6rem"
+                            <a class="btn btn-secondary ml-3" style="font-size:0.6rem"
                                 href="{{ route('personal.delete.comment', ['teacherId' => $key]) }}" 
                                 role="button"> Megjegyzés törlése
                             </a>

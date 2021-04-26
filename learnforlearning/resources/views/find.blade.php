@@ -29,9 +29,9 @@
             <div>
                 @if(isset($optional_subjects))
                     @forelse ($optional_subjects as $subject)
-                        <span class="badge badge-primary">
+                        <span class="badge badge-secondary">
                             <a style="color: white !important;font-size:14px" 
-                               href="{{ route('subjects.info', ['id' => $subject->id]) }}">{{ $subject->name }}
+                               href="{{ route('subjects.info', ['id' => $subject->id, 'page' => 'calculation']) }}">{{ $subject->name }}
                             </a>
                         </span>
                     @empty
@@ -74,7 +74,7 @@
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{ $sub_data[$element->subject_code]['name'] }}</td>
                                     <td>
-                                        <a class="btn btn-primary btn-lg" style="font-size:0.8rem" target="_blank" 
+                                        <a class="btn btn-secondary btn-lg" style="font-size:0.8rem" target="_blank" 
                                         href="{{ $sub_data[$element->subject_code]['url'] }}" role="button">Információk
                                         </a>
                                     </td>
@@ -85,7 +85,7 @@
                 </table>
                 <div class="container" id="calc_delete_div" style="{{count($calculation_history)===0 ? 'display:none' : ''}}">
                     <div class="row">
-                        <a class="btn btn-primary btn-lg ml-auto" href="{{route('findsubject.delete')}}" 
+                        <a class="btn btn-secondary btn-lg ml-auto" href="{{route('findsubject.delete')}}" 
                            role="button">Korábbi kalkulációk törlése
                         </a>
                     </div>
@@ -108,7 +108,7 @@
                         <option value="1">Ősszel induló félév</option>
                         <option value="2">Tavasszal induló félév</option>
                     </select>
-                    <button id="calc_button" type="submit" class="btn btn-primary {{ $can_calculate ? '' : 'disabled' }} mr-auto" 
+                    <button id="calc_button" type="submit" class="btn btn-secondary {{ $can_calculate ? '' : 'disabled' }} mr-auto" 
                             style="{{ $can_calculate ? '' : 'pointer-events: none;' }}">Kalkulál
                     </button>
                 </div>
@@ -185,7 +185,7 @@
                                 <td>NEW</td>
                                 <td>`+result_name+`</td>
                                 <td>
-                                    <a class="btn btn-primary btn-lg" style="font-size:0.8rem" target="_blank" 
+                                    <a class="btn btn-secondary btn-lg" style="font-size:0.8rem" target="_blank" 
                                         href="`+result_url+`" role="button">Információk
                                     </a>
                                 </td>

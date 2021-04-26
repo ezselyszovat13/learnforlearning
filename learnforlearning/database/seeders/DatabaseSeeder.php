@@ -2203,7 +2203,7 @@ class DatabaseSeeder extends Seeder
                                   'spec' => 'NOTHING',
                                   'is_admin' => true]);
 
-        $full_load_test = true;
+        $full_load_test = false;
 
         if($full_load_test){
             $subject_count = Subject::count();

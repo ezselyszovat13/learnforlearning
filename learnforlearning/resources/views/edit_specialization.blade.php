@@ -20,7 +20,7 @@
                         <option value="NOTHING" {{$old_spec == 'NOTHING' ? 'selected':''}}>Még nem választottam</option>
                     </select>
                     </div>
-                    <td><button type="submit" class="btn btn-primary">Specializáció módosítása</button></td>
+                    <td><button type="submit" class="btn btn-secondary">Specializáció módosítása</button></td>
                 </form>
             @else
                 <div role='alert' class="alert alert-danger">

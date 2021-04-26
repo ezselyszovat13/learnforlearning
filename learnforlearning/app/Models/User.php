@@ -118,6 +118,11 @@ class User extends Authenticatable
         return (int) $subject->pivot->grade;
     }
 
+    public function deleteGrade($subject) {
+        if($this->getGrade($subject->code) === null) return null;
+        return $this->subjects()->detach($subject);
+    }
+
     public function addCalculation($subject_code){
        $this->calculations()->create(['subject_code' => $subject_code]);
     }

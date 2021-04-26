@@ -33,6 +33,26 @@
                 @endif
             @endif
 
+            @if (session()->has('grade_updated'))
+                @if (session()->get('grade_updated') == true)
+                    <div class="alert alert-success mb-3" role="alert">
+                        Az érdemjegy módosítása sikeresen megtörtént!
+                    </div>
+                @endif
+            @endif
+
+            @if (session()->has('grade_deleted'))
+                @if (session()->get('grade_deleted') == true)
+                    <div class="alert alert-success mb-3" role="alert">
+                        Az érdemjegy törlése sikeresen megtörtént!
+                    </div>
+                @else
+                    <div class="alert alert-danger mb-3" role="alert">
+                        A felhasználónak nem volt jegye a tárgyból, melyet törölni szerettünk volna.
+                    </div>
+                @endif
+            @endif
+
             <h1 class="display-4">Új érdemjegyek felvétele</h1>
             <p class="lead">Itt tölthetsz fel új érdemjegyeket a hatékonyabb adatmeghatározáshoz!</p>
             <hr class="my-4">
@@ -46,6 +66,8 @@
                                     <div class="card h-100">
                                         <p class="card-header">
                                             <span style="font-size: 1.3rem;font-weight:bold"> {{ $subject->name }} </span> {{ $subject->code}}
+                                            <a data-toggle="tooltip" title="Bevitt érdemjegy törlése" 
+                                               href="{{route('newsubject.delete', ['id' => $subject->id])}}">❌</a>
                                         </p>
                                         <div class="card-body">
                                             @if($subject->even_semester)
@@ -56,10 +78,10 @@
                                             <p class="card-subtitle mb-2 text-muted"> Elért érdemejgy: 
                                                 <span style="font-size: 1.3rem;font-weight:bold">{{$subject->pivot->grade}}</span>
                                             </p>
-                                            <a class="btn btn-primary btn-lg mb-2 mb-sm-0" style="font-size:0.8rem"
-                                                    href="{{ route('subjects.info', ['id' => $subject->id]) }}" role="button">Információk
+                                            <a class="btn btn-secondary btn-lg mb-2 mb-sm-0" style="font-size:0.8rem"
+                                                    href="{{ route('subjects.info', ['id' => $subject->id, 'page' => 'grades']) }}" role="button">Információk
                                             </a>
-                                            <a class="btn btn-primary btn-lg" style="font-size:0.8rem"
+                                            <a class="btn btn-secondary btn-lg" style="font-size:0.8rem"
                                                     href="{{ route('newsubject.edit', ['id' => $subject->id]) }}" 
                                                     role="button">Jegy szerkesztése
                                             </a>
@@ -113,7 +135,7 @@
                         @endif
 
                         <div class="my-3">
-                        <button type="submit" class="btn btn-primary">Adatbevitel</button>
+                        <button type="submit" class="btn btn-secondary">Adatbevitel</button>
                         </div>
                     </div>
                 </form>

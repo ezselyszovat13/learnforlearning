@@ -54,7 +54,7 @@
                                             @else
                                                 <p class="card-subtitle mb-2 text-muted">A tárgy féléve: PÁRATLAN</p>
                                             @endif
-                                            <a class="btn btn-primary btn-lg" href="{{ route('subjects.info', ['id' => $subject->id]) }}"
+                                            <a class="btn btn-secondary btn-lg" href="{{ route('subjects.info', ['id' => $subject->id, 'page' => 'subjects']) }}"
                                                 role="button">Információk</a>
                                         </div>
                                     </div>
@@ -106,7 +106,7 @@
                         else
                             subjectsHTML += `<p class="card-subtitle mb-2 text-muted">A tárgy féléve: PÁRATLAN</p>`;
                                                 
-                        subjectsHTML += `<a class="btn btn-primary btn-lg" href="/subjects/`+subject.id+`"
+                        subjectsHTML += `<a class="btn btn-secondary btn-lg" href="/subjects/`+subject.id+`?page=subjects"
                                                     role="button">Információk</a></div></div></div>`;
                       });
                       $('#subject_container').html(subjectsHTML);
