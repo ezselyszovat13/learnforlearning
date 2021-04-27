@@ -5,14 +5,16 @@
 @section('content')
     <div class="container">
         <div class="jumbotron">
-            <h1 class="display-4">Üdvözöllek!</h1>
-            <p class="lead">Jelen szoftverünk célja a kötelezően választható tárgyak közül meghatározni, hogy egyénenként kinek mely tárgy lenne a legalkalmasabb a felvételre.</p>
+            <p class="display-4 col-xs-12">Üdvözöllek!</p>
+            <p class="lead">Jelen szoftverünk célja a kötelezően választható tárgyak közül meghatározni, 
+                hogy egyénenként kinek mely tárgy lenne a legalkalmasabb a felvételre.
+            </p>
             <hr class="my-4">
             <ul>
                 <li>Az alkalmazást használó felhasználók száma: {{ $users }}</li>
                 <li>A felhasznált adatok mennyisége: {{ $data }}</li>
             </ul>
-            <a class="btn btn-primary btn-lg" href="{{route('subjects')}}" role="button">Tárgyak listázása</a>
+            <a class="btn btn-secondary btn-lg" href="{{route('subjects')}}" role="button">Tárgyak listázása</a>
             @if(count($comments) != 0) 
                 <hr class="my-4">
                 <h2>Néhány, a felhasználók által alkotott megjegyzés</h2> 
@@ -32,7 +34,8 @@
             @endforeach
             <hr class="my-4">
             <p>
-                A felhasználók szerinti jelenlegi legjobb oktató: <span style="font-size: 1.3rem;font-weight:bold"> {{ $bestTeacher }} </span> 
+                A felhasználók szerinti jelenlegi legjobb oktató:
+                <span style="font-size: 1.3rem;font-weight:bold"> {{ $best_teacher }} </span> 
             </p>
         </div>
     </div>

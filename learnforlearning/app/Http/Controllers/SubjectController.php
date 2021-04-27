@@ -17,10 +17,16 @@ class SubjectController extends Controller
         return view('subjects', compact('subjects'));
     }
 
-    public function showSubject($id) {
+    public function showSubject($id, Request $request) {
         $subject = Subject::where('id',$id)->where('is_accepted',true)->first();
         if($subject === null)
             return redirect()->route('subjects')->with('subject_not_found_watch', true);
+
+        $data = $request->all();
+
+        $page = null;
+        if($request->has('page'))
+            $page = $data['page'];
 
         $user = Auth::user();
         $teachers = $subject->teachers()->get();
@@ -30,41 +36,41 @@ class SubjectController extends Controller
                 continue;
 
             $points = 0;
-            $teacherVotes = $teacher->voters()->get();
-            $hasPositiveVote = false;
-            $hasNegativeVote = false;
-            foreach($teacherVotes as $tVote){
-                if($tVote->pivot->is_positive_vote === null){
+            $teacher_votes = $teacher->voters()->get();
+            $has_positive_vote = false;
+            $has_negative_vote = false;
+            foreach($teacher_votes as $t_vote){
+                if($t_vote->pivot->is_positive_vote === null){
                     continue;
                 }
-                else if($tVote->pivot->is_positive_vote){
+                else if($t_vote->pivot->is_positive_vote){
                     $points += 1;
                     if($user !== null){
-                        if($tVote->pivot->user_id == $user->id){
-                            $hasPositiveVote = true;
+                        if($t_vote->pivot->user_id == $user->id){
+                            $has_positive_vote = true;
                         }
                     }
                 }
                 else{
                     $points -= 1;
                     if($user !== null){
-                        if($tVote->pivot->user_id == $user->id){
-                            $hasNegativeVote = true;
+                        if($t_vote->pivot->user_id == $user->id){
+                            $has_negative_vote = true;
                         }
                     }
                 }
             }
             $votes[$teacher->id] = [
                 'points' => $points,
-                'hasPosVote' => $hasPositiveVote,
-                'hasNegVote' => $hasNegativeVote
+                'hasPosVote' => $has_positive_vote,
+                'hasNegVote' => $has_negative_vote
             ];
         }
         
         if($user === null)
-            return view('subject', compact('subject','teachers', 'votes'));
+            return view('subject', compact('subject','teachers', 'votes', 'page'));
 
-        return view('subject', compact('subject','teachers','user','votes'));
+        return view('subject', compact('subject','teachers','user','votes', 'page'));
     }
 
     public function givenSubjects() {
@@ -74,40 +80,48 @@ class SubjectController extends Controller
 
         switch ($user->spec) {
             case 'A':
-                $subjects = Subject::all()->where('existsOnA',true);
+                $subjects = Subject::all()->where('existsOnA',true)->toArray();
                 break;
             case 'B':
-                $subjects = Subject::all()->where('existsOnB',true);
+                $subjects = Subject::all()->where('existsOnB',true)->toArray();
                 break;
             case 'C':
-                $subjects = Subject::all()->where('existsOnC',true);
+                $subjects = Subject::all()->where('existsOnC',true)->toArray();
                 break;
             case 'NOTHING':
-                $subjects = Subject::all();
+                $subjects = Subject::all()->toArray();
                 break;
             default:
                 break;
         }
-        $userSubjects = $user->subjects()->get();
-        if($userSubjects === null)
-            return view('givenSubjects',compact('subjects'));
-        else
-        return view('givenSubjects', compact('subjects','userSubjects'));
+        $user_subjects = $user->subjects()->get();
+        if($user_subjects === null)
+            return view('given_subjects',compact('subjects'));
+        
+        foreach($user_subjects as $subject){
+            for($i = 0; $i < count($subjects);$i++){
+                if($subject->code === $subjects[$i]["code"]){
+                    array_splice($subjects,$i,1);
+                    break;
+                }
+            }
+        }
+        return view('given_subjects', compact('subjects','user_subjects'));
     }
 
     public function showFind() {
         $user = Auth::User();
-        $canCalculate = $user->hasSpecialization();
-        $optionalSubjects = $user->getAvailableOptionalSubjects();
-        $calculationHistory = $user->calculations()->get();
+        $can_calculate = $user->hasSpecialization();
+        $optional_subjects = $user->getAvailableOptionalSubjects();
+        $calculation_history = $user->calculations()->get();
         $subjects = Subject::where('is_accepted',true)->get();
-        $subData = [];
+        $sub_data = [];
         foreach($subjects as $subject){
-            $subData[$subject->code] = [
+            $sub_data[$subject->code] = [
                 'url' => $subject->url,
                 'name' => $subject->name];
         }
-        return view('find',compact('canCalculate','optionalSubjects', 'calculationHistory', 'subData'));
+        return view('find',compact('can_calculate','optional_subjects', 'calculation_history', 'sub_data'));
     }
 
     public function addNewGrade(AddGradeFormRequest $request){
@@ -115,8 +129,8 @@ class SubjectController extends Controller
         $subject = Subject::where('id',$data['subject'])->first();
         $user = Auth::User();
 
-        $lastGrade = $user->getGrade($subject->code);
-        if($lastGrade === null){
+        $last_grade = $user->getGrade($subject->code);
+        if($last_grade === null){
             $user->setGrade($subject->code, (int)$data['grade']);
             return redirect()->route('newsubject')->with('grade_added', true);
         }
@@ -126,28 +140,49 @@ class SubjectController extends Controller
     }
 
     public function editGivenGrade($id){
-        $subjectToUpdate = Subject::find($id);
-        if ($subjectToUpdate === null) {
+        $subject_to_update = Subject::find($id);
+        if ($subject_to_update === null) {
             return redirect()->route('newsubject')->with('subject_not_exists',true);
         }
         $user = Auth::User();
-        $grade = $user->getGrade($subjectToUpdate->code);
-        $userSubjects = $user->subjects()->get();
-        if($userSubjects === null)
-            return view('givenSubjects',compact('subjects'));
+        $grade = $user->getGrade($subject_to_update->code);
+        $user_subjects = $user->subjects()->get();
+        if($user_subjects === null)
+            return view('given_subjects',compact('subjects'));
 
-        return view('edit-given-subject', compact('userSubjects','subjectToUpdate', 'grade'));
+        return view('edit_given_subject', compact('user_subjects','subject_to_update', 'grade'));
     }
 
     public function updateGivenGrade(ModifyGradeFormRequest $request, $id){
         $data = $request->all();
-        $subjectToUpdate = Subject::find($id);
-        if ($subjectToUpdate === null) {
+        $subject_to_update = Subject::find($id);
+        if ($subject_to_update === null) {
             return redirect()->route('newsubject')->with('subject_not_exists',true);
         }
         $user = Auth::User();
-        $user->setGrade($subjectToUpdate->code,$data['grade']);
+        $user->setGrade($subject_to_update->code,$data['grade']);
         return redirect()->route('newsubject')->with('grade_updated', true);
     }
 
+    public function deleteGrade($id){
+        $subject_to_delete = Subject::find($id);
+        if ($subject_to_delete === null) {
+            return redirect()->route('newsubject')->with('subject_not_exists',true);
+        }
+        $user = Auth::User();
+        $result = $user->deleteGrade($subject_to_delete);
+        if ($result === null) {
+            return redirect()->route('newsubject')->with('grade_deleted',false);
+        }
+        return redirect()->route('newsubject')->with('grade_deleted',true);
+    }
+
+    public function getTeachers(Request $request){
+        $data = $request->all();
+        $subject_id = $data['subject_id'];
+        $subject = Subject::where('id', $subject_id)->first();
+        if($subject === null)
+            return null;
+        return $subject->teachers()->get();
+    }
 }

@@ -12,18 +12,19 @@
                     @csrf
                     <div class="form-group">
                     <label for="spec" class="text-md-right mr-4">Specializáció </label>
-                    <select id="spec" name="spec" class="mr-4 col-md-4 form-control {{ $errors->has('spec') ? 'is-invalid' : '' }}" autofocus>
-                        <option value="A" {{$oldSpec == 'A' ? 'selected':''}}>A szakirány</option>
-                        <option value="B" {{$oldSpec == 'B' ? 'selected':''}}>B szakirány</option>
-                        <option value="C" {{$oldSpec == 'C' ? 'selected':''}}>C szakirány</option>
-                        <option value="NOTHING" {{$oldSpec == 'NOTHING' ? 'selected':''}}>Még nem választottam</option>
+                    <select id="spec" name="spec" class="mr-4 col-sm-4 form-control 
+                        {{ $errors->has('spec') ? 'is-invalid' : '' }}" autofocus>
+                        <option value="A" {{$old_spec == 'A' ? 'selected':''}}>A szakirány</option>
+                        <option value="B" {{$old_spec == 'B' ? 'selected':''}}>B szakirány</option>
+                        <option value="C" {{$old_spec == 'C' ? 'selected':''}}>C szakirány</option>
+                        <option value="NOTHING" {{$old_spec == 'NOTHING' ? 'selected':''}}>Még nem választottam</option>
                     </select>
                     </div>
-                    <td><button type="submit" class="btn btn-primary">Specializáció módosítása</button></td>
+                    <td><button type="submit" class="btn btn-secondary">Specializáció módosítása</button></td>
                 </form>
             @else
                 <div role='alert' class="alert alert-danger">
-                    <p>Nem létező felhasználó</p>
+                    <p>Nem létező felhasználó!</p>
                 </div>
             @endif
         </div>

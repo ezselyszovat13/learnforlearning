@@ -38,11 +38,11 @@ class User extends Authenticatable
         return $this->hasMany(Calculation::class);
     }
 
-    public function vote($teacherId, $isPositive){
-        $teacher = Teacher::where('id', $teacherId)->get('id')->first();
+    public function vote($teacher_id, $is_positive){
+        $teacher = Teacher::where('id', $teacher_id)->get('id')->first();
         if (!$teacher) return null;
-        $vote = $this->votes()->where('teacher_id', $teacherId)->first();
-        if($vote !== null && $vote->pivot->is_positive_vote === $isPositive){
+        $vote = $this->votes()->where('teacher_id', $teacher_id)->first();
+        if($vote !== null && $vote->pivot->is_positive_vote === $is_positive){
             if($vote->pivot->comment !== null){
                 return $this->votes()->syncWithoutDetaching([
                     $teacher->id => [
@@ -57,7 +57,7 @@ class User extends Authenticatable
         else{
             return $this->votes()->syncWithoutDetaching([
                 $teacher->id => [
-                    'is_positive_vote' => $isPositive,
+                    'is_positive_vote' => $is_positive,
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now()
                 ]
@@ -65,10 +65,10 @@ class User extends Authenticatable
         }
     }
 
-    public function deleteComment($teacherId){
-        $teacher = Teacher::where('id', $teacherId)->get('id')->first();
+    public function deleteComment($teacher_id){
+        $teacher = Teacher::where('id', $teacher_id)->get('id')->first();
         if (!$teacher) return null;
-        $vote = $this->votes()->where('teacher_id', $teacherId)->first();
+        $vote = $this->votes()->where('teacher_id', $teacher_id)->first();
         if($vote !== null && $vote->pivot->is_positive_vote !== null){
             return $this->votes()->syncWithoutDetaching([
                 $teacher->id => [
@@ -118,6 +118,11 @@ class User extends Authenticatable
         return (int) $subject->pivot->grade;
     }
 
+    public function deleteGrade($subject) {
+        if($this->getGrade($subject->code) === null) return null;
+        return $this->subjects()->detach($subject);
+    }
+
     public function addCalculation($subject_code){
        $this->calculations()->create(['subject_code' => $subject_code]);
     }
@@ -148,28 +153,28 @@ class User extends Authenticatable
             $spec = $this['spec'];
 
         $subjects = Subject::all();
-        $userSubjects = $this->subjects()->pluck('code')->toArray();
-        $optSubjects = [];
+        $user_subjects = $this->subjects()->pluck('code')->toArray();
+        $opt_subjects = [];
         foreach ($subjects as $subject) {
-            if(!in_array($subject->code,$userSubjects)){
+            if(!in_array($subject->code,$user_subjects)){
                 if($spec == 'A'){
                     if($subject['existsOnA'] && $subject['optionalOnA']){
-                        array_push($optSubjects,$subject);
+                        array_push($opt_subjects,$subject);
                     }
                 }
                 else if($spec == 'B'){
                     if($subject['existsOnB'] && $subject['optionalOnB']){
-                        array_push($optSubjects,$subject);
+                        array_push($opt_subjects,$subject);
                     }
                 }
                 else if($spec == 'C'){
                     if($subject['existsOnC'] && $subject['optionalOnC']){
-                        array_push($optSubjects,$subject);
+                        array_push($opt_subjects,$subject);
                     }
                 }
             }
         }
-        return $optSubjects;
+        return $opt_subjects;
     }
 
     public function getOptionalSubjects(){
@@ -180,25 +185,25 @@ class User extends Authenticatable
             $spec = $this['spec'];
 
         $subjects = $this->subjects()->get();
-        $optSubjects = [];
+        $opt_subjects = [];
         foreach ($subjects as $subject) {
             if($spec == 'A'){
                 if($subject['existsOnA'] && $subject['optionalOnA']){
-                    array_push($optSubjects,$subject);
+                    array_push($opt_subjects,$subject);
                 }
             }
             else if($spec == 'B'){
                 if($subject['existsOnB'] && $subject['optionalOnB']){
-                    array_push($optSubjects,$subject);
+                    array_push($opt_subjects,$subject);
                 }
             }
             else if($spec == 'C'){
                 if($subject['existsOnC'] && $subject['optionalOnC']){
-                    array_push($optSubjects,$subject);
+                    array_push($opt_subjects,$subject);
                 }
             }
         }
-        return $optSubjects;
+        return $opt_subjects;
     }
 
     public function getOptionalGradesCount(){
@@ -209,8 +214,8 @@ class User extends Authenticatable
     }
 
     public function getOptionalGradesAverage(){
-        $optCount = $this->getOptionalGradesCount();
-        if($optCount==0)
+        $opt_count = $this->getOptionalGradesCount();
+        if($opt_count==0)
             return null;
         
         $subjects = $this->getOptionalSubjects();
@@ -219,14 +224,14 @@ class User extends Authenticatable
         foreach ($subjects as $subject) {
             $sum = $sum + $subject->pivot->grade;
         }
-        return $sum/$optCount;
+        return $sum/$opt_count;
     }
 
-    public function addComment($teacherId, $comment){
-        $teacher = Teacher::where('id', $teacherId)->get('id')->first();
+    public function addComment($teacher_id, $comment){
+        $teacher = Teacher::where('id', $teacher_id)->get('id')->first();
         if (!$teacher) return null;
         return $this->votes()->syncWithoutDetaching([
-            $teacherId => [
+            $teacher_id => [
                 'comment' => $comment,
             ]
         ]);

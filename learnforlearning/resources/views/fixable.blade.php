@@ -25,20 +25,23 @@
                 @endif
                 <h2>Egy, már meglévő oktató aktivitásának változása</h2>
                 <p>
-                    Ebben a funkcióban jelezheted azt, hogy egy, az alkalmazásban szereplő oktató aktivitási státusza megváltozott, mely azonban 
-                    az alkalmazásban nem tükröződik még.
-                    Fontos! Attól, hogy Te ezt jelzed felénk, addig nem lehetünk teljesen biztosak a dologban, míg más valaki nem jelentkezik ugyanezzel
-                    a problémával, így a javítás idejéért elnézésedet kérjük!
+                    Ebben a funkcióban jelezheted azt, hogy egy, az alkalmazásban szereplő oktató aktivitási státusza megváltozott,
+                     mely azonban az alkalmazásban nem tükröződik még.
+                    Fontos! Attól, hogy Te ezt jelzed felénk, addig nem lehetünk teljesen biztosak a dologban, míg más valaki 
+                    nem jelentkezik ugyanezzel a problémával, így a javítás idejéért elnézésedet kérjük!
                 </p>
 
                 <form action="{{route('fixable.activity')}}" method="POST">
                     @csrf
                     <div class="form-group form-inline">
                         <label for="subject" class="text-md-right mr-4">Kurzus: </label>
-                        <select id="subject" name="subject" class="form-control {{ $errors->has('subject') ? 'is-invalid' : '' }}" autofocus>
+                        <select id="subject" name="subject" class="form-control 
+                            {{ $errors->has('subject') ? 'is-invalid' : '' }}" autofocus>
                             <option value="">Válassz opciót!</option>
                             @foreach ($subjects as $subject)
-                                <option value="{{$subject->id}}" {{ (old('subject') == $subject->id ? 'selected':'') }}>{{$subject->name}}</option>
+                                <option value="{{$subject->id}}" {{ (old('subject') == $subject->id ? 'selected':'') }}>
+                                    {{$subject->name}}
+                                </option>
                             @endforeach
                         </select>
                         @if ($errors->has('subject'))
@@ -49,11 +52,9 @@
                     </div>
                     <div class="form-group form-inline">
                         <label for="teacher" class="text-md-right mr-4">Oktató: </label>
-                        <select id="teacher" name="teacher" class="form-control {{ $errors->has('teacher') ? 'is-invalid' : '' }} mr-4" autofocus>
-                            <option value="">Válassz opciót!</option>
-                            @foreach ($teachers as $teacher)
-                                <option value="{{$teacher->id}}" {{ (old('teacher') == $teacher->id ? 'selected':'') }}>{{$teacher->name}}</option>
-                            @endforeach
+                        <select id="teacher" name="teacher" class="form-control 
+                            {{ $errors->has('teacher') ? 'is-invalid' : '' }} mr-4" autofocus>
+                            <option value="">Válassz kurzust!</option>
                         </select>
                         @if ($errors->has('teacher'))
                             <div class="invalid-feedback">
@@ -68,7 +69,7 @@
                                 </label>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Elküld</button>
+                        <button type="submit" class="btn btn-secondary">Elküld</button>
                     </div>
                 </form>
             </div>
@@ -83,18 +84,21 @@
             <div>
                 <h2>Új oktató ajánlása</h2>
                 <p>
-                    Ebben a funkcióban jelezheted azt, hogy az adott tárgynál egy oktató oktat, ugyanakkor ezen tanár nem szerepel adatbázisunkban.
-                    Fontos! Attól, hogy Te ezt jelzed felénk, addig nem lehetünk teljesen biztosak a dologban, míg más valaki nem jelentkezik ugyanezzel
-                    a problémával, így a javítás idejéért elnézésedet kérjük!
+                    Ebben a funkcióban jelezheted azt, hogy az adott tárgynál egy oktató oktat, ugyanakkor ezen tanár nem 
+                    szerepel adatbázisunkban. Fontos! Attól, hogy Te ezt jelzed felénk, addig nem lehetünk teljesen biztosak a 
+                    dologban, míg más valaki nem jelentkezik ugyanezzel a problémával, így a javítás idejéért elnézésedet kérjük!
                 </p>
                 <form action="{{route('fixable.newteacher')}}" method="POST">
                     @csrf
                     <div class="form-group form-inline">
                         <label for="subject2" class="text-md-right mr-4">Kurzus: </label>
-                        <select id="subject2" name="subject2" class="form-control {{ $errors->has('subject2') ? 'is-invalid' : '' }}" autofocus>
+                        <select id="subject2" name="subject2" class="form-control 
+                            {{ $errors->has('subject2') ? 'is-invalid' : '' }}" autofocus>
                             <option value="">Válassz opciót!</option>
                             @foreach ($subjects as $subject)
-                                <option value="{{$subject->id}}" {{ (old('subject2') == $subject->id ? 'selected':'') }}>{{$subject->name}}</option>
+                                <option value="{{$subject->id}}" {{ (old('subject2') == $subject->id ? 'selected':'') }}>
+                                    {{$subject->name}}
+                                </option>
                             @endforeach
                         </select>
                         @if ($errors->has('subject2'))
@@ -105,8 +109,9 @@
                     </div>
                     <div class="form-group form-inline">
                         <label for="tname" class="text-md-right mr-4">Oktató neve: </label>
-                        <input type="text" class="mr-4 form-control {{ $errors->has('tname') ? 'is-invalid' : '' }}" id="tname" name="tname" value="{{ old('tname') ? old('tname') : ''}}">
-                        <button type="submit" class="btn btn-primary">Elküld</button>
+                        <input type="text" class="mr-4 form-control {{ $errors->has('tname') ? 'is-invalid' : '' }}" 
+                               id="tname" name="tname" value="{{ old('tname') ? old('tname') : ''}}">
+                        <button type="submit" class="btn btn-secondary">Elküld</button>
                     </div>
                 </form>
             </div>
@@ -121,16 +126,18 @@
                 @endif
                 <h2>Új kurzus ajánlása</h2>
                 <p>
-                    Ebben a funkcióban jelezheted azt, hogy te észrevettél egy új tárgyat, mely a specializációhoz kapcsolható, ugyanakkor ezen kurzus nem szerepel adatbázisunkban.
-                    Fontos! Attól, hogy Te ezt jelzed felénk, addig nem lehetünk teljesen biztosak a dologban, míg más valaki nem jelentkezik ugyanezzel
-                    a problémával, így a javítás idejéért elnézésedet kérjük!
+                    Ebben a funkcióban jelezheted azt, hogy te észrevettél egy új tárgyat, mely a specializációhoz kapcsolható, 
+                    ugyanakkor ezen kurzus nem szerepel adatbázisunkban. Fontos! Attól, hogy Te ezt jelzed felénk, addig nem 
+                    lehetünk teljesen biztosak a dologban, míg más valaki nem jelentkezik ugyanezzel a problémával, így a javítás
+                    idejéért elnézésedet kérjük!
                 </p>
 
                 <form action="{{route('fixable.newsubject')}}" method="POST">
                     @csrf
                     <div class="form-group form-inline">
                         <label for="sname" class="text-md-right mr-4">Kurzus neve: </label>
-                        <input type="text" class="mr-4 form-control col-md-6 {{ $errors->has('sname') ? 'is-invalid' : '' }}" id="sname" name="sname" value="{{ old('sname') ? old('sname') : ''}}">
+                        <input type="text" class="mr-4 form-control col-md-6 {{ $errors->has('sname') ? 'is-invalid' : '' }}" 
+                               id="sname" name="sname" value="{{ old('sname') ? old('sname') : ''}}">
                         @if ($errors->has('sname'))
                             <div class="invalid-feedback">
                                 <strong>{{ $errors->first('sname') }}</strong>
@@ -139,7 +146,8 @@
                     </div>
                     <div class="form-group form-inline">
                         <label for="code" class="text-md-right mr-4">Kurzus kódja: </label>
-                        <input type="text" class="mr-4 form-control col-md-6 {{ $errors->has('code') ? 'is-invalid' : '' }}" id="code" name="code" value="{{ old('code') ? old('code') : ''}}">
+                        <input type="text" class="mr-4 form-control col-md-6 {{ $errors->has('code') ? 'is-invalid' : '' }}"
+                               id="code" name="code" value="{{ old('code') ? old('code') : ''}}">
                         @if ($errors->has('code'))
                             <div class="invalid-feedback">
                                 <strong>{{ $errors->first('code') }}</strong>
@@ -176,7 +184,8 @@
                     </div>
                     <div class="form-group form-inline">
                         <label for="credit" class="text-md-right mr-4">Kreditérték: </label>
-                        <input type="text" class="mr-4 form-control col-md-4 {{ $errors->has('credit') ? 'is-invalid' : '' }}" id="credit" name="credit" value="{{ old('credit') ? old('credit') : ''}}">
+                        <input type="text" class="mr-4 form-control col-md-4 {{ $errors->has('credit') ? 'is-invalid' : '' }}"
+                               id="credit" name="credit" value="{{ old('credit') ? old('credit') : ''}}">
                         @if ($errors->has('credit'))
                             <div class="invalid-feedback">
                                 <strong>{{ $errors->first('credit') }}</strong>
@@ -189,17 +198,51 @@
                     </div>
                     <div class="form-group form-inline">
                         <label for="url" class="text-md-right mr-4">URL (további információk): </label>
-                        <input type="text" class="mr-4 form-control col-md-6 {{ $errors->has('url') ? 'is-invalid' : '' }}" id="url" name="url" value="{{ old('url') ? old('url') : ''}}">
+                        <input type="text" class="mr-4 form-control col-md-6 {{ $errors->has('url') ? 'is-invalid' : '' }}"
+                               id="url" name="url" value="{{ old('url') ? old('url') : ''}}">
                         @if ($errors->has('url'))
                             <div class="invalid-feedback">
                                 <strong>{{ $errors->first('url') }}</strong>
                             </div>
                         @endif
                     </div>
-                    <button type="submit" class="btn btn-primary">Elküld</button>
+                    <button type="submit" class="btn btn-secondary">Elküld</button>
                 </form>
             </div>
             
         </div>
     </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#subject').change(function () { 
+                $.ajaxSetup({
+                    beforeSend: function(xhr, type) {
+                        if (!type.crossDomain) {
+                            xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+                        }
+                    },
+               });
+               $.ajax({
+                  url: "{{ url('/fixable/teachers') }}",
+                  type: 'GET',
+                  data: {
+                     subject_id: jQuery('#subject option:selected').val()
+                  },
+                  success: function(result){
+                      options = "";
+                      result.forEach(teacher => {
+                        options += `<option value="`+teacher.id+`">`+teacher.name+`</option>`
+                      });
+                      if(options == "")
+                        options += '<option value="">Ehhez a tárgyhoz nem ismertek oktatók!</option>';
+                      $('#teacher').html(options);
+                  },
+                  error: function (data, textStatus, errorThrown) {
+                    console.log(data);
+                  }
+                });
+            });
+        });
+    </script>
 @endsection

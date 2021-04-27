@@ -19,7 +19,7 @@ class Subject extends Model
         return $this->belongsToMany(Teacher::class)->withPivot('is_active','going_against')->withTimestamps();
     }
 
-    public function setAccepted($acceptValue){
+    public function setAccepted(){
         $this->update(['is_accepted' => true]);
     }
 }

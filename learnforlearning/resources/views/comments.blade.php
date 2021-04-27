@@ -5,14 +5,22 @@
 @section('content')
     <div class="container">
         <div class="jumbotron">
-            <h1 class="display-4">Beérkezett megjegyzések</h1>
+            <h1 class="display-4">Beérkezett megjegyzések
+                @if(isset($sub_page))
+                    <a class="btn btn-secondary btn-lg" href="{{ route('subjects.info', 
+                              ['id' => $subject_id, 'page' => isset($page) ? $page : null]) }}" role="button">Vissza a kurzushoz</a>
+                @endif
+            </h1>
             <hr class="my-4">
-            <p style="font-size: 1.2rem;">A következő oktatóról: <span style="font-size: 1.5rem;font-weight:bold">{{$teacher->name}}</span></p>
+            <p style="font-size: 1.2rem;">
+                A következő oktatóról: <span style="font-size: 1.5rem;font-weight:bold">{{$teacher->name}}</span>
+            </p>
             @forelse ($comments as $author => $data)
                 @if($data['comment'] !== null)
                 <div class="mb-2">
                     <div class="card">
-                        <p class="card-header {{$data['is_positive_vote'] ? 'bg-success' : ''}} {{(!$data['is_positive_vote'] && $data['is_positive_vote'] !== null) ? 'bg-danger' : ''}}">
+                        <p class="card-header {{$data['is_positive_vote'] ? 'bg-success' : ''}} {{(!$data['is_positive_vote'] &&
+                                  $data['is_positive_vote'] !== null) ? 'bg-danger' : ''}}">
                             Szerző: <span style="font-size: 1.3rem;font-weight:bold"> {{ $author }} </span>
                         </p>
                         <div class="card-body">
@@ -26,7 +34,7 @@
                     <p>Még nem érkeztek kommentek az oktatóra!</p>
                 </div>
             @endforelse
-            @if(!$wasComment && count($comments)>0)
+            @if(!$was_comment && count($comments)>0)
                 <div role='alert' class="alert alert-danger">
                     <p>Még nem érkeztek kommentek az oktatóra!</p>
                 </div>

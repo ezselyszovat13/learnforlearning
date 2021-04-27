@@ -32,19 +32,19 @@ class Teacher extends Model
         return $comments;
     }
 
-    public function setActivity($subjectId,$isActive){
-        $subject = Subject::where('id',$subjectId)->first();
+    public function setActivity($subject_id,$is_active){
+        $subject = Subject::where('id',$subject_id)->first();
         if($subject === null) return null;
         return $this->subjects()->syncWithoutDetaching([
             $subject->id => [
-                'is_active' => $isActive,
+                'is_active' => $is_active,
                 'going_against' => 0
             ]
         ]);
     }
 
-    public function resetGoingAgainst($subjectId){
-        $subject = Subject::where('id',$subjectId)->first();
+    public function resetGoingAgainst($subject_id){
+        $subject = Subject::where('id',$subject_id)->first();
         if($subject === null) return null;
         return $this->subjects()->syncWithoutDetaching([
             $subject->id => [
@@ -53,25 +53,25 @@ class Teacher extends Model
         ]);
     }
 
-    public function increaseGoingAgainst($subjectId,$isActive){
-        $subject = Subject::where('id',$subjectId)->first();
+    public function increaseGoingAgainst($subject_id,$is_act){
+        $subject = Subject::where('id',$subject_id)->first();
         if($subject === null) return null;
 
-        $subject = $this->subjects()->where('subject_id',$subjectId)->first();
-        $isOpposite = ($subject->pivot->is_active != $isActive);
-        if($isOpposite){
-            var_dump("HI! ");
-            $goingAgainstValue = $subject->pivot->going_against;
-            var_dump($goingAgainstValue);
+        $subject = $this->subjects()->where('subject_id',$subject_id)->first();
+        if($subject === null) return null;
+
+        $is_opposite = ($subject->pivot->is_active != $is_act);
+        if($is_opposite){
+            $going_against_value = $subject->pivot->going_against;
             return $this->subjects()->syncWithoutDetaching([
                 $subject->id => [
-                    'going_against' => $goingAgainstValue + 1,
+                    'going_against' => $going_against_value + 1,
                 ]
             ]);
         }
     }
 
-    public function setAccepted($acceptValue) {
+    public function setAccepted() {
         $this->update(['is_accepted' => true]);
     }
 }

@@ -35,7 +35,7 @@ class ModifySpecFormRequest extends FormRequest
     public function messages() {
         return [
             'required' => 'Ki kell választanod a specializációt!',
-            'in:A,B,C,NOTHING' => 'Nem megfelelő érték!',
+            'in:A,B,C,NOTHING' => 'A szakirány A/B/C vagy "semmi" lehetnek!',
         ];
     }
 }

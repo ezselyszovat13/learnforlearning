@@ -41,8 +41,8 @@
                 @endif
             @endif
             <h2>Egy, már meglévő oktató aktivitásának változása</h2>
-            @if(isset($activitySubjects))
-                @if(count($activitySubjects)!==0)
+            @if(isset($activity_subjects))
+                @if(count($activity_subjects)!==0)
                     <table class="table table-striped table-responsive">
                         <thead>
                             <tr>
@@ -56,7 +56,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach ($activitySubjects as $element)
+                        @foreach ($activity_subjects as $element)
                             <tr>
                                 <th scope="row">{{$loop->iteration}}</th>
                                 <td>{{$element['subjectName']}}</td>
@@ -64,14 +64,16 @@
                                 <td>{{$element['isActive'] ? "AKTÍV" : "NEM AKTÍV"}}</td>
                                 <td>{{$element['goingAgainst']}}</td>
                                 <td>
-                                    <a class="btn btn-primary btn-lg" style="font-size:0.8rem" target="_blank"
-                                        href="{{ route('manage.changeActivity', ['subjectId' => $element['subjectId'], 'teacherId' => $element['teacher']->id, 'activity' => !$element['isActive']]) }}" 
+                                    <a class="btn btn-secondary btn-lg" style="font-size:0.8rem" target="_blank"
+                                        href="{{ route('manage.changeActivity', ['subjectId' => $element['subjectId'],
+                                                'teacherId' => $element['teacher']->id, 'activity' => !$element['isActive']]) }}" 
                                         role="button"> Aktivitás megváltoztatása
                                     </a>
                                 </td>
                                 <td>
-                                    <a class="btn btn-primary btn-lg" style="font-size:0.8rem" target="_blank"
-                                        href="{{ route('manage.resetAgainstActivity', ['subjectId' => $element['subjectId'], 'teacherId' => $element['teacher']->id]) }}" 
+                                    <a class="btn btn-secondary btn-lg" style="font-size:0.8rem" target="_blank"
+                                        href="{{ route('manage.resetAgainstActivity', ['subjectId' => $element['subjectId'], 
+                                                 'teacherId' => $element['teacher']->id]) }}" 
                                         role="button"> Ajánlás elvetése
                                     </a>
                                 </td>
@@ -119,8 +121,8 @@
                 @endif
             @endif
             <h2>Új oktató ajánlása</h2>
-            @if(isset($pendingTeachers))
-                @if(count($pendingTeachers)!==0)
+            @if(isset($pending_teachers))
+                @if(count($pending_teachers)!==0)
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -130,16 +132,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach ($pendingTeachers as $element)
+                        @foreach ($pending_teachers as $element)
                             <tr>
                                 <th scope="row">{{$loop->iteration}}</th>
                                 <td>{{$element->name}}</td>
                                 <td>
-                                    <a class="btn btn-primary btn-lg mr-4" style="font-size:0.8rem" target="_blank"
+                                    <a class="btn btn-secondary btn-lg mr-4" style="font-size:0.8rem" target="_blank"
                                         href="{{ route('manage.addTeacher', ['teacherId' => $element->id]) }}" 
                                         role="button"> Oktató aktiválása
                                     </a>
-                                    <a class="btn btn-primary btn-lg mt-2 mt-sm-0" style="font-size:0.8rem" target="_blank"
+                                    <a class="btn btn-secondary btn-lg mt-2 mt-sm-0" style="font-size:0.8rem" target="_blank"
                                         href="{{ route('manage.deleteTeacher', ['teacherId' => $element->id]) }}" 
                                         role="button"> Ajánlás elvetése
                                     </a>
@@ -188,8 +190,8 @@
                 @endif
             @endif
             <h2>Új kurzus ajánlása</h2>
-            @if(isset($pendingSubjects))
-                @if(count($pendingSubjects)!==0)
+            @if(isset($pending_subjects))
+                @if(count($pending_subjects)!==0)
                     <table class="table table-striped table-responsive">
                         <thead>
                             <tr>
@@ -205,7 +207,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach ($pendingSubjects as $subject)
+                        @foreach ($pending_subjects as $subject)
                             <tr>
                                 <th scope="row">{{$loop->iteration}}</th>
                                 <td>{{$subject->name}}</td>
@@ -223,13 +225,13 @@
                                 <td>{{$subject->credit_points}}</td>
                                 <td>{{$subject->even_semester ? "IGEN" : "NEM"}}</td>
                                 <td>
-                                    <a class="btn btn-primary btn-lg mr-4" style="font-size:0.8rem" target="_blank"
+                                    <a class="btn btn-secondary btn-lg mr-4" style="font-size:0.8rem" target="_blank"
                                         href="{{ route('manage.addSubject', ['subjectId' => $subject->id]) }}" 
                                         role="button"> Kurzus aktiválása
                                     </a>
                                 </td>
                                 <td>
-                                    <a class="btn btn-primary btn-lg" style="font-size:0.8rem" target="_blank"
+                                    <a class="btn btn-secondary btn-lg" style="font-size:0.8rem" target="_blank"
                                         href="{{ route('manage.deleteSubject', ['subjectId' => $subject->id]) }}" 
                                         role="button"> Ajánlás elvetése
                                     </a>
