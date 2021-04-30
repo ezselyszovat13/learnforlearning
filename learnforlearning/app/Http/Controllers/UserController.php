@@ -31,8 +31,10 @@ class UserController extends Controller
         return view('personal',compact('user','comments', 'was_comment', 'was_like'));
     }
 
-    public function editSpecialization(){
+    public function editSpecialization($id){
         $user = Auth::User();
+        if((int)$id !== $user->id)
+            return redirect()->route('personal')->with('user_cannot_be_edited', true);
         $old_spec = $user['spec'];
         return view('edit_specialization', compact('user','old_spec'));
     }

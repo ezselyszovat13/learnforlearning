@@ -30,6 +30,13 @@
                     </div>
                 @endif
             @endif
+            @if (session()->has('teacher_not_existed'))
+                @if (session()->get('teacher_not_existed') == true)
+                    <div class="alert alert-danger mb-3" role="alert">
+                        A kommentolvasáshoz használt oktató nem létezik!
+                    </div>
+                @endif
+            @endif
             <div class="container">
                 <div class="row">
                     <div class="form-group form-inline">
