@@ -67,6 +67,7 @@
                                         <p class="card-header">
                                             <span style="font-size: 1.3rem;font-weight:bold"> {{ $subject->name }} </span> {{ $subject->code}}
                                             <a data-toggle="tooltip" title="Bevitt érdemjegy törlése" 
+                                               onclick="return confirm('Biztosan törölni szeretnéd az érdemjegyet?')"
                                                href="{{route('newsubject.delete', ['id' => $subject->id])}}">❌</a>
                                         </p>
                                         <div class="card-body">
