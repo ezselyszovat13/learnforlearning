@@ -17,7 +17,7 @@ class CreateSubjectUserTable extends Migration
             $table->id();
             $table->unsignedBigInteger('subject_id');
             $table->unsignedBigInteger('user_id');
-            $table->integer('mark');
+            $table->integer('grade');
             $table->timestamps();
 
             $table->unique(['subject_id','user_id']);

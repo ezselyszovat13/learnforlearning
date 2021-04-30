@@ -48,6 +48,7 @@ html {
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  min-width: 400px;
 }
 
 article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
@@ -63,6 +64,7 @@ body {
   color: #212529;
   text-align: left;
   background-color: #f8fafc;
+  min-width: 400px;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -545,6 +547,7 @@ pre code {
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+  min-width: 390px;
 }
 
 @media (min-width: 576px) {
