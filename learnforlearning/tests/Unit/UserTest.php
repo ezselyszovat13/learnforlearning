@@ -24,14 +24,6 @@ class UserTest extends TestCase
         $this->assertTrue($user->getGradesCount() === 0);
     }
 
-    public function test_grades(){
-        $user = User::where('email',"user1@tanulas.hu")->first();
-        $grades = $user->getGrades();
-        $this->assertTrue($grades['IP-18AA1E'] === "5");
-        $this->assertTrue($grades['IP-18AA1G'] === "5");
-        $this->assertTrue(!array_key_exists('IP-18AA2E',$grades));
-    }
-
     public function test_vote(){
         $user = User::where('email',"user1@tanulas.hu")->first();
         $this->assertTrue($user !== null);
@@ -158,8 +150,13 @@ class UserTest extends TestCase
         $this->assertTrue(!in_array("IP-18AA1E",$subject_codes));
     }
 
-    public function test_grade(){
+    public function test_grades(){
         $user = User::where('email',"user1@tanulas.hu")->first();
+        $grades = $user->getGrades();
+        $this->assertTrue($grades['IP-18AA1E'] === "5");
+        $this->assertTrue($grades['IP-18AA1G'] === "5");
+        $this->assertTrue(!array_key_exists('IP-18AA2E',$grades));
+        
         $subject = Subject::where('code', "IP-18KVMNMALEG")->first();
         $this->assertTrue($user !== null);
         $this->assertTrue($user->setGrade("IP-18KVMNMALE",5) === null);

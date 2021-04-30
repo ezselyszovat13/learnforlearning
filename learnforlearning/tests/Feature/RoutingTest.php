@@ -45,7 +45,7 @@ class RoutingTest extends TestCase
                                      "Egy, már meglévő oktató aktivitásának változása","Új oktató ajánlása","Új kurzus ajánlása"]);
     }
 
-    public function test_fail_on_middleware(){
+    public function test_manage(){
         $response = $this->get('/manage');
         $response->assertStatus(403);
     }
