@@ -12,6 +12,13 @@
                     </div>
                 @endif
             @endif
+            @if (session()->has('user_cannot_be_edited'))
+                @if (session()->get('user_cannot_be_edited') == true)
+                    <div class="alert alert-danger mb-3" role="alert">
+                        Más felhasználó beállításait nem szerkesztheted!
+                    </div>
+                @endif
+            @endif
 
             <h1 class="display-4">Adatok</h1>
             <p class="lead">Itt láthatóak a megadott személyes adataid, valamint egyéb kalkulált eredményeid!</p>

@@ -74,8 +74,9 @@
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{ $sub_data[$element->subject_code]['name'] }}</td>
                                     <td>
-                                        <a class="btn btn-secondary btn-lg" style="font-size:0.8rem" target="_blank" 
-                                        href="{{ $sub_data[$element->subject_code]['url'] }}" role="button">Információk
+                                        <a class="btn btn-secondary btn-lg" style="font-size:0.8rem"
+                                           href="{{ route('subjects.info', ['id' => $sub_data[$element->subject_code]['id'], 'page' => 'calculation']) }}"
+                                           role="button">Információk
                                         </a>
                                     </td>
                                 </tr>
@@ -168,7 +169,7 @@
 
                         calcHistory = '';
                         result_name = result['subject'].name;
-                        result_url = result['subject'].url;
+                        result_id = result['subject'].id;
                         if($('#calc_table').css('display') == 'none'){
                             $('#calc_table').removeAttr("style");
                             $('#calc_header').removeAttr("style");
@@ -185,8 +186,9 @@
                                 <td>NEW</td>
                                 <td>`+result_name+`</td>
                                 <td>
-                                    <a class="btn btn-secondary btn-lg" style="font-size:0.8rem" target="_blank" 
-                                        href="`+result_url+`" role="button">Információk
+                                    <a class="btn btn-secondary btn-lg" style="font-size:0.8rem"
+                                        href="/subjects/`+result_id+`?page=calculation" 
+                                        role="button">Információk
                                     </a>
                                 </td>
                             </tr>`;

@@ -13,8 +13,8 @@ return [
     |
     */
 
-    'failed' => 'A megadott címmel és jelszóval felhasználó nem található',
-    'password' => 'A megadott jelszó helytelen',
-    'throttle' => 'Túl sok belépési próbálkozás. Kérjük próbálja újra :seconds másodperc múlva.',
+    'failed' => 'A megadott címmel és jelszóval felhasználó nem található!',
+    'password' => 'A megadott jelszó helytelen!',
+    'throttle' => 'Túl sok belépési próbálkozás. Kérjük próbálja újra néhány másodperc múlva.',
 
 ];

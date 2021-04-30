@@ -111,6 +111,11 @@
                         <label for="tname" class="text-md-right mr-4">Oktató neve: </label>
                         <input type="text" class="mr-4 form-control {{ $errors->has('tname') ? 'is-invalid' : '' }}" 
                                id="tname" name="tname" value="{{ old('tname') ? old('tname') : ''}}">
+                        @if ($errors->has('tname'))
+                            <div class="invalid-feedback">
+                                <strong>{{ $errors->first('tname') }}</strong>
+                            </div>
+                        @endif
                         <button type="submit" class="btn btn-secondary">Elküld</button>
                     </div>
                 </form>

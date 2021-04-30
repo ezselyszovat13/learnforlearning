@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
 use App\Models\User;
+use App\Models\Subject;
 
 class RoutingWithLoginTest extends TestCase
 {
@@ -16,7 +17,7 @@ class RoutingWithLoginTest extends TestCase
      * @return void
      */
     public function test_new_subject(){
-        $user = new User(array('name' => 'John'));
+        $user = new User(array('name' => 'John','spec' => 'A'));
         $this->be($user);
         $response = $this->get('/newsubject');
         $response->assertStatus(200);
