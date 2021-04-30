@@ -61,7 +61,4 @@ Route::get('/subject/{id}/comments', [TeacherController::class, 'comments'])->na
 
 Route::get('/offline', function () { return view('offline');});
 
-
 Auth::routes();
-
-Route::get('/home', [HomeController::class, 'index'])->name('home');

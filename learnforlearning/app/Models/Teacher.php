@@ -19,6 +19,10 @@ class Teacher extends Model
         return $this->belongsToMany(User::class)->withPivot('is_positive_vote','comment')->withTimestamps();
     }
 
+    public function isActive(){
+        return $this->is_accepted;
+    }
+
     public function comments() {
         $votes = $this->voters()->get();
         $comments = [];
@@ -41,6 +45,18 @@ class Teacher extends Model
                 'going_against' => 0
             ]
         ]);
+    }
+
+    public function getActivity($subject_id){
+        $subject = Subject::where('id',$subject_id)->first();
+        if($subject === null) return null;
+        return $this->subjects()->where('subject_id', $subject_id)->first()->pivot->is_active;
+    }
+
+    public function getGoingAgainst($subject_id){
+        $subject = Subject::where('id',$subject_id)->first();
+        if($subject === null) return null;
+        return $this->subjects()->where('subject_id', $subject_id)->first()->pivot->going_against;
     }
 
     public function resetGoingAgainst($subject_id){
