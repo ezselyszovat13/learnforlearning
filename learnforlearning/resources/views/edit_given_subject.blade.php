@@ -16,7 +16,8 @@
                                 <div class="mb-2 col-md-6">
                                     <div class="card h-100">
                                         <p class="card-header">
-                                            <span style="font-size: 1.3rem;font-weight:bold"> {{ $subject->name }} </span> {{ $subject->code}}
+                                            <span style="font-size: 1.3rem;font-weight:bold"> {{ $subject->name }} 
+                                            </span> {{ $subject->code}}
                                         </p>
                                         <div class="card-body">
                                             @if($subject->even_semester)
@@ -32,7 +33,8 @@
                                                     name="grade" value="{{ old('grade') ? old('grade') : $grade}}">
                                                     
                                                     <a class="btn btn-secondary btn-lg mb-2 mb-sm-0 disabled" style="font-size:0.8rem"
-                                                       href="{{ route('subjects.info', ['id' => $subject->id, 'page' => 'grades']) }}" role="button">Információk
+                                                       href="{{ route('subjects.info', ['id' => $subject->id, 'page' => 'grades']) }}"
+                                                       role="button">Információk
                                                     </a>
                                                     <button type="submit" class="btn btn-secondary">Jegy módosítása</button>
                                                     @if ($errors->has('grade'))
@@ -46,7 +48,8 @@
                                                     <span style="font-size: 1.3rem;font-weight:bold">{{$subject->pivot->grade}}</span>
                                                 </p>
                                                 <a class="btn btn-secondary btn-lg mb-2 mb-sm-0 disabled" style="font-size:0.8rem"
-                                                   href="{{ route('subjects.info', ['id' => $subject->id, 'page' => 'grades']) }}" role="button">Információk
+                                                   href="{{ route('subjects.info', ['id' => $subject->id, 'page' => 'grades']) }}" 
+                                                   role="button">Információk
                                                 </a>
                                                 <a class="btn btn-secondary btn-lg disabled" style="font-size:0.8rem" target="_blank"
                                                     href="{{ route('newsubject.edit', ['id' => $subject->id]) }}" 

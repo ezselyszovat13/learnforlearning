@@ -53,7 +53,8 @@
                                 <div class="mb-2 col-md-4" style="padding-left: 0px;">
                                     <div class="card h-100">
                                         <p class="card-header">
-                                            <span style="font-size: 1.3rem;font-weight:bold"> {{ $subject->name }} </span> {{ $subject->code}}
+                                            <span style="font-size: 1.3rem;font-weight:bold"> {{ $subject->name }} </span>
+                                               {{ $subject->code}}
                                         </p>
                                         <div class="card-body">
                                             @if($subject->even_semester)
@@ -61,7 +62,8 @@
                                             @else
                                                 <p class="card-subtitle mb-2 text-muted">A tárgy féléve: PÁRATLAN</p>
                                             @endif
-                                            <a class="btn btn-secondary btn-lg" href="{{ route('subjects.info', ['id' => $subject->id, 'page' => 'subjects']) }}"
+                                            <a class="btn btn-secondary btn-lg" href="{{ route('subjects.info', 
+                                                      ['id' => $subject->id, 'page' => 'subjects']) }}"
                                                 role="button">Információk</a>
                                         </div>
                                     </div>
@@ -104,7 +106,8 @@
                         subjectsHTML += `<div class="mb-2 col-md-4" style="padding-left: 0px;">
                                         <div class="card h-100">
                                             <p class="card-header">
-                                                <span style="font-size: 1.3rem;font-weight:bold" class="mr-1"> `+ subject.name + `</span>` + subject.code +
+                                                <span style="font-size: 1.3rem;font-weight:bold" class="mr-1"> `+ subject.name + 
+                                                `</span>` + subject.code +
                                             `</p>
                                             <div class="card-body">`;
                         

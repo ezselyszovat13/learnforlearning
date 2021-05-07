@@ -75,7 +75,8 @@
                                     <td>{{ $sub_data[$element->subject_code]['name'] }}</td>
                                     <td>
                                         <a class="btn btn-secondary btn-lg" style="font-size:0.8rem"
-                                           href="{{ route('subjects.info', ['id' => $sub_data[$element->subject_code]['id'], 'page' => 'calculation']) }}"
+                                           href="{{ route('subjects.info', ['id' => $sub_data[$element->subject_code]['id'], 
+                                                 'page' => 'calculation']) }}"
                                            role="button">Információk
                                         </a>
                                     </td>
@@ -158,7 +159,7 @@
                   success: function(result){
                      $('#loading').html('');
                      $('#load_container').hide();
-                     if(result['isSuccessful'] === false){
+                     if(result['is_successful'] === false){
                          $('#calc_failed').show();
                          $('#calc_successed').hide();
                      }

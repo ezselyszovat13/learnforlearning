@@ -41,46 +41,44 @@
                 @endif
             @endif
             <h2>Egy, már meglévő oktató aktivitásának változása</h2>
+
             @if(isset($activity_subjects))
                 @if(count($activity_subjects)!==0)
-                    <table class="table table-striped table-responsive">
-                        <thead>
-                            <tr>
-                                <th scope="col"></th>
-                                <th scope="col">Kurzus neve</th>
-                                <th scope="col">Oktató neve</th>
-                                <th scope="col">Jelenlegi aktivitása</th>
-                                <th scope="col">Ennyien mondanak mást</th>
-                                <th scope="col"></th>
-                                <th scope="col"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        @foreach ($activity_subjects as $element)
-                            <tr>
-                                <th scope="row">{{$loop->iteration}}</th>
-                                <td>{{$element['subjectName']}}</td>
-                                <td>{{$element['teacher']->name}}</td>
-                                <td>{{$element['isActive'] ? "AKTÍV" : "NEM AKTÍV"}}</td>
-                                <td>{{$element['goingAgainst']}}</td>
-                                <td>
-                                    <a class="btn btn-secondary btn-lg" style="font-size:0.8rem" target="_blank"
-                                        href="{{ route('manage.changeActivity', ['subjectId' => $element['subjectId'],
-                                                'teacherId' => $element['teacher']->id, 'activity' => !$element['isActive']]) }}" 
-                                        role="button"> Aktivitás megváltoztatása
-                                    </a>
-                                </td>
-                                <td>
-                                    <a class="btn btn-secondary btn-lg" style="font-size:0.8rem" target="_blank"
-                                        href="{{ route('manage.resetAgainstActivity', ['subjectId' => $element['subjectId'], 
-                                                 'teacherId' => $element['teacher']->id]) }}" 
-                                        role="button"> Ajánlás elvetése
-                                    </a>
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                     </table>
+                    <div class="container" style="padding-left: 0px;">
+                        <div class="row">
+                            @foreach ($activity_subjects as $element)
+                                <div class="mb-2 col-md-12" style="padding-left: 0px;">
+                                    <div class="card h-100">
+                                        <p class="card-header">
+                                            <span style="font-size: 1.3rem;font-weight:bold"> {{$element['teacher']->name}} </span>
+                                            aktivitása kétséges
+                                        </p>
+                                        <div class="card-body">
+                                            <p class="card-subtitle mb-2 text-muted">Az érintett kurzus: 
+                                                <span class="font-weight-bold">{{$element['subjectName']}}</span>
+                                            </p>
+                                            <p class="card-subtitle mb-2 text-muted">Jelenlegi aktivitása: 
+                                                <span class="font-weight-bold">{{$element['isActive'] ? "AKTÍV" : "NEM AKTÍV"}}</span>
+                                            </p>
+                                            <p class="card-subtitle mb-2 text-muted">Ennyien mondanak mást: 
+                                                <span class="font-weight-bold">{{$element['goingAgainst']}}</span> felhasználó
+                                            </p>
+                                            <a class="btn btn-secondary btn-lg" style="font-size:0.8rem" target="_blank"
+                                                href="{{ route('manage.changeActivity', ['subjectId' => $element['subjectId'],
+                                                        'teacherId' => $element['teacher']->id, 'activity' => !$element['isActive']]) }}" 
+                                                role="button"> Aktivitás megváltoztatása
+                                            </a>
+                                            <a class="btn btn-secondary btn-lg mt-2 mt-sm-0" style="font-size:0.8rem" target="_blank"
+                                                href="{{ route('manage.resetAgainstActivity', ['subjectId' => $element['subjectId'], 
+                                                        'teacherId' => $element['teacher']->id]) }}" 
+                                                role="button"> Ajánlás elvetése
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
                 @else
                     <div class="alert alert-danger mt-3" role="alert">
                         <p>Jelenleg nincsenek kérelmek!</p>
@@ -91,6 +89,7 @@
                     <p>Jelenleg nincsenek kérelmek!</p>
                 </div>
             @endif
+
             <hr class="my-4">
             @if (session()->has('teacher_not_exists_add'))
                 @if (session()->get('teacher_not_exists_add') == true)
@@ -120,36 +119,34 @@
                     </div>
                 @endif
             @endif
+
             <h2>Új oktató ajánlása</h2>
             @if(isset($pending_teachers))
                 @if(count($pending_teachers)!==0)
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col"></th>
-                                <th scope="col">Oktató neve</th>
-                                <th scope="col"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        @foreach ($pending_teachers as $element)
-                            <tr>
-                                <th scope="row">{{$loop->iteration}}</th>
-                                <td>{{$element->name}}</td>
-                                <td>
-                                    <a class="btn btn-secondary btn-lg mr-4" style="font-size:0.8rem" target="_blank"
-                                        href="{{ route('manage.addTeacher', ['teacherId' => $element->id]) }}" 
-                                        role="button"> Oktató aktiválása
-                                    </a>
-                                    <a class="btn btn-secondary btn-lg mt-2 mt-sm-0" style="font-size:0.8rem" target="_blank"
-                                        href="{{ route('manage.deleteTeacher', ['teacherId' => $element->id]) }}" 
-                                        role="button"> Ajánlás elvetése
-                                    </a>
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                     </table>
+                    <div class="container" style="padding-left: 0px;">
+                        <div class="row">
+                            @foreach ($pending_teachers as $element)
+                                <div class="mb-2 col-md-6" style="padding-left: 0px;">
+                                    <div class="card h-100">
+                                        <p class="card-header">
+                                            A javasolt oktató: 
+                                            <span style="font-size: 1.3rem;font-weight:bold"> {{$element->name}} </span>
+                                        </p>
+                                        <div class="card-body">
+                                            <a class="btn btn-secondary btn-lg mr-4" style="font-size:0.8rem" target="_blank"
+                                            href="{{ route('manage.addTeacher', ['teacherId' => $element->id]) }}" 
+                                            role="button"> Oktató aktiválása
+                                            </a>
+                                            <a class="btn btn-secondary btn-lg mt-2 mt-sm-0" style="font-size:0.8rem" target="_blank"
+                                                href="{{ route('manage.deleteTeacher', ['teacherId' => $element->id]) }}" 
+                                                role="button"> Ajánlás elvetése
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
                 @else
                     <div class="alert alert-danger mt-3" role="alert">
                         <p>Jelenleg nincsenek kérelmek!</p>
@@ -160,6 +157,7 @@
                     <p>Jelenleg nincsenek kérelmek!</p>
                 </div>
             @endif
+
             <hr class="my-4">
             @if (session()->has('subject_not_exists_add'))
                 @if (session()->get('subject_not_exists_add') == true)
@@ -192,54 +190,55 @@
             <h2>Új kurzus ajánlása</h2>
             @if(isset($pending_subjects))
                 @if(count($pending_subjects)!==0)
-                    <table class="table table-striped table-responsive">
-                        <thead>
-                            <tr>
-                                <th scope="col"></th>
-                                <th scope="col">Kurzus neve</th>
-                                <th scope="col">Kurzus kódja</th>
-                                <th scope="col">Szakirányok</th>
-                                <th scope="col">Itt opcionális</th>
-                                <th scope="col">Kreditérték</th>
-                                <th scope="col">Páros féléves tárgy</th>
-                                <th scope="col"></th>
-                                <th scope="col"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        @foreach ($pending_subjects as $subject)
-                            <tr>
-                                <th scope="row">{{$loop->iteration}}</th>
-                                <td>{{$subject->name}}</td>
-                                <td>{{$subject->code}}</td>
-                                <td>
-                                    {{ $subject->existsOnA ? 'A ' : ''}}
-                                    {{ $subject->existsOnB ? 'B ' : ''}}
-                                    {{ $subject->existsOnC ? 'C ' : ''}}
-                                </td>
-                                <td>
-                                    {{ $subject->optionalOnA ? 'A ' : ''}}
-                                    {{ $subject->optionalOnB ? 'B ' : ''}}
-                                    {{ $subject->optionalOnC ? 'C ' : ''}}
-                                </td>
-                                <td>{{$subject->credit_points}}</td>
-                                <td>{{$subject->even_semester ? "IGEN" : "NEM"}}</td>
-                                <td>
-                                    <a class="btn btn-secondary btn-lg mr-4" style="font-size:0.8rem" target="_blank"
-                                        href="{{ route('manage.addSubject', ['subjectId' => $subject->id]) }}" 
-                                        role="button"> Kurzus aktiválása
-                                    </a>
-                                </td>
-                                <td>
-                                    <a class="btn btn-secondary btn-lg" style="font-size:0.8rem" target="_blank"
-                                        href="{{ route('manage.deleteSubject', ['subjectId' => $subject->id]) }}" 
-                                        role="button"> Ajánlás elvetése
-                                    </a>
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                     </table>
+                    <div class="container" style="padding-left: 0px;">
+                        <div class="row">
+                            @foreach ($pending_subjects as $subject)
+                                <div class="mb-2 col-md-12" style="padding-left: 0px;">
+                                    <div class="card h-100">
+                                        <p class="card-header">
+                                            Az ajánlott kurzus: 
+                                            <span style="font-size: 1.3rem;font-weight:bold"> {{$subject->name}} </span>
+                                            ({{$subject->code}})
+                                        </p>
+                                        <div class="card-body">
+                                            <p class="card-subtitle mb-2 text-muted">Itt létezik:
+                                                <span class="font-weight-bold">
+                                                    {{ $subject->existsOnA ? 'A ' : ''}}
+                                                    {{ $subject->existsOnB ? 'B ' : ''}}
+                                                    {{ $subject->existsOnC ? 'C ' : ''}}
+                                                </span>
+                                            </p>
+                                            <p class="card-subtitle mb-2 text-muted">Itt opcionális:
+                                                <span class="font-weight-bold">
+                                                    {{ $subject->optionalOnA ? 'A ' : ''}}
+                                                    {{ $subject->optionalOnB ? 'B ' : ''}}
+                                                    {{ $subject->optionalOnC ? 'C ' : ''}}
+                                                </span>
+                                            </p>
+                                            <p class="card-subtitle mb-2 text-muted">Kreditértéke:
+                                                <span class="font-weight-bold">
+                                                    {{$subject->credit_points}}
+                                                </span>
+                                            </p>
+                                            <p class="card-subtitle mb-2 text-muted">Páros féléves? 
+                                                <span class="font-weight-bold">
+                                                    {{$subject->even_semester ? '✔' :'❌'}}
+                                                </span>
+                                            </p>
+                                            <a class="btn btn-secondary btn-lg mr-4" style="font-size:0.8rem" target="_blank"
+                                               href="{{ route('manage.addSubject', ['subjectId' => $subject->id]) }}" 
+                                               role="button"> Kurzus aktiválása
+                                            </a>
+                                            <a class="btn btn-secondary btn-lg mt-2 mt-sm-0" style="font-size:0.8rem" target="_blank"
+                                               href="{{ route('manage.deleteSubject', ['subjectId' => $subject->id]) }}" 
+                                               role="button"> Ajánlás elvetése
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
                 @else
                     <div class="alert alert-danger mt-3" role="alert">
                         <p>Jelenleg nincsenek kérelmek!</p>

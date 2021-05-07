@@ -39,7 +39,8 @@
                         @if($page === 'calculation')
                             <a class="btn btn-secondary btn-lg" href="{{ route('findsubject') }}" role="button">Vissza a kalkulációhoz</a>
                         @elseif($page === 'grades')
-                            <a class="btn btn-secondary btn-lg" href="{{ route('newsubject') }}" role="button">Vissza az érdemjegyekhez</a>
+                            <a class="btn btn-secondary btn-lg" href="{{ route('newsubject') }}" 
+                               role="button">Vissza az érdemjegyekhez</a>
                         @elseif($page === 'subjects')
                             <a class="btn btn-secondary btn-lg" href="{{ route('subjects') }}" role="button">Vissza a kurzusokhoz</a>
                         @endif
@@ -88,8 +89,9 @@
                                                   {{ $votes[$teacher->id]['points']<0 ? 'bg-danger' : ''}}">
                                             <span style="font-size: 1.3rem;font-weight:bold"> {{ $teacher->name }} </span> 
                                             <a class="btn" data-toggle="tooltip" title="A megjegyzésekért kattints ide!"
-                                               href="{{ route('teacher.comments', ['id' => $teacher->id, 'page' => isset($page) ? $page : null,
-                                                'subpage' => 'subject', 'subjectId' => $subject->id]) }}" role="button">❓
+                                               href="{{ route('teacher.comments', ['id' => $teacher->id, 'page' => isset($page) ? 
+                                                     $page : null, 'subpage' => 'subject', 'subjectId' => $subject->id]) }}" 
+                                               role="button">❓
                                             </a>
                                         </p>
                                         <div class="card-body h-60">
@@ -104,21 +106,26 @@
                                             </p>
                                             <p>
                                                 @if(isset($user)) 
-                                                    <span style="width:20px;{{ $votes[$teacher->id]['hasPosVote'] ? 'opacity:1' : 'opacity:0.5' }}">
+                                                    <span style="width:20px;{{ $votes[$teacher->id]['hasPosVote'] ? 'opacity:1' : 
+                                                                'opacity:0.5' }}">
                                                         <a class="btn btn-lg" href="{{ route('user.vote', ['teacherId' => $teacher->id, 
-                                                                'isPositive' => true, 'subjectId' => $subject->id, 'page' => isset($page) ? $page : null]) }}" 
+                                                                'isPositive' => true, 'subjectId' => $subject->id, 'page' => isset($page)
+                                                                 ? $page : null]) }}" 
                                                         role="button">👍
                                                         </a>
                                                     </span>
-                                                    <span style="width:20px;{{ $votes[$teacher->id]['hasNegVote'] ? 'opacity:1' : 'opacity:0.5' }}">
+                                                    <span style="width:20px;{{ $votes[$teacher->id]['hasNegVote'] ? 'opacity:1' : 
+                                                                'opacity:0.5' }}">
                                                         <a class="btn btn-lg" href="{{ route('user.vote', ['teacherId' => $teacher->id, 
-                                                                'isPositive' => false, 'subjectId' => $subject->id, 'page' => isset($page) ? $page : null]) }}" 
+                                                                'isPositive' => false, 'subjectId' => $subject->id, 'page' => isset($page) 
+                                                                ? $page : null]) }}" 
                                                         role="button">💔
                                                         </a>
                                                     </span>
                                                     <span style="width:20px;">
                                                         <a class="btn btn-lg" href="{{ route('user.comment', ['teacherId' => $teacher->id,
-                                                                'subjectId' => $subject->id, 'page' => isset($page) ? $page : null]) }}" role="button">💬
+                                                                'subjectId' => $subject->id, 'page' => isset($page) ? $page : null]) }}" 
+                                                           role="button">💬
                                                         </a>
                                                     </span>
                                                 @endif

@@ -41,7 +41,8 @@
                                 <div class="mb-2 col-md-6" style="padding-left: 0px;">
                                     <div class="card h-100">
                                         <p class="card-header">
-                                            <span style="font-size: 1.3rem;font-weight:bold"> {{ $subject->name }} </span> {{ $subject->code}}
+                                            <span style="font-size: 1.3rem;font-weight:bold"> {{ $subject->name }} </span>
+                                               {{ $subject->code}}
                                             <a data-toggle="tooltip" title="Bevitt érdemjegy törlése" 
                                                onclick="return confirm('Biztosan törölni szeretnéd az érdemjegyet?')"
                                                href="{{route('newsubject.delete', ['id' => $subject->id])}}">❌</a>
@@ -56,7 +57,8 @@
                                                 <span style="font-size: 1.3rem;font-weight:bold">{{$subject->pivot->grade}}</span>
                                             </p>
                                             <a class="btn btn-secondary btn-lg mb-sm-0" style="font-size:0.8rem"
-                                                    href="{{ route('subjects.info', ['id' => $subject->id, 'page' => 'grades']) }}" role="button">Információk
+                                                    href="{{ route('subjects.info', ['id' => $subject->id, 'page' => 'grades']) }}" 
+                                                    role="button">Információk
                                             </a>
                                             <a class="btn btn-secondary btn-lg mt-0 mt-md-2 mt-lg-0" style="font-size:0.8rem"
                                                     href="{{ route('newsubject.edit', ['id' => $subject->id]) }}" 
