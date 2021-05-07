@@ -30,7 +30,7 @@
                 @if(isset($optional_subjects))
                     @forelse ($optional_subjects as $subject)
                         <span class="badge badge-secondary">
-                            <a style="color: white !important;font-size:14px" 
+                            <a style="color: white !important;font-size:12px" 
                                href="{{ route('subjects.info', ['id' => $subject->id, 'page' => 'calculation']) }}">{{ $subject->name }}
                             </a>
                         </span>
@@ -85,11 +85,9 @@
                     </tbody>
                 </table>
                 <div class="container" id="calc_delete_div" style="{{count($calculation_history)===0 ? 'display:none' : ''}}">
-                    <div class="row">
-                        <a class="btn btn-secondary btn-lg ml-auto" href="{{route('findsubject.delete')}}" 
-                           role="button">Korábbi kalkulációk törlése
-                        </a>
-                    </div>
+                    <a class="btn btn-secondary btn-lg" href="{{route('findsubject.delete')}}" 
+                       role="button">Korábbi kalkulációk törlése
+                    </a>
                 </div>
             </div>           
             @if(count($calculation_history)===0)
@@ -105,11 +103,13 @@
                 <div class="row">
                     <label for="semester" class="mr-4 mt-2">Aktuális félév: </label>
                     <select id="semester" name="semester" class="mr-4 col-md-4 form-control {{ $can_calculate ? '' : 'disabled' }}
-                        {{ $errors->has('semester') ? 'is-invalid' : '' }}" style="{{ $can_calculate ? '' : 'pointer-events: none;' }}" {{$can_calculate ? 'autofocus' : ''}}>
+                        {{ $errors->has('semester') ? 'is-invalid' : '' }}" 
+                        style="{{ $can_calculate ? '' : 'pointer-events: none;' }}" {{$can_calculate ? 'autofocus' : ''}}>
                         <option value="1">Ősszel induló félév</option>
                         <option value="2">Tavasszal induló félév</option>
                     </select>
-                    <button id="calc_button" type="submit" class="btn btn-secondary {{ $can_calculate ? '' : 'disabled' }} mr-auto" 
+                    <button id="calc_button" type="submit" class="btn btn-secondary {{ $can_calculate ? '' : 'disabled' }} 
+                               mt-2 mt-md-0 mr-auto" 
                             style="{{ $can_calculate ? '' : 'pointer-events: none;' }}">Kalkulál
                     </button>
                 </div>

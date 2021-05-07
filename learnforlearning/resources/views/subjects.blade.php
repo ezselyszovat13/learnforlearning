@@ -47,10 +47,10 @@
             </div>
             @if(isset($subjects))
                 @if(count($subjects)!=0)
-                    <div class="container">
+                    <div class="container" style="padding-left: 0px;">
                         <div class="row" id="subject_container">
                             @foreach ($subjects as $subject)
-                                <div class="mb-2 col-md-4">
+                                <div class="mb-2 col-md-4" style="padding-left: 0px;">
                                     <div class="card h-100">
                                         <p class="card-header">
                                             <span style="font-size: 1.3rem;font-weight:bold"> {{ $subject->name }} </span> {{ $subject->code}}
@@ -101,7 +101,7 @@
                   success: function(result){
                       subjectsHTML = "";
                       result.forEach(subject => {
-                        subjectsHTML += `<div class="mb-2 col-md-4">
+                        subjectsHTML += `<div class="mb-2 col-md-4" style="padding-left: 0px;">
                                         <div class="card h-100">
                                             <p class="card-header">
                                                 <span style="font-size: 1.3rem;font-weight:bold" class="mr-1"> `+ subject.name + `</span>` + subject.code +

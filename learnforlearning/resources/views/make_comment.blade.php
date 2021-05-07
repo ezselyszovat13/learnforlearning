@@ -28,9 +28,7 @@
                     </div>
                 @endif
                 <div class="container">
-                    <div class="row">
-                        <button type="submit" class="btn btn-secondary mt-2 ml-auto">Megjegyzés elküldése</button>
-                    </div>
+                    <button type="submit" class="btn btn-secondary mt-2">Megjegyzés elküldése</button>
                 </div>
             </form>
         </div>

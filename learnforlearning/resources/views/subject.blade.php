@@ -30,18 +30,22 @@
                     </div>
                 @endif
             @endif
-            <h1 class="display-4">{{$subject->name}}<span class="ml-2" style="font-size: 1.8rem">({{$subject->code}})</span>
-                <a class="btn btn-secondary btn-lg" target="__blank" href="{{ $subject->url }}" role="button">További információk</a>
-                @if(isset($page))
-                    @if($page === 'calculation')
-                        <a class="btn btn-secondary btn-lg" href="{{ route('findsubject') }}" role="button">Vissza a kalkulációhoz</a>
-                    @elseif($page === 'grades')
-                        <a class="btn btn-secondary btn-lg" href="{{ route('newsubject') }}" role="button">Vissza az érdemjegyekhez</a>
-                    @elseif($page === 'subjects')
-                        <a class="btn btn-secondary btn-lg" href="{{ route('subjects') }}" role="button">Vissza a kurzusokhoz</a>
+            <div>
+                <h1>
+                    <span class="font-weight-bold">{{$subject->name}}</span>
+                    <span class="ml-2" style="font-size: 1.8rem">({{$subject->code}})</span>
+                    <a class="btn btn-secondary btn-lg" target="__blank" href="{{ $subject->url }}" role="button">További információk</a>
+                    @if(isset($page))
+                        @if($page === 'calculation')
+                            <a class="btn btn-secondary btn-lg" href="{{ route('findsubject') }}" role="button">Vissza a kalkulációhoz</a>
+                        @elseif($page === 'grades')
+                            <a class="btn btn-secondary btn-lg" href="{{ route('newsubject') }}" role="button">Vissza az érdemjegyekhez</a>
+                        @elseif($page === 'subjects')
+                            <a class="btn btn-secondary btn-lg" href="{{ route('subjects') }}" role="button">Vissza a kurzusokhoz</a>
+                        @endif
                     @endif
-                @endif
-            </h1>
+                </h1>
+            </div>
             
             <hr class="my-4">
             <div>
@@ -74,11 +78,11 @@
                             <h1 class="mx-auto">Oktatók</h1>
                         </div>
                     </div>
-                    <div class="container">
+                    <div class="container" style="padding-left: 0px;">
                         <div class="row">
                             @foreach ($teachers as $teacher) 
                                 @if($teacher->pivot->is_active) 
-                                <div class="mb-2 col-md-4">
+                                <div class="mb-2 col-md-4" style="padding-left: 0px;">
                                     <div class="card h-40">
                                         <p class="card-header h-100 {{$votes[$teacher->id]['points']>0 ? 'bg-success' : ''}} 
                                                   {{ $votes[$teacher->id]['points']<0 ? 'bg-danger' : ''}}">

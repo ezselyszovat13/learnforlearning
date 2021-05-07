@@ -5,18 +5,6 @@
 @section('content')
     <div class="container">
         <div class="jumbotron">
-            @if (session()->has('grade_added'))
-                @if (session()->get('grade_added') == true)
-                    <div class="alert alert-success mb-3" role="alert">
-                        Az új érdemjegy sikeresen felvéve!
-                    </div>
-                @else
-                    <div class="alert alert-danger mb-3" role="alert">
-                        Ehhez a kurzushoz már tartozik érdemjegy!
-                    </div>
-                @endif
-            @endif
-
             @if (session()->has('subject_not_exists'))
                 @if (session()->get('subject_not_exists') == true)
                     <div class="alert alert-danger mb-3" role="alert">
@@ -41,28 +29,16 @@
                 @endif
             @endif
 
-            @if (session()->has('grade_deleted'))
-                @if (session()->get('grade_deleted') == true)
-                    <div class="alert alert-success mb-3" role="alert">
-                        Az érdemjegy törlése sikeresen megtörtént!
-                    </div>
-                @else
-                    <div class="alert alert-danger mb-3" role="alert">
-                        A felhasználónak nem volt jegye a tárgyból, melyet törölni szerettünk volna.
-                    </div>
-                @endif
-            @endif
-
             <h1 class="display-4">Új érdemjegyek felvétele</h1>
             <p class="lead">Itt tölthetsz fel új érdemjegyeket a hatékonyabb adatmeghatározáshoz!</p>
             <hr class="my-4">
             <h2>Eddig felvett eredmények: </h2>
             @if(isset($user_subjects))
                 @if(count($user_subjects)!=0)
-                    <div class="container">
+                    <div class="container" style="padding-left: 0px;">
                         <div class="row">
                             @foreach ($user_subjects as $subject)
-                                <div class="mb-2 col-md-6">
+                                <div class="mb-2 col-md-6" style="padding-left: 0px;">
                                     <div class="card h-100">
                                         <p class="card-header">
                                             <span style="font-size: 1.3rem;font-weight:bold"> {{ $subject->name }} </span> {{ $subject->code}}
@@ -82,7 +58,7 @@
                                             <a class="btn btn-secondary btn-lg mb-sm-0" style="font-size:0.8rem"
                                                     href="{{ route('subjects.info', ['id' => $subject->id, 'page' => 'grades']) }}" role="button">Információk
                                             </a>
-                                            <a class="btn btn-secondary btn-lg" style="font-size:0.8rem"
+                                            <a class="btn btn-secondary btn-lg mt-0 mt-md-2 mt-lg-0" style="font-size:0.8rem"
                                                     href="{{ route('newsubject.edit', ['id' => $subject->id]) }}" 
                                                     role="button">Jegy szerkesztése
                                             </a>
@@ -101,6 +77,29 @@
                 <div role='alert' class="alert alert-danger">
                     <p>Még nem történt jegybevitel!</p>
                 </div>
+            @endif
+            @if (session()->has('grade_added'))
+                @if (session()->get('grade_added') == true)
+                    <div class="alert alert-success mb-3" role="alert">
+                        Az új érdemjegy sikeresen felvéve!
+                    </div>
+                @else
+                    <div class="alert alert-danger mb-3" role="alert">
+                        Ehhez a kurzushoz már tartozik érdemjegy!
+                    </div>
+                @endif
+            @endif
+
+            @if (session()->has('grade_deleted'))
+                @if (session()->get('grade_deleted') == true)
+                    <div class="alert alert-success mb-3" role="alert">
+                        Az érdemjegy törlése sikeresen megtörtént!
+                    </div>
+                @else
+                    <div class="alert alert-danger mb-3" role="alert">
+                        A felhasználónak nem volt jegye a tárgyból, melyet törölni szerettünk volna.
+                    </div>
+                @endif
             @endif
 
             <hr class="my-4">
