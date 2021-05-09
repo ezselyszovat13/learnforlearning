@@ -375,14 +375,14 @@ class CalculateController extends Controller
         $result = [];
         if($advisable_subject == null){
             $result = [
-                'isSuccessful' => false,
+                'is_successful' => false,
                 'subject' => null,
             ];
             return $result;
         }
         $logon_user->addCalculation($advisable_subject->code);
         $result = [
-            'isSuccessful' => true,
+            'is_successful' => true,
             'subject' => $advisable_subject,
         ];
         return $result;

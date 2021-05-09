@@ -50,7 +50,6 @@ Route::get('/subject/comment/delete', [UserController::class, 'deleteComment'])-
 Route::get('/personal/comment/delete', [UserController::class, 'personalDeleteComment'])->name('personal.delete.comment')->middleware('auth');
 Route::get('/findsubject/delete', [UserController::class, 'deleteCalculations'])->name('findsubject.delete')->middleware('auth');
 Route::get('/subject/vote/', [UserController::class, 'vote'])->name('user.vote')->middleware('auth');
-Route::get('/personal/vote/', [UserController::class, 'personalVote'])->name('personal.vote')->middleware('auth');
 Route::get('/subject/comment/', [UserController::class, 'comment'])->name('user.comment')->middleware('auth');
 Route::post('/personal/{id}/update', [UserController::class, 'updateSpecialization'])->name('spec.update')->middleware('auth');
 Route::post('/subject/comment/update', [UserController::class, 'commentUpdate'])->name('user.comment.update')->middleware('auth');
