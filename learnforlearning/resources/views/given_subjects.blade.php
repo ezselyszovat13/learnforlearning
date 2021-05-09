@@ -21,14 +21,6 @@
                 @endif
             @endif
 
-            @if (session()->has('grade_updated'))
-                @if (session()->get('grade_updated') == true)
-                    <div class="alert alert-success mb-3" role="alert">
-                        Az érdemjegy módosítása sikeresen megtörtént!
-                    </div>
-                @endif
-            @endif
-
             <h1 class="display-4">Új érdemjegyek felvétele</h1>
             <p class="lead">Itt tölthetsz fel új érdemjegyeket a hatékonyabb adatmeghatározáshoz!</p>
             <hr class="my-4">

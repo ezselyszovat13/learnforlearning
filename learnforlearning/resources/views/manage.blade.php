@@ -63,12 +63,12 @@
                                             <p class="card-subtitle mb-2 text-muted">Ennyien mondanak mást: 
                                                 <span class="font-weight-bold">{{$element['goingAgainst']}}</span> felhasználó
                                             </p>
-                                            <a class="btn btn-secondary btn-lg" style="font-size:0.8rem" target="_blank"
+                                            <a class="btn btn-secondary btn-lg" style="font-size:0.8rem"
                                                 href="{{ route('manage.changeActivity', ['subjectId' => $element['subjectId'],
                                                         'teacherId' => $element['teacher']->id, 'activity' => !$element['isActive']]) }}" 
                                                 role="button"> Aktivitás megváltoztatása
                                             </a>
-                                            <a class="btn btn-secondary btn-lg mt-2 mt-sm-0" style="font-size:0.8rem" target="_blank"
+                                            <a class="btn btn-secondary btn-lg mt-2 mt-sm-0" style="font-size:0.8rem"
                                                 href="{{ route('manage.resetAgainstActivity', ['subjectId' => $element['subjectId'], 
                                                         'teacherId' => $element['teacher']->id]) }}" 
                                                 role="button"> Ajánlás elvetése
@@ -133,11 +133,11 @@
                                             <span style="font-size: 1.3rem;font-weight:bold"> {{$element->name}} </span>
                                         </p>
                                         <div class="card-body">
-                                            <a class="btn btn-secondary btn-lg mr-4" style="font-size:0.8rem" target="_blank"
+                                            <a class="btn btn-secondary btn-lg mr-4 mt-2 mt-lg-0" style="font-size:0.8rem"
                                             href="{{ route('manage.addTeacher', ['teacherId' => $element->id]) }}" 
                                             role="button"> Oktató aktiválása
                                             </a>
-                                            <a class="btn btn-secondary btn-lg mt-2 mt-sm-0" style="font-size:0.8rem" target="_blank"
+                                            <a class="btn btn-secondary btn-lg mt-2 mt-lg-0" style="font-size:0.8rem"
                                                 href="{{ route('manage.deleteTeacher', ['teacherId' => $element->id]) }}" 
                                                 role="button"> Ajánlás elvetése
                                             </a>
@@ -225,11 +225,11 @@
                                                     {{$subject->even_semester ? '✔' :'❌'}}
                                                 </span>
                                             </p>
-                                            <a class="btn btn-secondary btn-lg mr-4" style="font-size:0.8rem" target="_blank"
+                                            <a class="btn btn-secondary btn-lg mr-4" style="font-size:0.8rem"
                                                href="{{ route('manage.addSubject', ['subjectId' => $subject->id]) }}" 
                                                role="button"> Kurzus aktiválása
                                             </a>
-                                            <a class="btn btn-secondary btn-lg mt-2 mt-sm-0" style="font-size:0.8rem" target="_blank"
+                                            <a class="btn btn-secondary btn-lg mt-2 mt-sm-0" style="font-size:0.8rem"
                                                href="{{ route('manage.deleteSubject', ['subjectId' => $subject->id]) }}" 
                                                role="button"> Ajánlás elvetése
                                             </a>

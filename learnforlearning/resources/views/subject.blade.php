@@ -170,8 +170,6 @@
                      if(result.state === "1"){
                          $("#l"+teacher_id).css('opacity',1);
                          $("#d"+teacher_id).css('opacity',0.5);
-                         $("#c"+teacher_id).removeClass('bg-danger');
-                         $("#c"+teacher_id).addClass('bg-success');
                          if(had_neg_vote){
                             like_num += 2;
                          }
@@ -182,8 +180,6 @@
                      else if(result.state === "0"){
                          $("#l"+teacher_id).css('opacity',0.5);
                          $("#d"+teacher_id).css('opacity',1);
-                         $("#c"+teacher_id).removeClass('bg-success');
-                         $("#c"+teacher_id).addClass('bg-danger');
                          if(had_pos_vote){
                             like_num -= 2;
                          }
@@ -194,8 +190,6 @@
                      else{
                          $("#l"+teacher_id).css('opacity',0.5);
                          $("#d"+teacher_id).css('opacity',0.5);
-                         $("#c"+teacher_id).removeClass('bg-danger');
-                         $("#c"+teacher_id).removeClass('bg-success');
                          if(had_neg_vote){
                             like_num += 1;
                          }
@@ -205,12 +199,18 @@
                      }
                      if(like_num>0){
                         result = '<span style="font-weight:bold;color:green">+'+like_num+'</span>';
+                        $("#c"+teacher_id).removeClass('bg-danger');
+                        $("#c"+teacher_id).addClass('bg-success');
                      }
                      else if(like_num<0){
                         result = '<span style="font-weight:bold;color:red">'+like_num+'</span>';
+                        $("#c"+teacher_id).removeClass('bg-success');
+                        $("#c"+teacher_id).addClass('bg-danger');
                      }
                      else{
                         result = '<span style="font-weight:bold">'+like_num+'</span>';
+                        $("#c"+teacher_id).removeClass('bg-danger');
+                        $("#c"+teacher_id).removeClass('bg-success');
                      }
                      $("#s"+teacher_id).html(result);
                   },
