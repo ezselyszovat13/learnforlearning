@@ -44,24 +44,27 @@ class User extends Authenticatable
         $vote = $this->votes()->where('teacher_id', $teacher_id)->first();
         if($vote !== null && $vote->pivot->is_positive_vote === $is_positive){
             if($vote->pivot->comment !== null){
-                return $this->votes()->syncWithoutDetaching([
+                $this->votes()->syncWithoutDetaching([
                     $teacher->id => [
                         'is_positive_vote' => null,
                         'created_at' => Carbon::now(),
                         'updated_at' => Carbon::now()
                     ]
                 ]);
+                return 2;
             }
             $this->votes()->detach($teacher);
+            return 3;
         }
         else{
-            return $this->votes()->syncWithoutDetaching([
+            $this->votes()->syncWithoutDetaching([
                 $teacher->id => [
                     'is_positive_vote' => $is_positive,
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now()
                 ]
             ]);
+            return 4;
         }
     }
 

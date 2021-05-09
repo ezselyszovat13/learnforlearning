@@ -88,7 +88,7 @@
                 @if($data['comment'] !== null)
                 <div class="mb-2">
                     <div class="card">
-                        <p class="card-header {{$data['is_positive_vote'] ? 'bg-success' : ''}} 
+                        <p id="{{'c'.$key}}" class="card-header {{$data['is_positive_vote'] ? 'bg-success' : ''}} 
                                   {{(!$data['is_positive_vote'] && $data['is_positive_vote'] !== null) ? 'bg-danger' : ''}}">
                             Véleményezett oktató: 
                             <span style="font-size: 1.3rem;font-weight:bold"> {{ $data['teacher_name'] }} </span>
@@ -125,17 +125,13 @@
             <h2>Az oktatókra leadott szavazataid</h2>
             @forelse ($comments as $key => $data)
                 @if($data['is_positive_vote'] !== null)
-                    <span class="badge badge-light mb-2 col-md-2">
+                    <span id="{{'s'.$key}}" class="badge badge-light mb-2 col-md-3">
                         <p> {{$data['teacher_name']}} </p>
-                        <span style="{{ $data['is_positive_vote'] ? 'opacity:1' : 'opacity:0.5' }}">
-                            <a class="btn btn-lg" 
-                               href="{{ route('personal.vote', ['teacherId' => $key, 'isPositive' => true]) }}" role="button">👍
-                            </a>
+                        <span id="{{'l'.$key}}" style="{{ $data['is_positive_vote'] ? 'opacity:1' : 'opacity:0.5' }}">
+                            <span class="btn btn-lg voter pos" data-id="{{$key}}">👍</span>
                         </span>
-                        <span style="{{ !$data['is_positive_vote'] ? 'opacity:1' : 'opacity:0.5' }}">
-                            <a class="btn btn-lg" 
-                               href="{{ route('personal.vote', ['teacherId' => $key, 'isPositive' => false]) }}" role="button">💔
-                            </a>
+                        <span id="{{'d'.$key}}" style="{{ !$data['is_positive_vote'] ? 'opacity:1' : 'opacity:0.5' }}">
+                            <span class="btn btn-lg voter neg" data-id="{{$key}}" >💔</span>
                         </span>
                     </span>
                 @endif
@@ -153,4 +149,50 @@
             @endif
         </div>
     </div>
+
+    <script>
+        $(document).ready(function () {
+            $('.voter').click(function () { 
+                teacher_id = $(this).data("id");
+                is_pos = $(this).hasClass("pos") ? 1 : 0;
+                $.ajaxSetup({
+                    beforeSend: function(xhr, type) {
+                        if (!type.crossDomain) {
+                            xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+                        }
+                    },
+               });
+               $.ajax({
+                  url: "{{ url('/subject/vote/') }}",
+                  type: 'GET',
+                  data: {
+                     teacherId: teacher_id,
+                     isPositive: is_pos
+                  },
+                  success: function(result){
+                     if(result.state === "1"){
+                         $("#l"+teacher_id).css('opacity',1);
+                         $("#d"+teacher_id).css('opacity',0.5);
+                         $("#c"+teacher_id).removeClass('bg-danger');
+                         $("#c"+teacher_id).addClass('bg-success');
+                     }
+                     else if(result.state === "0"){
+                         $("#l"+teacher_id).css('opacity',0.5);
+                         $("#d"+teacher_id).css('opacity',1);
+                         $("#c"+teacher_id).removeClass('bg-success');
+                         $("#c"+teacher_id).addClass('bg-danger');
+                     }
+                     else{
+                         $("#s"+teacher_id).css('display','none');
+                         $("#c"+teacher_id).removeClass('bg-danger');
+                         $("#c"+teacher_id).removeClass('bg-success');
+                     }
+                  },
+                  error: function (data, textStatus, errorThrown) {
+                     console.log(data);
+                  }
+                });
+            });
+        });
+    </script>
 @endsection

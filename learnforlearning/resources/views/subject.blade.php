@@ -85,7 +85,7 @@
                                 @if($teacher->pivot->is_active) 
                                 <div class="mb-2 col-md-4" style="padding-left: 0px;">
                                     <div class="card h-40">
-                                        <p class="card-header h-100 {{$votes[$teacher->id]['points']>0 ? 'bg-success' : ''}} 
+                                        <p id="{{'c'.$teacher->id}}" class="card-header h-100 {{$votes[$teacher->id]['points']>0 ? 'bg-success' : ''}} 
                                                   {{ $votes[$teacher->id]['points']<0 ? 'bg-danger' : ''}}">
                                             <span style="font-size: 1.3rem;font-weight:bold"> {{ $teacher->name }} </span> 
                                             <a class="btn" data-toggle="tooltip" title="A megjegyzésekért kattints ide!"
@@ -95,32 +95,26 @@
                                             </a>
                                         </p>
                                         <div class="card-body h-60">
-                                            <p> Kedveltség: 
-                                                @if($votes[$teacher->id]['points']>0)
-                                                    <span style="font-weight:bold;color:green">+{{$votes[$teacher->id]['points']}}</span>
-                                                @elseif($votes[$teacher->id]['points']==0)
-                                                    <span style="font-weight:bold">{{$votes[$teacher->id]['points']}}</span>
-                                                @else
-                                                    <span style="font-weight:bold;color:red">{{$votes[$teacher->id]['points']}}</span>
-                                                @endif
+                                            <p> Kedveltség:
+                                                <span id="{{'s'.$teacher->id}}">
+                                                    @if($votes[$teacher->id]['points']>0)
+                                                        <span style="font-weight:bold;color:green">+{{$votes[$teacher->id]['points']}}</span>
+                                                    @elseif($votes[$teacher->id]['points']==0)
+                                                        <span style="font-weight:bold">{{$votes[$teacher->id]['points']}}</span>
+                                                    @else
+                                                        <span style="font-weight:bold;color:red">{{$votes[$teacher->id]['points']}}</span>
+                                                    @endif
+                                                </span>
                                             </p>
                                             <p>
                                                 @if(isset($user)) 
-                                                    <span style="width:20px;{{ $votes[$teacher->id]['hasPosVote'] ? 'opacity:1' : 
-                                                                'opacity:0.5' }}">
-                                                        <a class="btn btn-lg" href="{{ route('user.vote', ['teacherId' => $teacher->id, 
-                                                                'isPositive' => true, 'subjectId' => $subject->id, 'page' => isset($page)
-                                                                 ? $page : null]) }}" 
-                                                        role="button">👍
-                                                        </a>
+                                                    <span id="{{'l'.$teacher->id}}" style="width:20px;{{ $votes[$teacher->id]['hasPosVote'] ? 'opacity:1' : 
+                                                             'opacity:0.5' }}">
+                                                        <span data-id="{{$teacher->id}}" class="btn btn-lg voter pos" >👍</span>
                                                     </span>
-                                                    <span style="width:20px;{{ $votes[$teacher->id]['hasNegVote'] ? 'opacity:1' : 
+                                                    <span id="{{'d'.$teacher->id}}" style="width:20px;{{ $votes[$teacher->id]['hasNegVote'] ? 'opacity:1' : 
                                                                 'opacity:0.5' }}">
-                                                        <a class="btn btn-lg" href="{{ route('user.vote', ['teacherId' => $teacher->id, 
-                                                                'isPositive' => false, 'subjectId' => $subject->id, 'page' => isset($page) 
-                                                                ? $page : null]) }}" 
-                                                        role="button">💔
-                                                        </a>
+                                                        <span data-id="{{$teacher->id}}" class="btn btn-lg voter neg">💔</span>
                                                     </span>
                                                     <span style="width:20px;">
                                                         <a class="btn btn-lg" href="{{ route('user.comment', ['teacherId' => $teacher->id,
@@ -149,4 +143,82 @@
             @endif
         </div>
     </div>
+
+    <script>
+        $(document).ready(function () {
+            $('.voter').click(function () { 
+                teacher_id = $(this).data("id");
+                is_pos = $(this).hasClass("pos") ? 1 : 0;
+                had_pos_vote = $('#l'+teacher_id).css('opacity') == 1;
+                had_neg_vote = $('#d'+teacher_id).css('opacity') == 1;
+                $.ajaxSetup({
+                    beforeSend: function(xhr, type) {
+                        if (!type.crossDomain) {
+                            xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+                        }
+                    },
+               });
+               $.ajax({
+                  url: "{{ url('/subject/vote/') }}",
+                  type: 'GET',
+                  data: {
+                     teacherId: teacher_id,
+                     isPositive: is_pos
+                  },
+                  success: function(result){
+                     like_num = parseInt($("#s"+teacher_id).text());
+                     if(result.state === "1"){
+                         $("#l"+teacher_id).css('opacity',1);
+                         $("#d"+teacher_id).css('opacity',0.5);
+                         $("#c"+teacher_id).removeClass('bg-danger');
+                         $("#c"+teacher_id).addClass('bg-success');
+                         if(had_neg_vote){
+                            like_num += 2;
+                         }
+                         else{
+                            like_num += 1;
+                         }
+                     }
+                     else if(result.state === "0"){
+                         $("#l"+teacher_id).css('opacity',0.5);
+                         $("#d"+teacher_id).css('opacity',1);
+                         $("#c"+teacher_id).removeClass('bg-success');
+                         $("#c"+teacher_id).addClass('bg-danger');
+                         if(had_pos_vote){
+                            like_num -= 2;
+                         }
+                         else{
+                            like_num -= 1;
+                         }
+                     }
+                     else{
+                         $("#l"+teacher_id).css('opacity',0.5);
+                         $("#d"+teacher_id).css('opacity',0.5);
+                         $("#c"+teacher_id).removeClass('bg-danger');
+                         $("#c"+teacher_id).removeClass('bg-success');
+                         if(had_neg_vote){
+                            like_num += 1;
+                         }
+                         else if(had_pos_vote){
+                            like_num -= 1;
+                         }
+                     }
+                     if(like_num>0){
+                        result = '<span style="font-weight:bold;color:green">+'+like_num+'</span>';
+                     }
+                     else if(like_num<0){
+                        result = '<span style="font-weight:bold;color:red">'+like_num+'</span>';
+                     }
+                     else{
+                        result = '<span style="font-weight:bold">'+like_num+'</span>';
+                     }
+                     $("#s"+teacher_id).html(result);
+                  },
+                  error: function (data, textStatus, errorThrown) {
+                     console.log(data);
+                  }
+                });
+            });
+        });
+    </script>
 @endsection

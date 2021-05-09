@@ -54,21 +54,32 @@ class UserController extends Controller
 
     public function vote(Request $request){
         $params = $request->all();
-        
-        $page = null;
-        if($request->has('page'))
-            $page = $params['page'];
-
         $user = Auth::user();
-        $user->vote($params['teacherId'],$params['isPositive']);
-        return redirect()->route('subjects.info', ['id' => $params['subjectId'], 'page' => $page]);
-    }
-
-    public function personalVote(Request $request){
-        $params = $request->all();
-        $user = Auth::user();
-        $user->vote($params['teacherId'],$params['isPositive']);
-        return redirect()->route('personal')->with('vote_updated',true);
+        $user_vote = $user->vote($params['teacherId'],$params['isPositive']);
+        if($user_vote === null){
+            $result = [
+                'is_successful' => false,
+            ];
+            return $result;
+        }
+        if($user_vote === 4){
+            $result = [
+                'is_successful' => true,
+                'state' => $params['isPositive']
+            ];
+        }
+        else if($user_vote === 2 || $user_vote === 3){
+            $result = [
+                'is_successful' => true,
+                'state' => 'refresh'
+            ];
+        }
+        else{
+            $result = [
+                'is_successful' => false,
+            ];
+        }
+        return $result;
     }
 
     public function comment(Request $request){
