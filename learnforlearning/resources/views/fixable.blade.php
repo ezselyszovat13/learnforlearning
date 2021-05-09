@@ -116,7 +116,7 @@
                                 <strong>{{ $errors->first('tname') }}</strong>
                             </div>
                         @endif
-                        <button type="submit" class="btn btn-secondary">Elküld</button>
+                        <button type="submit" class="btn btn-secondary mt-2 mt-sm-0">Elküld</button>
                     </div>
                 </form>
             </div>

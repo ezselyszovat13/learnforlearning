@@ -48,7 +48,7 @@ html {
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  min-width: 400px;
+  min-width: 280px;
 }
 
 article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
@@ -64,7 +64,7 @@ body {
   color: #212529;
   text-align: left;
   background-color: #f8fafc;
-  min-width: 400px;
+  min-width: 280px;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -363,7 +363,7 @@ h1, h2, h3, h4, h5, h6,
 }
 
 h1, .h1 {
-  font-size: 2.25rem;
+  font-size: 2.15rem;
 }
 
 h2, .h2 {
@@ -410,7 +410,7 @@ h6, .h6 {
 }
 
 .display-4 {
-  font-size: 3.5rem;
+  font-size: 2rem;
   font-weight: 300;
   line-height: 1.2;
 }
@@ -547,7 +547,7 @@ pre code {
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
-  min-width: 390px;
+  min-width: 280px;
 }
 
 @media (min-width: 576px) {
@@ -573,8 +573,6 @@ pre code {
 .row {
   display: flex;
   flex-wrap: wrap;
-  margin-right: -15px;
-  margin-left: -15px;
 }
 
 .no-gutters {
@@ -594,7 +592,7 @@ pre code {
 .col-sm-auto, .col-sm-12, .col-sm-11, .col-sm-10, .col-sm-9, .col-sm-8, .col-sm-7, .col-sm-6, .col-sm-5, .col-sm-4, .col-sm-3, .col-sm-2, .col-sm-1, .col,
 .col-auto, .col-12, .col-11, .col-10, .col-9, .col-8, .col-7, .col-6, .col-5, .col-4, .col-3, .col-2, .col-1 {
   position: relative;
-  width: 100%;
+  width: 90%;
   padding-right: 15px;
   padding-left: 15px;
 }
@@ -806,6 +804,24 @@ pre code {
 }
 
 @media (min-width: 576px) {
+  .display-4 {
+    font-size: 2.7rem;
+    font-weight: 300;
+    line-height: 1.2;
+  }
+
+  .texter {
+    font-size:13px !important;
+  }
+
+  .widthFixer {
+    font-size:0.8rem !important;
+  }
+
+  .calcFixer {
+    font-size:1rem !important;
+  }
+
   .col-sm {
     flex-basis: 0;
     flex-grow: 1;
@@ -1087,6 +1103,7 @@ pre code {
   .col-md-6 {
     flex: 0 0 50%;
     max-width: 50%;
+    width: 100%;
   }
 
   .col-md-7 {
@@ -4668,10 +4685,21 @@ input[type=button].btn-block {
   border-bottom-right-radius: 0.2rem;
 }
 
+.texter {
+  font-size:10px;
+}
+
+.widthFixer {
+  font-size:0.55rem;
+}
+
+.calcFixer {
+  font-size:0.8rem;
+}
+
 .badge {
   display: inline-block;
   padding: 0.25em 0.4em;
-  font-size: 75%;
   font-weight: 700;
   line-height: 1;
   text-align: center;
@@ -5346,8 +5374,8 @@ a.close.disabled {
 }
 
 .toast {
-  flex-basis: 350px;
-  max-width: 350px;
+  flex-basis: 250px;
+  max-width: 250px;
   font-size: 0.875rem;
   background-color: rgba(255, 255, 255, 0.85);
   background-clip: padding-box;

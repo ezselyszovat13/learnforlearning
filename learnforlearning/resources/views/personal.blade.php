@@ -88,7 +88,7 @@
                 @if($data['comment'] !== null)
                 <div class="mb-2">
                     <div class="card">
-                        <p class="card-header {{$data['is_positive_vote'] ? 'bg-success' : ''}} 
+                        <p id="{{'c'.$key}}" class="card-header {{$data['is_positive_vote'] ? 'bg-success' : ''}} 
                                   {{(!$data['is_positive_vote'] && $data['is_positive_vote'] !== null) ? 'bg-danger' : ''}}">
                             Véleményezett oktató: 
                             <span style="font-size: 1.3rem;font-weight:bold"> {{ $data['teacher_name'] }} </span>
@@ -115,41 +115,18 @@
             @endif
 
             <hr class="my-4">
-            @if (session()->has('vote_updated'))
-                @if (session()->get('vote_updated') == true)
-                    <div class="alert alert-success mb-3" role="alert">
-                        A szavazat sikeresen megváltoztatva!
-                    </div>
-                @endif
-            @endif
             <h2>Az oktatókra leadott szavazataid</h2>
-            @if($was_like)
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">Oktató neve</th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody>
-            @endif
             @forelse ($comments as $key => $data)
                 @if($data['is_positive_vote'] !== null)
-                    <tr>
-                        <td style="width:300px;"> {{$data['teacher_name']}} </td>
-                        <td style="width:20px;{{ $data['is_positive_vote'] ? 'opacity:1' : 'opacity:0.5' }}">
-                            <a class="btn btn-lg" 
-                               href="{{ route('personal.vote', ['teacherId' => $key, 'isPositive' => true]) }}" role="button">👍
-                            </a>
-                        </td>
-                        <td style="width:20px;{{ !$data['is_positive_vote'] ? 'opacity:1' : 'opacity:0.5' }}">
-                            <a class="btn btn-lg" 
-                               href="{{ route('personal.vote', ['teacherId' => $key, 'isPositive' => false]) }}" role="button">💔
-                            </a>
-                        </td>
-                    </tr>
+                    <span id="{{'s'.$key}}" class="badge badge-light mb-2 col-md-3">
+                        <p> {{$data['teacher_name']}} </p>
+                        <span id="{{'l'.$key}}" style="{{ $data['is_positive_vote'] ? 'opacity:1' : 'opacity:0.5' }}">
+                            <span class="btn btn-lg voter pos" data-id="{{$key}}">👍</span>
+                        </span>
+                        <span id="{{'d'.$key}}" style="{{ !$data['is_positive_vote'] ? 'opacity:1' : 'opacity:0.5' }}">
+                            <span class="btn btn-lg voter neg" data-id="{{$key}}" >💔</span>
+                        </span>
+                    </span>
                 @endif
             @empty
                 <div role='alert' class="alert alert-danger">
@@ -157,8 +134,6 @@
                 </div>
             @endforelse
             @if($was_like)
-                </tbody>
-            </table>
             @endif
             @if(!$was_like && count($comments)>0)
                 <div role='alert' class="alert alert-danger">
@@ -167,4 +142,53 @@
             @endif
         </div>
     </div>
+
+    <script>
+        $(document).ready(function () {
+            $('.voter').click(function () { 
+                teacher_id = $(this).data("id");
+                is_pos = $(this).hasClass("pos") ? 1 : 0;
+                $.ajaxSetup({
+                    beforeSend: function(xhr, type) {
+                        if (!type.crossDomain) {
+                            xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+                        }
+                    },
+               });
+               $.ajax({
+                  url: "{{ url('/subject/vote/') }}",
+                  type: 'GET',
+                  data: {
+                     teacherId: teacher_id,
+                     isPositive: is_pos
+                  },
+                  success: function(result){
+                     if(!result.is_successful)
+                        return
+
+                     if(result.state === "1"){
+                         $("#l"+teacher_id).css('opacity',1);
+                         $("#d"+teacher_id).css('opacity',0.5);
+                         $("#c"+teacher_id).removeClass('bg-danger');
+                         $("#c"+teacher_id).addClass('bg-success');
+                     }
+                     else if(result.state === "0"){
+                         $("#l"+teacher_id).css('opacity',0.5);
+                         $("#d"+teacher_id).css('opacity',1);
+                         $("#c"+teacher_id).removeClass('bg-success');
+                         $("#c"+teacher_id).addClass('bg-danger');
+                     }
+                     else{
+                         $("#s"+teacher_id).css('display','none');
+                         $("#c"+teacher_id).removeClass('bg-danger');
+                         $("#c"+teacher_id).removeClass('bg-success');
+                     }
+                  },
+                  error: function (data, textStatus, errorThrown) {
+                     console.log(data);
+                  }
+                });
+            });
+        });
+    </script>
 @endsection

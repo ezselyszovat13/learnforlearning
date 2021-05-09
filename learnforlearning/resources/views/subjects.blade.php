@@ -37,23 +37,22 @@
                     </div>
                 @endif
             @endif
-            <div class="container">
-                <div class="row">
-                    <div class="form-group form-inline">
-                        <label for="search">Keress tárgyra: </label>
-                        <input type="text" class="form-control ml-2" id="searchInput" placeholder="Tárgynév">
-                    </div>
-                </div>
+
+            <div class="form-group form-inline">
+                <label for="search">Keress tárgyra: </label>
+                <input type="text"  class="form-control ml-2" id="searchInput" placeholder="Tárgynév">
             </div>
+            
             @if(isset($subjects))
                 @if(count($subjects)!=0)
-                    <div class="container">
+                    <div class="container" style="padding-left: 0px;">
                         <div class="row" id="subject_container">
                             @foreach ($subjects as $subject)
-                                <div class="mb-2 col-md-4">
+                                <div class="mb-2 col-md-4" style="padding-left: 0px;">
                                     <div class="card h-100">
                                         <p class="card-header">
-                                            <span style="font-size: 1.3rem;font-weight:bold"> {{ $subject->name }} </span> {{ $subject->code}}
+                                            <span style="font-size: 1.3rem;font-weight:bold"> {{ $subject->name }} </span>
+                                               {{ $subject->code}}
                                         </p>
                                         <div class="card-body">
                                             @if($subject->even_semester)
@@ -61,7 +60,8 @@
                                             @else
                                                 <p class="card-subtitle mb-2 text-muted">A tárgy féléve: PÁRATLAN</p>
                                             @endif
-                                            <a class="btn btn-secondary btn-lg" href="{{ route('subjects.info', ['id' => $subject->id, 'page' => 'subjects']) }}"
+                                            <a class="btn btn-secondary btn-lg" href="{{ route('subjects.info', 
+                                                      ['id' => $subject->id, 'page' => 'subjects']) }}"
                                                 role="button">Információk</a>
                                         </div>
                                     </div>
@@ -101,10 +101,11 @@
                   success: function(result){
                       subjectsHTML = "";
                       result.forEach(subject => {
-                        subjectsHTML += `<div class="mb-2 col-md-4">
+                        subjectsHTML += `<div class="mb-2 col-md-4" style="padding-left: 0px;">
                                         <div class="card h-100">
                                             <p class="card-header">
-                                                <span style="font-size: 1.3rem;font-weight:bold" class="mr-1"> `+ subject.name + `</span>` + subject.code +
+                                                <span style="font-size: 1.3rem;font-weight:bold" class="mr-1"> `+ subject.name + 
+                                                `</span>` + subject.code +
                                             `</p>
                                             <div class="card-body">`;
                         
