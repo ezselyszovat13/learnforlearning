@@ -123,33 +123,21 @@
                 @endif
             @endif
             <h2>Az oktatókra leadott szavazataid</h2>
-            @if($was_like)
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">Oktató neve</th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody>
-            @endif
             @forelse ($comments as $key => $data)
                 @if($data['is_positive_vote'] !== null)
-                    <tr>
-                        <td style="width:300px;"> {{$data['teacher_name']}} </td>
-                        <td style="width:20px;{{ $data['is_positive_vote'] ? 'opacity:1' : 'opacity:0.5' }}">
+                    <span class="badge badge-light mb-2 col-md-2">
+                        <p> {{$data['teacher_name']}} </p>
+                        <span style="{{ $data['is_positive_vote'] ? 'opacity:1' : 'opacity:0.5' }}">
                             <a class="btn btn-lg" 
                                href="{{ route('personal.vote', ['teacherId' => $key, 'isPositive' => true]) }}" role="button">👍
                             </a>
-                        </td>
-                        <td style="width:20px;{{ !$data['is_positive_vote'] ? 'opacity:1' : 'opacity:0.5' }}">
+                        </span>
+                        <span style="{{ !$data['is_positive_vote'] ? 'opacity:1' : 'opacity:0.5' }}">
                             <a class="btn btn-lg" 
                                href="{{ route('personal.vote', ['teacherId' => $key, 'isPositive' => false]) }}" role="button">💔
                             </a>
-                        </td>
-                    </tr>
+                        </span>
+                    </span>
                 @endif
             @empty
                 <div role='alert' class="alert alert-danger">
@@ -157,8 +145,6 @@
                 </div>
             @endforelse
             @if($was_like)
-                </tbody>
-            </table>
             @endif
             @if(!$was_like && count($comments)>0)
                 <div role='alert' class="alert alert-danger">

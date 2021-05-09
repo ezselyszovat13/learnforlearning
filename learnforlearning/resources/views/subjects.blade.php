@@ -37,14 +37,12 @@
                     </div>
                 @endif
             @endif
-            <div class="container">
-                <div class="row">
-                    <div class="form-group form-inline">
-                        <label for="search">Keress tárgyra: </label>
-                        <input type="text" class="form-control ml-2" id="searchInput" placeholder="Tárgynév">
-                    </div>
-                </div>
+
+            <div class="form-group form-inline">
+                <label for="search">Keress tárgyra: </label>
+                <input type="text"  class="form-control ml-2" id="searchInput" placeholder="Tárgynév">
             </div>
+            
             @if(isset($subjects))
                 @if(count($subjects)!=0)
                     <div class="container" style="padding-left: 0px;">

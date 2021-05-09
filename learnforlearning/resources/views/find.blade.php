@@ -29,8 +29,8 @@
             <div>
                 @if(isset($optional_subjects))
                     @forelse ($optional_subjects as $subject)
-                        <span class="badge badge-secondary">
-                            <a style="color: white !important;font-size:12px" 
+                        <span class="badge badge-secondary my-1">
+                            <a class="texter" style="color: white !important;" 
                                href="{{ route('subjects.info', ['id' => $subject->id, 'page' => 'calculation']) }}">{{ $subject->name }}
                             </a>
                         </span>
@@ -74,7 +74,7 @@
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{ $sub_data[$element->subject_code]['name'] }}</td>
                                     <td>
-                                        <a class="btn btn-secondary btn-lg" style="font-size:0.8rem"
+                                        <a class="btn btn-secondary btn-lg widthFixer"
                                            href="{{ route('subjects.info', ['id' => $sub_data[$element->subject_code]['id'], 
                                                  'page' => 'calculation']) }}"
                                            role="button">Információk
@@ -86,7 +86,7 @@
                     </tbody>
                 </table>
                 <div class="container" id="calc_delete_div" style="{{count($calculation_history)===0 ? 'display:none' : ''}}">
-                    <a class="btn btn-secondary btn-lg" href="{{route('findsubject.delete')}}" 
+                    <a class="btn btn-secondary btn-lg calcFixer" href="{{route('findsubject.delete')}}" 
                        role="button">Korábbi kalkulációk törlése
                     </a>
                 </div>
