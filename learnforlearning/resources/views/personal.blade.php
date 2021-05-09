@@ -115,13 +115,6 @@
             @endif
 
             <hr class="my-4">
-            @if (session()->has('vote_updated'))
-                @if (session()->get('vote_updated') == true)
-                    <div class="alert alert-success mb-3" role="alert">
-                        A szavazat sikeresen megváltoztatva!
-                    </div>
-                @endif
-            @endif
             <h2>Az oktatókra leadott szavazataid</h2>
             @forelse ($comments as $key => $data)
                 @if($data['is_positive_vote'] !== null)
@@ -170,6 +163,9 @@
                      isPositive: is_pos
                   },
                   success: function(result){
+                     if(!result.is_successful)
+                        return
+
                      if(result.state === "1"){
                          $("#l"+teacher_id).css('opacity',1);
                          $("#d"+teacher_id).css('opacity',0.5);

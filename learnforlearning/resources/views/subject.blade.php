@@ -167,6 +167,9 @@
                   },
                   success: function(result){
                      like_num = parseInt($("#s"+teacher_id).text());
+                     if(!result.is_successful)
+                        return
+                        
                      if(result.state === "1"){
                          $("#l"+teacher_id).css('opacity',1);
                          $("#d"+teacher_id).css('opacity',0.5);
